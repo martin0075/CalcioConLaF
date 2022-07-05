@@ -12,56 +12,60 @@
         android:id="@+id/linearLayout2"
         android:layout_width="316dp"
         android:layout_height="408dp"
-        android:background="@drawable/roundstyle"
-        android:backgroundTint="@color/blue"
+        android:background="@color/blue"
         tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="149dp">
+        tools:layout_editor_absoluteY="149dp"
+        tools:ignore="MissingConstraints">
 
         <EditText
             android:id="@+id/txtUsername"
             android:layout_width="236dp"
-            android:layout_height="45dp"
-            android:background="@drawable/roundstyle"
-            android:backgroundTint="@color/white"
+            android:layout_height="48dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint=" username..."
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="43dp"
+            android:textColorHint="@color/black"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="26dp" />
 
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="235dp"
-            android:layout_height="43dp"
-            android:background="@drawable/roundstyle"
-            android:backgroundTint="@color/white"
+            android:layout_height="48dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint=" password..."
             android:inputType="textPassword"
+            android:textColorHint="@color/black"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="155dp" />
+            tools:layout_editor_absoluteY="157dp" />
 
         <EditText
             android:id="@+id/txtConfirmPassword"
             android:layout_width="235dp"
-            android:layout_height="43dp"
-            android:background="@drawable/roundstyle"
-            android:backgroundTint="@color/white"
+            android:layout_height="48dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint=" confirm password..."
             android:inputType="textPassword"
+            android:textColorHint="@color/black"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="41dp"
             tools:layout_editor_absoluteY="223dp" />
 
         <EditText
             android:id="@+id/txtMail"
             android:layout_width="235dp"
-            android:layout_height="43dp"
-            android:background="@drawable/roundstyle"
-            android:backgroundTint="@color/white"
+            android:layout_height="48dp"
+            android:background="@color/white"
             android:ems="10"
             android:hint=" mail..."
             android:inputType="textPassword"
+            android:textColorHint="@color/black"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="41dp"
             tools:layout_editor_absoluteY="90dp" />
 
@@ -69,11 +73,11 @@
             android:id="@+id/btnCreate"
             android:layout_width="175dp"
             android:layout_height="55dp"
-            android:background="@drawable/roundstyle"
             android:backgroundTint="@color/yellow"
             android:text="CREATE USER"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="71dp"
-            tools:layout_editor_absoluteY="326dp" />
+            tools:layout_editor_absoluteY="309dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -87,6 +91,8 @@
         android:theme="?attr/actionBarTheme"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         app:title="Create User"
-        tools:layout_editor_absoluteX="2dp" />
+        tools:layout_editor_absoluteX="2dp"
+        tools:ignore="MissingConstraints"
+        android:backgroundTint="@color/yellow"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
