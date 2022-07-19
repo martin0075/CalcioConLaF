@@ -8,91 +8,101 @@
     android:background="@color/blueScuro"
     android:orientation="vertical" >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="316dp"
-        android:layout_height="408dp"
-        android:background="@color/blue"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="149dp"
-        tools:ignore="MissingConstraints">
 
-        <EditText
-            android:id="@+id/txtUsername"
-            android:layout_width="236dp"
-            android:layout_height="48dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint=" username..."
-            android:inputType="textPersonName"
-            android:textColorHint="@color/black"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="40dp"
-            tools:layout_editor_absoluteY="26dp" />
+    <EditText
+        android:id="@+id/txtUsername"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint=" username..."
+        android:inputType="textPersonName"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.276"
+        tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/txtPassword"
-            android:layout_width="235dp"
-            android:layout_height="48dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint=" password..."
-            android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="157dp" />
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="235dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint=" password..."
+        android:inputType="textPassword"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.471"
+        tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/txtConfirmPassword"
-            android:layout_width="235dp"
-            android:layout_height="48dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint=" confirm password..."
-            android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="223dp" />
+    <EditText
+        android:id="@+id/txtConfirmPassword"
+        android:layout_width="235dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint=" confirm password..."
+        android:inputType="textPassword"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.566"
+        tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/txtMail"
-            android:layout_width="235dp"
-            android:layout_height="48dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint=" mail..."
-            android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="90dp" />
+    <EditText
+        android:id="@+id/txtMail"
+        android:layout_width="235dp"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint=" mail..."
+        android:inputType="text"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.374"
+        tools:ignore="MissingConstraints" />
 
-        <Button
-            android:id="@+id/btnCreate"
-            android:layout_width="175dp"
-            android:layout_height="55dp"
-            android:backgroundTint="@color/yellow"
-            android:text="CREATE USER"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="71dp"
-            tools:layout_editor_absoluteY="309dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="175dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/yellow"
+        android:text="CREATE USER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbCreate"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
+        android:backgroundTint="@color/yellow"
         android:minHeight="?attr/actionBarSize"
         android:textAlignment="center"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         app:title="Create User"
-        tools:layout_editor_absoluteX="2dp"
-        tools:ignore="MissingConstraints"
-        android:backgroundTint="@color/yellow"/>
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

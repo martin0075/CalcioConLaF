@@ -36,9 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private DatabaseReference database;
     private String TAG="Boh";
-    //final HashMap mappa=new HashMap();
     private ArrayList lista=new ArrayList();
-    //private ArrayList listaPw=new ArrayList();
 
 
     @Override
@@ -77,6 +75,29 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+        Button prova=findViewById(R.id.buttonProva);
+        prova.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        lista.clear();
+                        for(DataSnapshot ds: snapshot.getChildren()) {
+                            lista.add(ds.child("Username").getValue()+","+ds.child("Password").getValue());
+                        }
+                        for(int i=0;i<lista.size();i++){
+                            Log.v(TAG,lista.get(i).toString());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.tbCreate);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);// get the reference of Toolbar
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -94,5 +115,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(back);
             }
         });*/
+        Button register=findViewById(R.id.btnCreate);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent register=new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(register);
+            }
+        });
     }
 }
