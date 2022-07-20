@@ -15,7 +15,7 @@
         android:background="@drawable/roundstyle"
         android:backgroundTint="@color/white"
         android:ems="10"
-        android:hint=" username..."
+        android:hint=" Username"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
         android:background="@drawable/roundstyle"
         android:backgroundTint="@color/white"
         android:ems="10"
-        android:hint=" password..."
+        android:hint="Password"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661"
+        app:layout_constraintVertical_bias="0.568"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.Toolbar
@@ -86,15 +86,4 @@
         app:title="Login"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/buttonProva"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.538" />
 </androidx.constraintlayout.widget.ConstraintLayout>

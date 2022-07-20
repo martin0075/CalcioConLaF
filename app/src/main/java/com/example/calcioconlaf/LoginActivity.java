@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private DatabaseReference database;
+    public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     private String TAG="Boh";
     private ArrayList lista=new ArrayList();
 
@@ -46,51 +46,32 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText username=findViewById(R.id.txtUsername);
         EditText password=findViewById(R.id.txtPassword);
-        database = FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app").getReference().child("Users");
+
+        DatabaseReference ref = database.getReference();
+        DatabaseReference usersRef = ref.child("Users");
 
         Button login= findViewById(R.id.btnLogin);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                database.addValueEventListener(new ValueEventListener() {
+                usersRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         lista.clear();
                         for(DataSnapshot ds: snapshot.getChildren()) {
-                            lista.add(ds.child("Username").getValue()+","+ds.child("Password").getValue());
+                            lista.add(ds.child("Username").getValue()+" "+ds.child("Password").getValue());
                         }
-                        String dati=username.getText()+","+password.getText();
+                        //Toast.makeText(LoginActivity.this,lista.get(0).toString(),Toast.LENGTH_SHORT).show();
+                        Log.v(TAG,lista.get(0).toString());
+                        String dati=username.getText()+" "+password.getText();
                             if(lista.contains(dati)){
                                 Toast.makeText(LoginActivity.this,"Dati corretti",Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intent);
                             }else{
-                                Toast.makeText(LoginActivity.this,"Errore dati",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,"Dati mancanti o non corretti",Toast.LENGTH_SHORT).show();
                             }
                         }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        //Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                });
-            }
-        });
-        Button prova=findViewById(R.id.buttonProva);
-        prova.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                database.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        lista.clear();
-                        for(DataSnapshot ds: snapshot.getChildren()) {
-                            lista.add(ds.child("Username").getValue()+","+ds.child("Password").getValue());
-                        }
-                        for(int i=0;i<lista.size();i++){
-                            Log.v(TAG,lista.get(i).toString());
-                        }
-                    }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 

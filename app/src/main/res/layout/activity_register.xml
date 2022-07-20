@@ -15,15 +15,15 @@
         android:layout_height="48dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" username..."
+        android:hint=" Username"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.276"
+        app:layout_constraintVertical_bias="0.357"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -32,30 +32,14 @@
         android:layout_height="48dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" password..."
+        android:hint="Password"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/txtConfirmPassword"
-        android:layout_width="235dp"
-        android:layout_height="48dp"
-        android:background="@color/white"
-        android:ems="10"
-        android:hint=" confirm password..."
-        android:inputType="textPassword"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566"
+        app:layout_constraintVertical_bias="0.582"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -64,14 +48,14 @@
         android:layout_height="48dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint=" mail..."
+        android:hint="Email"
         android:inputType="text"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.374"
+        app:layout_constraintVertical_bias="0.465"
         tools:ignore="MissingConstraints" />
 
     <Button
