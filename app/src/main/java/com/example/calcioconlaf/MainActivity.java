@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Toast.makeText(MainActivity.this, "This is my Toast message!",
                         Toast.LENGTH_LONG).show();*/
-                Intent login=new Intent(MainActivity.this, LoginActivity.class);
+                Intent login=new Intent(MainActivity.this, ProvaAPI.class);
                 startActivity(login);
             }
         });
