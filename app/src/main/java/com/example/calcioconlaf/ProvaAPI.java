@@ -7,6 +7,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,6 +19,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -31,7 +34,7 @@ public class ProvaAPI extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prova_api);
 
-        String URL = "https://media.api-sports.io/football/venues/556.png";
+        String URL = "https://v3.football.api-sports.io/venues?id=556";
         //creo una coda di richiesta
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         //creo la richiesta
@@ -39,18 +42,39 @@ public class ProvaAPI extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 risposta+=response;
-                Log.v("Prova",risposta);
+                try {
+                    JSONObject result = new JSONObject(response);
+                    JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
+                    String srcImage=result1.getString("image");
+
+                    ImageView img=findViewById(R.id.imageStadio);
+                    Picasso.get().load(srcImage).into(img);
+                    //Toast.makeText(ProvaAPI.this,result1.getString("name"),Toast.LENGTH_SHORT).show();
+                    Log.v("Prova",result1.getString("image"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.v("Error",error.toString());
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("x-rapidapi-key", "c65be7f34d909f82ce5539b6617129b5");
+                params.put("x-rapidapi-host", "v3.football.api-sports.io");
+
+                return params;
+            }
+        };
         //aggiungo la richiesta alla coda
         requestQueue.add(stringRequest);
 
-        ImageView img=findViewById(R.id.imageStadio);
-        Picasso.get().load(URL).into(img);
+
+
     }
 }
