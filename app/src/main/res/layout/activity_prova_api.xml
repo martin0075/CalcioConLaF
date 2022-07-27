@@ -9,10 +9,10 @@
     tools:context=".ProvaAPI">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn1"
         android:layout_width="149dp"
         android:layout_height="53dp"
-        android:text="Button"
+        android:text="A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
@@ -21,10 +21,10 @@
         app:layout_constraintVertical_bias="0.713" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn4"
         android:layout_width="149dp"
         android:layout_height="53dp"
-        android:text="Button"
+        android:text="D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.828"
@@ -33,10 +33,10 @@
         app:layout_constraintVertical_bias="0.836" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn2"
         android:layout_width="149dp"
         android:layout_height="53dp"
-        android:text="Button"
+        android:text="B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.828"
@@ -47,13 +47,13 @@
     <ImageView
         android:id="@+id/imageStadio"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="240dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282"
+        app:layout_constraintVertical_bias="0.324"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -67,17 +67,184 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.613" />
+        app:layout_constraintVertical_bias="0.63" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn3"
         android:layout_width="149dp"
         android:layout_height="53dp"
-        android:text="Button"
+        android:text="C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.836" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975">
+
+        <ImageButton
+            android:id="@+id/btnIndizio1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#4CAF50"
+            android:cropToPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/indizio1_foreground"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975">
+
+        <ImageButton
+            android:id="@+id/btnIndizio3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#C1180C"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/indizio3_foreground"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975">
+
+        <ImageButton
+            android:id="@+id/btnIndizio2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="false"
+            android:background="#A147403E"
+            android:cropToPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/indizio2_foreground"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="133dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="105dp"
+            android:layout_height="120dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgAvatar1"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/avatar1_foreground"
+                tools:srcCompat="@drawable/avatar1_foreground" />
+
+            <TextView
+                android:id="@+id/txtAvatar1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Punteggio"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="105dp"
+            android:layout_height="120dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgAvatar2"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/avatar1_foreground"
+                tools:srcCompat="@drawable/avatar1_foreground" />
+
+            <TextView
+                android:id="@+id/txtAvatar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Punteggio"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="105dp"
+            android:layout_height="120dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgAvatar3"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/avatar1_foreground"
+                tools:srcCompat="@drawable/avatar1_foreground" />
+
+            <TextView
+                android:id="@+id/txtAvatar3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Punteggio"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="105dp"
+            android:layout_height="120dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgAvatar4"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                app:srcCompat="@drawable/avatar1_foreground"
+                tools:srcCompat="@drawable/avatar1_foreground" />
+
+            <TextView
+                android:id="@+id/txtAvatar4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Punteggio"
+                android:textAlignment="center" />
+        </LinearLayout>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
