@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalcioConLaF">
         <activity
+            android:name=".NewsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProvaAPI"
             android:exported="false" />
         <activity

@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,9 +23,15 @@ public class MainActivity extends AppCompatActivity {
         game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Toast.makeText(MainActivity.this, "This is my Toast message!",
-                        Toast.LENGTH_LONG).show();*/
-                Intent login=new Intent(MainActivity.this, ProvaAPI.class);
+                Intent login=new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(login);
+            }
+        });
+        Button news = findViewById(R.id.btnNews);
+        news.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent login=new Intent(MainActivity.this, NewsActivity.class);
                 startActivity(login);
             }
         });
