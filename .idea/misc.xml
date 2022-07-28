@@ -14,13 +14,21 @@
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/newselement.xml" value="0.1" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/mipmap-anydpi-v26/Av1.xml" value="0.1" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/drawable/buttonstyle.xml" value="0.2735" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.18" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/drawable/roundstyle.xml" value="0.2735" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_game.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_games.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_login.xml" value="0.2546875" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_main.xml" value="0.32472826086956524" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_news.xml" value="0.11956521739130435" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_prova_api.xml" value="0.17857142857142858" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_register.xml" value="0.26875" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/fragment_home.xml" value="0.11956521739130435" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/fragment_leaderboard.xml" value="0.11956521739130435" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/fragment_setting.xml" value="0.11956521739130435" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/newselement.xml" value="0.11956521739130435" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/menu/bottom_nav.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/menu/nav_menu.xml" value="0.353125" />
       </map>
     </option>
   </component>

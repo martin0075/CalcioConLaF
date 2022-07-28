@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                         String dati=username.getText()+" "+password.getText();
                             if(lista.contains(dati)){
                                 Toast.makeText(LoginActivity.this,"Dati corretti",Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(LoginActivity.this,ProvaAPI.class);
+                                Intent intent=new Intent(LoginActivity.this,GameActivity.class);
                                 startActivity(intent);
                             }else{
                                 Toast.makeText(LoginActivity.this,"Dati mancanti o non corretti",Toast.LENGTH_SHORT).show();

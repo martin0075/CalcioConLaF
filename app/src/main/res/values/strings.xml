@@ -3,4 +3,6 @@
     <color name="blue">#1E90FF</color>
     <color name="blueScuro">#003153</color>
     <color name="yellow">#FFCC00</color>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
