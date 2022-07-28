@@ -1,9 +1,13 @@
 package com.example.calcioconlaf;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewsActivity extends AppCompatActivity {
+public class NewsActivity extends AppCompatActivity implements AdapterForNews.OnNewsListerner{
     ArrayList<NewsElement> listOfElements;
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
@@ -57,9 +61,9 @@ public class NewsActivity extends AppCompatActivity {
                             JSONArray result=new JSONArray(response);
                             for(int i=0;i<result.length();i++){
                                 JSONObject result1 = (JSONObject) result.get(i);
-                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName")));
+                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName"), result1.getString("NewsLink")));
                             }
-                            mAdapter = new AdapterForNews(listOfElements);
+                            mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                             recyclerView.setAdapter(mAdapter);
                             //Log.v("Prova",result1.getString("image"));
                         } catch (JSONException e) {
@@ -84,7 +88,7 @@ public class NewsActivity extends AppCompatActivity {
                 };
                 //aggiungo la richiesta alla coda
                 requestQueue.add(stringRequest);
-                mAdapter = new AdapterForNews(listOfElements);
+                mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                 recyclerView.setAdapter(mAdapter);
 
             }
@@ -105,9 +109,9 @@ public class NewsActivity extends AppCompatActivity {
                             JSONArray result=new JSONArray(response);
                             for(int i=0;i<result.length();i++){
                                 JSONObject result1 = (JSONObject) result.get(i);
-                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName")));
+                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName"), result1.getString("NewsLink")));
                             }
-                            mAdapter = new AdapterForNews(listOfElements);
+                            mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                             recyclerView.setAdapter(mAdapter);
                             //Log.v("Prova",result1.getString("image"));
                         } catch (JSONException e) {
@@ -132,7 +136,7 @@ public class NewsActivity extends AppCompatActivity {
                 };
                 //aggiungo la richiesta alla coda
                 requestQueue.add(stringRequest);
-                mAdapter = new AdapterForNews(listOfElements);
+                mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                 recyclerView.setAdapter(mAdapter);
 
             }
@@ -153,9 +157,9 @@ public class NewsActivity extends AppCompatActivity {
                             JSONArray result=new JSONArray(response);
                             for(int i=0;i<result.length();i++){
                                 JSONObject result1 = (JSONObject) result.get(i);
-                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName")));
+                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName"), result1.getString("NewsLink")));
                             }
-                            mAdapter = new AdapterForNews(listOfElements);
+                            mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                             recyclerView.setAdapter(mAdapter);
                             //Log.v("Prova",result1.getString("image"));
                         } catch (JSONException e) {
@@ -180,7 +184,7 @@ public class NewsActivity extends AppCompatActivity {
                 };
                 //aggiungo la richiesta alla coda
                 requestQueue.add(stringRequest);
-                mAdapter = new AdapterForNews(listOfElements);
+                mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                 recyclerView.setAdapter(mAdapter);
 
             }
@@ -201,9 +205,9 @@ public class NewsActivity extends AppCompatActivity {
                             JSONArray result=new JSONArray(response);
                             for(int i=0;i<result.length();i++){
                                 JSONObject result1 = (JSONObject) result.get(i);
-                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName")));
+                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName"), result1.getString("NewsLink")));
                             }
-                            mAdapter = new AdapterForNews(listOfElements);
+                            mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                             recyclerView.setAdapter(mAdapter);
                             //Log.v("Prova",result1.getString("image"));
                         } catch (JSONException e) {
@@ -228,7 +232,7 @@ public class NewsActivity extends AppCompatActivity {
                 };
                 //aggiungo la richiesta alla coda
                 requestQueue.add(stringRequest);
-                mAdapter = new AdapterForNews(listOfElements);
+                mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                 recyclerView.setAdapter(mAdapter);
 
             }
@@ -249,9 +253,9 @@ public class NewsActivity extends AppCompatActivity {
                             JSONArray result=new JSONArray(response);
                             for(int i=0;i<result.length();i++){
                                 JSONObject result1 = (JSONObject) result.get(i);
-                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName")));
+                                listOfElements.add(new NewsElement(result1.getString("PublisherDate"),result1.getString("Title"),result1.getString("Image"),result1.getString("PublisherName"), result1.getString("NewsLink")));
                             }
-                            mAdapter = new AdapterForNews(listOfElements);
+                            mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                             recyclerView.setAdapter(mAdapter);
                             //Log.v("Prova",result1.getString("image"));
                         } catch (JSONException e) {
@@ -276,10 +280,18 @@ public class NewsActivity extends AppCompatActivity {
                 };
                 //aggiungo la richiesta alla coda
                 requestQueue.add(stringRequest);
-                mAdapter = new AdapterForNews(listOfElements);
+                mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
                 recyclerView.setAdapter(mAdapter);
 
             }
         });
+    }
+
+
+
+    @Override
+    public void onNewsClick(int position) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(listOfElements.get(position).getLink()));
+        startActivity(browserIntent);
     }
 }

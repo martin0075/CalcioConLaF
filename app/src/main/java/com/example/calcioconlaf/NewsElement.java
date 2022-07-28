@@ -5,12 +5,14 @@ public class NewsElement {
     private String descrizione;
     private String autore;
     private String URL;
+    private String link;
 
-    public NewsElement(String orario, String descrizione, String URL, String autore) {
+    public NewsElement(String orario, String descrizione, String URL, String autore, String link) {
         this.orario = orario;
         this.descrizione = descrizione;
         this.URL=URL;
         this.autore=autore;
+        this.link=link;
     }
 
     public String getOrario() {
@@ -39,6 +41,10 @@ public class NewsElement {
 
     public String getURL() {
         return URL;
+    }
+
+    public String getLink() {
+        return link;
     }
 
     public void setURL(String URL) {
