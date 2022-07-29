@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity {
 
         nav=findViewById(R.id.navigation);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.conteiner,home);
+        getSupportFragmentManager().beginTransaction().replace(R.id.conteiner,home).commit();
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

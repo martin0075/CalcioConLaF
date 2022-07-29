@@ -7,47 +7,12 @@
     android:orientation="vertical"
     tools:context=".NewsActivity" >
 
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnSerieA"
-            android:layout_width="81dp"
-            android:layout_height="75dp"
-            android:text="Serie A"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btnPremier"
-            android:layout_width="81dp"
-            android:layout_height="75dp"
-            android:text="Premier League"
-            android:layout_marginTop="0dp"
-            android:textSize="10sp" />
-
-        <Button
-            android:id="@+id/btnLiga"
-            android:layout_width="81dp"
-            android:layout_height="75dp"
-            android:text="La Liga"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btnBundesliga"
-            android:layout_width="81dp"
-            android:layout_height="75dp"
-            android:text="Bundesliga"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btnLigue1"
-            android:layout_width="81dp"
-            android:layout_height="75dp"
-            android:text="Ligue 1"
-            android:textSize="12sp" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        app:menu="@menu/news_nav"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
