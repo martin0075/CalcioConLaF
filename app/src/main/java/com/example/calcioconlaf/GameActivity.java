@@ -3,7 +3,9 @@ package com.example.calcioconlaf;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,6 +26,13 @@ public class GameActivity extends AppCompatActivity {
 
         nav=findViewById(R.id.navigation);
 
+        Intent intent=getIntent();
+        String username=intent.getExtras().getString("Username");
+
+        Bundle bundle=new Bundle();
+        bundle.putString("Username",username);
+        home.setArguments(bundle);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner,home).commit();
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -31,6 +40,8 @@ public class GameActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected( MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.home:
+                        bundle.putString("Username",username);
+                        home.setArguments(bundle);
                         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, home).commit();
                         return true;
                     case R.id.settings:
@@ -44,5 +55,9 @@ public class GameActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
+
     }
 }

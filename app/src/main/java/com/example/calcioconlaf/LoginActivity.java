@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(lista.contains(dati)){
                                 Toast.makeText(LoginActivity.this,"Dati corretti",Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(LoginActivity.this,GameActivity.class);
+                                intent.putExtra("Username", username.getText().toString());
                                 startActivity(intent);
                             }else{
                                 Toast.makeText(LoginActivity.this,"Dati mancanti o non corretti",Toast.LENGTH_SHORT).show();
@@ -79,23 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.tbCreate);
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);// get the reference of Toolbar
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent back= new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(back);
-            }
-        });*/
-            // Setting/replace toolbar as the ActionBar
-       /*toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent back= new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(back);
-            }
-        });*/
+
         Button register=findViewById(R.id.btnCreate);
         register.setOnClickListener(new View.OnClickListener() {
             @Override

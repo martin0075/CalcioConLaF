@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.039" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imgBtnTransfer"
         android:layout_width="253dp"
         android:layout_height="150dp"
         android:background="#FFFFFF"
@@ -34,6 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.251"
         tools:ignore="SpeakableTextPresentCheck"
+        android:clickable="true"
         android:src="@drawable/ic_png_transparent_computer_icons_desktop_transfer_icon_angle_text_payment_thumbnail" />
 
     <TextView
@@ -53,7 +54,7 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/imgBtnStadium"
         android:layout_width="253dp"
         android:layout_height="150dp"
         android:background="#FFFFFF"
@@ -63,6 +64,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.786"
         tools:ignore="SpeakableTextPresentCheck"
+        android:clickable="true"
         android:src="@drawable/stadium" />
 
     <TextView
