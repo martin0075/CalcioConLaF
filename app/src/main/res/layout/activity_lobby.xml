@@ -40,7 +40,6 @@
         android:id="@+id/txtTimer"
         android:layout_width="264dp"
         android:layout_height="55dp"
-        android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

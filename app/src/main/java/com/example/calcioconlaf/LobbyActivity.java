@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LobbyActivity extends AppCompatActivity {
 
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
-    TextView timer=findViewById(R.id.txtTimer);
+
     String username;
     Boolean trovati;
 
@@ -26,8 +26,10 @@ public class LobbyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
 
+        TextView timer=findViewById(R.id.txtTimer);
+
         Intent intent=getIntent();
-        username=intent.getExtras().getString("Username");
+        username=intent.getStringExtra("Username");
 
         new CountDownTimer(10000, 1000) {
 

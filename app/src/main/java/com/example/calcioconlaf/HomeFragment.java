@@ -85,6 +85,7 @@ public class HomeFragment extends Fragment {
 
                 Intent intent2=new Intent(getActivity(),LobbyActivity.class);
                 intent2.putExtra("Username", username);
+                startActivity(intent2);
 
                 Intent intent= new Intent(getActivity(), LobbyActivity.class);
                 startActivity(intent);
