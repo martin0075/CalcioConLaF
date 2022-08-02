@@ -54,7 +54,8 @@ public class HomeFragment extends Fragment {
                 DatabaseReference ref = database.getReference();
                 DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
 
-                lobbyStadiumRef.addValueEventListener(new ValueEventListener() {
+
+                lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String indexLobby="";
@@ -62,15 +63,18 @@ public class HomeFragment extends Fragment {
                             for(DataSnapshot ds: snapshot.getChildren()) {
                                 if(ds.getChildrenCount()<4){
                                     indexLobby=ds.getKey();
+                                    Log.v("Index 1", indexLobby);
+                                    lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
+
                                 }
                             }
                         }
                         if(indexLobby.equals("")){
                             indexLobby= String.valueOf((snapshot.getChildrenCount()+1));
+                            Log.v("Index 2", indexLobby);
+                            lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
+
                         }
-
-                        lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
-
                     }
 
                     @Override
@@ -78,6 +82,12 @@ public class HomeFragment extends Fragment {
 
                     }
                 });
+
+                Intent intent2=new Intent(getActivity(),LobbyActivity.class);
+                intent2.putExtra("Username", username);
+
+                Intent intent= new Intent(getActivity(), LobbyActivity.class);
+                startActivity(intent);
             }
         });
 
