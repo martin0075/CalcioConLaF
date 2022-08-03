@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,8 @@ public class LobbyActivity extends AppCompatActivity {
 
     String username;
     Boolean trovati;
+    String usernameLobby;
+    HomeFragment home=new HomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,9 @@ public class LobbyActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         username=intent.getStringExtra("Username");
+        Intent intent2=getIntent();
+        usernameLobby=intent2.getStringExtra("UsernameLobby");
+
 
         new CountDownTimer(10000, 1000) {
 
@@ -39,47 +45,43 @@ public class LobbyActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                if (utentiTrovati(username)) {
-                    Intent intent1=new Intent(LobbyActivity.this, ProvaAPI.class);
-                    startActivity(intent1);
-                }
-                else{
-                    Intent intent2=new Intent(LobbyActivity.this, HomeFragment.class);
-                    startActivity(intent2);
-                }
-                timer.setText("done!");
-            }
-
-        }.start();
-    }
-
-    private boolean utentiTrovati(String username){
-        DatabaseReference ref = database.getReference();
-        DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
-        trovati=false;
-
-        lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds: snapshot.getChildren()){
-                    if(ds.hasChild(username)){
-                        if(ds.getChildrenCount()>1){
-                            trovati= true;
+                DatabaseReference ref = database.getReference();
+                DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
+                trovati=false;
+                lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(username==null){
+                         username=usernameLobby;
+                        }
+                        for(DataSnapshot ds: snapshot.getChildren()){
+                            Log.d("Bella3", String.valueOf(ds.hasChild(username)));
+                            if(ds.hasChild(username)){
+                                Log.d("Bella2",String.valueOf(ds.getChildrenCount()));
+                                if(ds.getChildrenCount()>1){
+                                    trovati= true;
+                                    Intent intent=new Intent(LobbyActivity.this, ProvaAPI.class);
+                                    startActivity(intent);
+                                }else{
+                                    if(snapshot.getChildrenCount()==1){
+                                        lobbyStadiumRef.child("").setValue("");
+                                        lobbyStadiumRef.child(ds.getKey()).removeValue();
+                                    }else{
+                                        lobbyStadiumRef.child(ds.getKey()).removeValue();
+                                    }
+                                    Intent intent2=new Intent(LobbyActivity.this, GameActivity.class);
+                                    intent2.putExtra("UsernameLobby",username);
+                                    startActivity(intent2);
+                                }
+                            }
                         }
                     }
-                }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return trovati;
+        }.start();
     }
-
-
-
-
 }

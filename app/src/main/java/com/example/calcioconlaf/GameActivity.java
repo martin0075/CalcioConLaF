@@ -27,12 +27,19 @@ public class GameActivity extends AppCompatActivity {
         nav=findViewById(R.id.navigation);
 
         Intent intent=getIntent();
-        String username=intent.getExtras().getString("Username");
+        String username=intent.getStringExtra("Username");
+        Intent intent2=getIntent();
+        String usernameLobby=intent2.getStringExtra("UsernameLobby");
+        if(usernameLobby==null){
+            Log.v("Lobby","a"+usernameLobby);
+        }else if(username==null){
+            Log.v("User","b"+username);
+        }
 
         Bundle bundle=new Bundle();
         bundle.putString("Username",username);
+        bundle.putString("UsernameLobby",usernameLobby);
         home.setArguments(bundle);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner,home).commit();
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -40,8 +47,10 @@ public class GameActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected( MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.home:
-                        bundle.putString("Username",username);
-                        home.setArguments(bundle);
+                        //bundle.putString("Username",username);
+                        //bundle.putString("UsernameLobby",usernameLobby);
+                        //home.setArguments(bundle);
+
                         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, home).commit();
                         return true;
                     case R.id.settings:

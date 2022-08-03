@@ -28,15 +28,14 @@ public class HomeFragment extends Fragment {
 
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     public String username;
-    public Username user;
+    public String username2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         username=getArguments().getString("Username");
-        user=new Username(username);
-
-
+        username2=getArguments().getString("UsernameLobby");
+        Log.v("Username2","c"+username2);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
@@ -51,6 +50,7 @@ public class HomeFragment extends Fragment {
         imgBtnStadium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 DatabaseReference ref = database.getReference();
                 DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
 
@@ -72,8 +72,12 @@ public class HomeFragment extends Fragment {
                         if(indexLobby.equals("")){
                             indexLobby= String.valueOf((snapshot.getChildrenCount()+1));
                             Log.v("Index 2", indexLobby);
-                            lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
-
+                            if(username==null) {
+                                Log.v("Username",username2);
+                                lobbyStadiumRef.child(indexLobby).child(username2).setValue(username2);
+                            }else{
+                                lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
+                            }
                         }
                     }
 
@@ -83,12 +87,14 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-                Intent intent2=new Intent(getActivity(),LobbyActivity.class);
-                intent2.putExtra("Username", username);
-                startActivity(intent2);
-
                 Intent intent= new Intent(getActivity(), LobbyActivity.class);
-                startActivity(intent);
+                if(username==null){
+                    intent.putExtra("UsernameLobby", username2);
+                    startActivity(intent);
+                }else{
+                    intent.putExtra("Username", username);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -98,14 +104,5 @@ public class HomeFragment extends Fragment {
 
             }
         });
-    }
-
-    private class Username{
-        public String username;
-        public Username(){}
-        public Username(String username){
-            this.username=username;
-        }
-
     }
 }
