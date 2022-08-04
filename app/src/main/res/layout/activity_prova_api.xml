@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#00B4F403"
     android:backgroundTint="#002196F3"
-    tools:context=".ProvaAPI">
+    tools:context=".QuizStadium">
 
     <Button
         android:id="@+id/btn1"

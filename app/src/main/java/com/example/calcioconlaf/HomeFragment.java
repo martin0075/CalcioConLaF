@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     public String username;
     public String username2;
+    public String indexLobby;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +59,7 @@ public class HomeFragment extends Fragment {
                 lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String indexLobby="";
+                        indexLobby="";
                         if(snapshot.getChildrenCount()>0){
                             for(DataSnapshot ds: snapshot.getChildren()) {
                                 if(ds.getChildrenCount()<4){
@@ -90,9 +91,11 @@ public class HomeFragment extends Fragment {
                 Intent intent= new Intent(getActivity(), LobbyActivity.class);
                 if(username==null){
                     intent.putExtra("UsernameLobby", username2);
+                    intent.putExtra("IndexLobby", indexLobby);
                     startActivity(intent);
                 }else{
                     intent.putExtra("Username", username);
+                    intent.putExtra("IndexLobby", indexLobby);
                     startActivity(intent);
                 }
             }

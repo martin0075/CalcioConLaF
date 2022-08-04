@@ -47,9 +47,7 @@ public class GameActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected( MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.home:
-                        //bundle.putString("Username",username);
-                        //bundle.putString("UsernameLobby",usernameLobby);
-                        //home.setArguments(bundle);
+
 
                         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, home).commit();
                         return true;

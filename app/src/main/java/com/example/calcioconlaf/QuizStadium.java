@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProvaAPI extends AppCompatActivity {
+public class QuizStadium extends AppCompatActivity {
     String risposta="";
 
     @Override

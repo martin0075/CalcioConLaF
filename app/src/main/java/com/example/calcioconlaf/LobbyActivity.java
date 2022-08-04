@@ -22,6 +22,7 @@ public class LobbyActivity extends AppCompatActivity {
     String username;
     Boolean trovati;
     String usernameLobby;
+    String indexLobby;
     HomeFragment home=new HomeFragment();
 
     @Override
@@ -35,6 +36,9 @@ public class LobbyActivity extends AppCompatActivity {
         username=intent.getStringExtra("Username");
         Intent intent2=getIntent();
         usernameLobby=intent2.getStringExtra("UsernameLobby");
+        Intent intent3=getIntent();
+        indexLobby=intent3.getStringExtra("IndexLobby");
+
 
 
         new CountDownTimer(10000, 1000) {
@@ -60,8 +64,10 @@ public class LobbyActivity extends AppCompatActivity {
                                 Log.d("Bella2",String.valueOf(ds.getChildrenCount()));
                                 if(ds.getChildrenCount()>1){
                                     trovati= true;
-                                    Intent intent=new Intent(LobbyActivity.this, ProvaAPI.class);
-                                    startActivity(intent);
+                                    Intent intent4=new Intent(LobbyActivity.this, QuizStadium.class);
+                                    intent4.putExtra("Username", username);
+                                    intent4.putExtra("IndexLobby", indexLobby);
+                                    startActivity(intent4);
                                 }else{
                                     if(snapshot.getChildrenCount()==1){
                                         lobbyStadiumRef.child("").setValue("");
@@ -69,9 +75,9 @@ public class LobbyActivity extends AppCompatActivity {
                                     }else{
                                         lobbyStadiumRef.child(ds.getKey()).removeValue();
                                     }
-                                    Intent intent2=new Intent(LobbyActivity.this, GameActivity.class);
-                                    intent2.putExtra("UsernameLobby",username);
-                                    startActivity(intent2);
+                                    Intent intent5=new Intent(LobbyActivity.this, GameActivity.class);
+                                    intent5.putExtra("UsernameLobby",username);
+                                    startActivity(intent5);
                                 }
                             }
                         }
@@ -83,5 +89,16 @@ public class LobbyActivity extends AppCompatActivity {
                 });
             }
         }.start();
+    }
+
+    public void setGame(){
+        DatabaseReference ref = database.getReference();
+        DatabaseReference gameStadiumRef = ref.child("GameStadium");
+
+        for(int i=0; i<10; i++){
+
+        }
+
+
     }
 }
