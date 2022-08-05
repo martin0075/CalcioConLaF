@@ -49,6 +49,7 @@ public class PlayerGame {
     }
 
     public void setActivePlayer(boolean activePlayer) {
+        ciao
         this.activePlayer = activePlayer;
     }
 
