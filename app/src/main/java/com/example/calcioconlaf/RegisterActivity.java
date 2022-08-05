@@ -26,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     private String TAG="Bella";
     private ArrayList<String> listaUser=new ArrayList();
     private ArrayList<String> listaMail=new ArrayList();
+    private ExampleLooperThread examplelooperthread;
+    RegisterActivity registerActivity=RegisterActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String mail=email.getText().toString();
                 String pw=password.getText().toString();
                 User user=new User(nome,pw, mail);
-                usersRef.addValueEventListener(new ValueEventListener() {
+                examplelooperthread=new ExampleLooperThread(nome,mail,pw,user,registerActivity);
+                examplelooperthread.start();
+                /*usersRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         listaUser.clear();
@@ -69,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
-                });
+                });*/
             }
         });
     }
