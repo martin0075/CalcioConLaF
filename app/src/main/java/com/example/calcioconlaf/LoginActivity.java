@@ -37,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     private String TAG="Boh";
     private ArrayList lista=new ArrayList();
+    private LoginThread loginThread;
+    LoginActivity loginActivity=LoginActivity.this;
+
 
 
     @Override
@@ -47,14 +50,14 @@ public class LoginActivity extends AppCompatActivity {
         EditText username=findViewById(R.id.txtUsername);
         EditText password=findViewById(R.id.txtPassword);
 
-        DatabaseReference ref = database.getReference();
-        DatabaseReference usersRef = ref.child("Users");
-
         Button login= findViewById(R.id.btnLogin);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                usersRef.addValueEventListener(new ValueEventListener() {
+                String dati=username.getText()+" "+password.getText();
+                loginThread=new LoginThread(dati,username.getText().toString(),loginActivity);
+                loginThread.start();
+                /*usersRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         lista.clear();
@@ -63,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         //Toast.makeText(LoginActivity.this,lista.get(0).toString(),Toast.LENGTH_SHORT).show();
                         Log.v(TAG,lista.get(0).toString());
-                        String dati=username.getText()+" "+password.getText();
                             if(lista.contains(dati)){
                                 Toast.makeText(LoginActivity.this,"Dati corretti",Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(LoginActivity.this,GameActivity.class);
@@ -77,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                });*/
             }
         });
 

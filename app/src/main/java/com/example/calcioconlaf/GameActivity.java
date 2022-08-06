@@ -30,11 +30,7 @@ public class GameActivity extends AppCompatActivity {
         String username=intent.getStringExtra("Username");
         Intent intent2=getIntent();
         String usernameLobby=intent2.getStringExtra("UsernameLobby");
-        if(usernameLobby==null){
-            Log.v("Lobby","a"+usernameLobby);
-        }else if(username==null){
-            Log.v("User","b"+username);
-        }
+
 
         Bundle bundle=new Bundle();
         bundle.putString("Username",username);
@@ -47,8 +43,6 @@ public class GameActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected( MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.home:
-
-
                         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, home).commit();
                         return true;
                     case R.id.settings:

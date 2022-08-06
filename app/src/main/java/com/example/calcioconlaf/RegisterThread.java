@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ExampleLooperThread extends Thread {
+public class RegisterThread extends Thread {
     private ArrayList<String> listaUser = new ArrayList();
     private ArrayList<String> listaMail = new ArrayList();
     public FirebaseDatabase database = FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -34,7 +34,7 @@ public class ExampleLooperThread extends Thread {
     String pwT;
     User userT;
     RegisterActivity registerActivity;
-    public ExampleLooperThread(String nome, String mail, String pw, User user, RegisterActivity registerActivity) {
+    public RegisterThread(String nome, String mail, String pw, User user, RegisterActivity registerActivity) {
         this.nomeT = nome;
         this.mailT = mail;
         this.pwT = pw;
@@ -44,7 +44,7 @@ public class ExampleLooperThread extends Thread {
 
     @Override
     public void run() {
-        usersRef.addValueEventListener(new ValueEventListener() {
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaUser.clear();
@@ -52,8 +52,8 @@ public class ExampleLooperThread extends Thread {
                     listaUser.add(ds.child("Username").getValue().toString());
                     listaMail.add(ds.child("Email").getValue().toString());
                 }
-                Log.d("prova",mailT+" "+nomeT+" "+pwT);
                 if ((!listaMail.contains(mailT)) && (!listaUser.contains(nomeT)) && ((!nomeT.matches("")) && (!pwT.matches("")) && (!mailT.matches("")))) {
+                    Log.d("if","if");
                     usersRef.child(mailT).setValue(userT);
                     registerActivity.runOnUiThread(new Runnable() {
                         @Override
@@ -64,14 +64,13 @@ public class ExampleLooperThread extends Thread {
                         }
                     });
                 }else {
+                    Log.d("else","else");
                     registerActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(registerActivity,"Dati mancanti o già utilizzati",Toast.LENGTH_SHORT).show();
                         }
                     });
-                    //Toast.makeText(RegisterActivity.this,"Dati mancanti o già utilizzati",Toast.LENGTH_SHORT).show();
-
                 }
             }
 

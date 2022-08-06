@@ -41,6 +41,8 @@ public class NewsActivity extends AppCompatActivity implements AdapterForNews.On
     AdapterForNews mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     BottomNavigationView nav;
+    NewsThread newsThread;
+    NewsActivity newsActivity=NewsActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,12 @@ public class NewsActivity extends AppCompatActivity implements AdapterForNews.On
         listOfElements = new ArrayList<NewsElement>();
         nav=findViewById(R.id.navigation);
 
+        newsThread=new NewsThread(newsActivity,mAdapter);
+
         String URL2 = "https://football98.p.rapidapi.com/liga/news";
         //creo una coda di richiesta
-        callApi(URL2,listOfElements,recyclerView);
+        newsThread.callApi(URL2,listOfElements,recyclerView);
+        //callApi(URL2,listOfElements,recyclerView);
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -65,25 +70,25 @@ public class NewsActivity extends AppCompatActivity implements AdapterForNews.On
                 switch(item.getItemId()){
                     case R.id.premier:
                         String URL = "https://football98.p.rapidapi.com/premierleague/news";
-                        callApi(URL,listOfElements,recyclerView);
+                        newsThread.callApi(URL,listOfElements,recyclerView);
                         return true;
                     case R.id.seriea:
                         String URL1 = "https://football98.p.rapidapi.com/seriea/news";
                         //creo una coda di richiesta
-                        callApi(URL1,listOfElements,recyclerView);
+                        newsThread.callApi(URL1,listOfElements,recyclerView);
                         return true;
                     case R.id.liga:
                         String URL2 = "https://football98.p.rapidapi.com/liga/news";
                         //creo una coda di richiesta
-                        callApi(URL2,listOfElements,recyclerView);
+                        newsThread.callApi(URL2,listOfElements,recyclerView);
                         return true;
                     case R.id.ligue1:
                         String URL3 = "https://football98.p.rapidapi.com/ligue1/news";
-                        callApi(URL3,listOfElements,recyclerView);
+                        newsThread.callApi(URL3,listOfElements,recyclerView);
                         return true;
                     case R.id.bundes:
                         String URL4 = "https://football98.p.rapidapi.com/bundesliga/news";
-                        callApi(URL4,listOfElements,recyclerView);
+                        newsThread.callApi(URL4,listOfElements,recyclerView);
 
                         return true;
                 }
@@ -94,7 +99,7 @@ public class NewsActivity extends AppCompatActivity implements AdapterForNews.On
 
     }
 
-    private void callApi(String url, ArrayList<NewsElement> listOfElements,  RecyclerView recyclerView){
+    /*private void callApi(String url, ArrayList<NewsElement> listOfElements,  RecyclerView recyclerView){
         RequestQueue requestQueue = Volley.newRequestQueue(NewsActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -134,7 +139,7 @@ public class NewsActivity extends AppCompatActivity implements AdapterForNews.On
 
         mAdapter = new AdapterForNews(listOfElements, NewsActivity.this::onNewsClick);
         recyclerView.setAdapter(mAdapter);
-    }
+    }*/
 
     @Override
     public void onNewsClick(int position) {

@@ -1,5 +1,6 @@
 package com.example.calcioconlaf;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -30,6 +31,8 @@ public class HomeFragment extends Fragment {
     public String username;
     public String username2;
     public String indexLobby;
+    StadiumThread stadiumThread;
+    HomeFragment homeFragment=HomeFragment.this;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,14 +48,16 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ImageButton imgBtnStadium=getView().findViewById(R.id.imgBtnStadium);
-        ImageButton imgBtnTransfer=getView().findViewById(R.id.imgBtnTransfer);
+        ImageButton imgBtnStadium = getView().findViewById(R.id.imgBtnStadium);
+        ImageButton imgBtnTransfer = getView().findViewById(R.id.imgBtnTransfer);
 
         imgBtnStadium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stadiumThread = new StadiumThread(username, username2, homeFragment);
+                stadiumThread.start();
 
-                DatabaseReference ref = database.getReference();
+                /*DatabaseReference ref = database.getReference();
                 DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
 
 
@@ -99,12 +104,14 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 }
             }
-        });
+        });*/
 
-        imgBtnTransfer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                imgBtnTransfer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                    }
+                });
             }
         });
     }

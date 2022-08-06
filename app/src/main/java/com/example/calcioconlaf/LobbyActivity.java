@@ -24,6 +24,8 @@ public class LobbyActivity extends AppCompatActivity {
     String usernameLobby;
     String indexLobby;
     HomeFragment home=new HomeFragment();
+    LobbyThread lobbyThread;
+    LobbyActivity lobbyActivity=LobbyActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,9 @@ public class LobbyActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                DatabaseReference ref = database.getReference();
+                lobbyThread=new LobbyThread(username,usernameLobby,indexLobby,lobbyActivity);
+                lobbyThread.start();
+                /*DatabaseReference ref = database.getReference();
                 DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
                 trovati=false;
                 lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -86,7 +90,7 @@ public class LobbyActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                });*/
             }
         }.start();
     }
