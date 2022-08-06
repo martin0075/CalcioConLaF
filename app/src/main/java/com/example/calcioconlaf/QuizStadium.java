@@ -44,13 +44,15 @@ public class QuizStadium extends AppCompatActivity {
                 risposta+=response;
                 try {
                     JSONObject result = new JSONObject(response);
-                    JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
-                    String srcImage=result1.getString("image");
+                    if(result.getString("results").equals(1)){
+                        JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
+                        String srcImage=result1.getString("image");
 
-                    ImageView img=findViewById(R.id.imageStadio);
-                    Picasso.get().load(srcImage).into(img);
-                    //Toast.makeText(ProvaAPI.this,result1.getString("name"),Toast.LENGTH_SHORT).show();
-                    Log.v("Prova",result1.getString("image"));
+                        ImageView img=findViewById(R.id.imageStadio);
+                        Picasso.get().load(srcImage).into(img);
+                        //Toast.makeText(ProvaAPI.this,result1.getString("name"),Toast.LENGTH_SHORT).show();
+                        Log.v("Prova",result1.getString("image"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

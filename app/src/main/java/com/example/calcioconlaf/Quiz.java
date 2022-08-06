@@ -10,6 +10,8 @@ public class Quiz {
     private String country;
     private String city;
 
+    public Quiz(){}
+
     public Quiz(String urlImage, String option1, String option2, String option3, String option4, String answer, String country, String city) {
         this.urlImage = urlImage;
         this.option1 = option1;
@@ -75,5 +77,13 @@ public class Quiz {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
