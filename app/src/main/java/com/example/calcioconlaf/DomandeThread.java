@@ -1,5 +1,7 @@
 package com.example.calcioconlaf;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -17,33 +19,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class DomandeThread extends Thread{
 
     LobbyActivity lobbyActivity;
     ArrayList<Quiz> domande;
+    String username;
+    String indexLobby;
+    boolean receiveData=false;
     int b;
+    int c;
+    int a;
     Random r=new Random();
 
-    public DomandeThread(LobbyActivity lobbyActivity, ArrayList<Quiz> domande) {
+    public DomandeThread(LobbyActivity lobbyActivity, ArrayList<Quiz> domande, String username, String indexLobby) {
         this.lobbyActivity=lobbyActivity;
         this.domande=domande;
+        this.username=username;
+        this.indexLobby=indexLobby;
     }
 
     @Override
     public void run() {
-
+        setGame(domande);
     }
 
-    public void setGame(){
+    public void setGame(ArrayList<Quiz> domande){
         int n;
 
-        for(b =0; b <5; b++){
+        for(b =0; b <10; b++){
             n=r.nextInt(947);
 
             Quiz quiz=new Quiz();
             String URL = "https://v3.football.api-sports.io/venues?id="+n;
-            //creo una coda di richiesta
+
             RequestQueue requestQueue = Volley.newRequestQueue(lobbyActivity);
             //creo la richiesta
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -52,9 +62,9 @@ public class DomandeThread extends Thread{
                     try {
                         JSONObject result = new JSONObject(response);
 
-
+                        //Log.v("V","execute");
                         if(result.getString("results").equals("1")){
-                            //Log.v("Log", result.toString()+"a");
+                            Log.v("Log", result.toString()+"a");
 
 
                             JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
@@ -66,8 +76,29 @@ public class DomandeThread extends Thread{
                             quiz.setCity(result1.getString("city"));
                             quiz.setCountry(result1.getString("country"));
 
+
+
                             domande.add(quiz);
-                            Log.v("Domanda1", domande.get(b).getOption4());
+
+                            if(domande.size()==10){
+                                for(int x=0; x<domande.size();x++){
+                                    Log.v("Answer", domande.get(x).getAnswer());
+                                }
+                                setReceiveData(true);
+
+                                RisposteThread risposte=new RisposteThread(username, indexLobby, domande, lobbyActivity);
+                                lobbyActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Log.v("size", String.valueOf(domande.size()));
+                                        risposte.start();
+
+
+                                    }
+                                });
+
+
+                            }
 
 
 
@@ -75,11 +106,13 @@ public class DomandeThread extends Thread{
                         else{
                             b--;
                         }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                 }
+
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
@@ -95,18 +128,30 @@ public class DomandeThread extends Thread{
                     return params;
                 }
             };
+
             //aggiungo la richiesta alla coda
+            //creo una coda di richiesta
+
             requestQueue.add(stringRequest);
+
+
+
 
 
 
         }
 
-
-
-
     }
 
+
+    public boolean isReceiveData() {
+        return receiveData;
+    }
+
+
+    public void setReceiveData(boolean receiveData) {
+        this.receiveData = receiveData;
+    }
 
     public ArrayList<Quiz> getDomande() {
         return domande;
