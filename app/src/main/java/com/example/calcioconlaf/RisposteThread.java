@@ -27,15 +27,20 @@ public class RisposteThread extends Thread{
     LobbyActivity lobbyActivity;
     int c;
     int a;
-    int cont;
+    int cont=0;
+    int n=0;
     Random r=new Random();
+    RequestQueue requestQueue1;
+    ArrayList<String> opzioni=new ArrayList<>();
+    String opzione1;
+    String opzione2;
+    String opzione3;
 
     public RisposteThread(String username, String indexLobby, ArrayList<Quiz> domande, LobbyActivity lobbyActivity) {
         this.username=username;
         this.indexLobby=indexLobby;
         this.domande=domande;
         this.lobbyActivity=lobbyActivity;
-        cont=0;
     }
 
     @Override
@@ -44,16 +49,17 @@ public class RisposteThread extends Thread{
     }
 
     public void setOption(ArrayList<Quiz> domande){
-        for(c=0; c<domande.size(); c++){
+        requestQueue1=Volley.newRequestQueue(lobbyActivity);
+        while(c<domande.size()){
+            Log.v("size",String.valueOf(domande.size()));
+            cont++;
             Log.v("c", String.valueOf(c));
             for(a=0; a<3; a++) {
                 int num = r.nextInt(947);
-
                 String URL1 = "https://v3.football.api-sports.io/venues?id=" + num;
                 //creo una coda di richiesta
                 //RequestQueue requestQueue1 = Volley.newRequestQueue(this);
 
-                if(c<=9){
                     Log.v("Domanda", domande.get(c).getAnswer());
                     StringRequest stringRequest1 = new StringRequest(Request.Method.GET, URL1, new Response.Listener<String>() {
                         @Override
@@ -61,41 +67,43 @@ public class RisposteThread extends Thread{
                             try {
                                 JSONObject result2 = new JSONObject(response);
                                 if (result2.getString("results").equals("1")) {
-                                    JSONObject result3 = (JSONObject) result2.getJSONArray("response").get(0);
-                                    //Log.v("option",result3.getString("name")+"a");
-                                    Log.v("count", String.valueOf(a));
-                                    if ((!(domande.get(c).getOption1().equals(result3.getString("name"))))
+                                JSONObject result3 = (JSONObject) result2.getJSONArray("response").get(0);
+                                //Log.v("result3", result3.getString("name"));
+                                opzioni.add(result3.getString("name"));
+
+                                if(opzioni.size()>25){
+                                        Log.v("sizeD", String.valueOf(domande.size()));
+                                }
+
+                                //Log.v("opt1",domande.get(c).getOption1());
+                                /*if ((!(domande.get(c).getOption1().equals(result3.getString("name"))))
                                             && (!(domande.get(c).getOption2().equals(result3.getString("name"))))
                                             && (!(domande.get(c).getOption3().equals(result3.getString("name"))))
                                             && (!(domande.get(c).getOption4().equals(result3.getString("name"))))) {
-                                        Log.v("option", result3.getString("name") + "a");
-
-                                        switch (a) {
-
-                                            case 0:
-                                                domande.get(c).setOption1(result3.getString("name"));
-                                                Log.v("count0", String.valueOf(a));
-                                                break;
-                                            case 1:
-                                                domande.get(c).setOption2(result3.getString("name"));
-                                                Log.v("count1", String.valueOf(a));
-                                                break;
-                                            case 2:
-                                                domande.get(c).setOption3(result3.getString("name"));
-                                                Log.v("option3", result3.getString("name"));
-                                                cont++;
-                                                break;
-                                        }
-
-                                    } else {
-                                        a--;
+                                    switch (a) {
+                                        case 0:
+                                            domande.get(c).setOption1(result3.getString("name"));
+                                            Log.v("count0", String.valueOf(a));
+                                            Log.v("option1", domande.get(c).getOption1());
+                                        break;
+                                        case 1:
+                                            domande.get(c).setOption2(result3.getString("name"));
+                                            Log.v("option2", domande.get(c).getOption2());
+                                        break;
+                                        case 2:
+                                            domande.get(c).setOption3(result3.getString("name"));
+                                            Log.v("option3", domande.get(c).getOption3());
+                                            //cont++;
+                                        break;
                                     }
-                                }
-
+                                }*/
+                                    //else {
+                                      //  a--;
+                                    //}
+                            }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -113,14 +121,14 @@ public class RisposteThread extends Thread{
                         }
                     };
                     //aggiungo la richiesta alla coda
-                    RequestQueue requestQueue1 = Volley.newRequestQueue(lobbyActivity);
                     requestQueue1.add(stringRequest1);
-                }
+                if(a==2){
+                    c++;
 
+                }
             }
         }
-
-        if(cont==10){
+        if(cont==domande.size()){
             Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
             intent4.putExtra("Username", username);
             intent4.putExtra("IndexLobby", indexLobby);

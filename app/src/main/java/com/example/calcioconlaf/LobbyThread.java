@@ -42,12 +42,9 @@ public class LobbyThread extends Thread{
                     username = usernameLobby;
                 }
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    Log.d("Bella3", String.valueOf(ds.hasChild(username)));
                     if (ds.hasChild(username)) {
-                        Log.d("Bella2", String.valueOf(ds.getChildrenCount()));
                         if (ds.getChildrenCount() > 1) {
                             trovati = true;
-
                         } else {
                             if (snapshot.getChildrenCount() == 1) {
                                 lobbyStadiumRef.child("").setValue("");

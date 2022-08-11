@@ -45,9 +45,7 @@ public class StadiumThread extends Thread{
                 }
                 if(indexLobby.equals("")){
                     indexLobby= String.valueOf((snapshot.getChildrenCount()+1));
-                    Log.v("Index 2", indexLobby);
                     if(username==null) {
-                        Log.v("Username",username2);
                         lobbyStadiumRef.child(indexLobby).child(username2).setValue(username2);
                     }else{
                         lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
