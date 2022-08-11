@@ -59,13 +59,7 @@ public class SetRisposteThread extends Thread{
                 }
 
             }
-            Log.v("size1", String.valueOf(opzioni.size()));
-            Log.v("Domanda", String.valueOf(i));
-            Log.v("Option", domande.get(i).getOption1());
-            Log.v("Option", domande.get(i).getOption2());
-            Log.v("Option", domande.get(i).getOption3());
-            Log.v("Option", domande.get(i).getOption4());
-            Log.v("Answer", domande.get(i).getAnswer());
+
         }
     }
 }

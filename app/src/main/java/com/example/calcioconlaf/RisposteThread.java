@@ -80,7 +80,6 @@ public class RisposteThread extends Thread{
                                 JSONObject result2 = new JSONObject(response);
                                 JSONObject result3=(JSONObject) result2.getJSONArray("response").get(0);
                                 opzioni.add(result3.getString("name"));
-                                Log.v("size", String.valueOf(opzioni.size()));
                                 if(opzioni.size()==30){
                                     SetRisposteThread setRisposte=new SetRisposteThread(domande, opzioni);
                                     lobbyActivity.runOnUiThread(new Runnable() {

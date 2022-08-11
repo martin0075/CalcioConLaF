@@ -67,7 +67,7 @@ public class LobbyActivity extends AppCompatActivity {
         //domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
 
 
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(15000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timer.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -78,53 +78,7 @@ public class LobbyActivity extends AppCompatActivity {
                 lobbyThread=new LobbyThread(username,usernameLobby,indexLobby,lobbyActivity, domande);
                 lobbyThread.start();
 
-                /*DatabaseReference ref = database.getReference();
-                DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
-                trovati=false;
-                lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(username==null){
-                         username=usernameLobby;
-                        }
 
-                        for(DataSnapshot ds: snapshot.getChildren()){
-                            Log.d("Bella3", String.valueOf(ds.hasChild(username)));
-                            if(ds.hasChild(username)){
-                                Log.d("Bella2",String.valueOf(ds.getChildrenCount()));
-                                if(ds.getChildrenCount()>1){
-                                    trovati= true;
-
-                                    while(!domandeThread.isReceiveData()){
-                                        Log.v("isLoaded", String.valueOf(domandeThread.isReceiveData()));
-                                    }
-
-                                }else{
-                                    if(snapshot.getChildrenCount()==1){
-                                        lobbyStadiumRef.child("").setValue("");
-                                        lobbyStadiumRef.child(ds.getKey()).removeValue();
-                                    }else{
-                                        lobbyStadiumRef.child(ds.getKey()).removeValue();
-                                    }
-                                    Intent intent5=new Intent(LobbyActivity.this, GameActivity.class);
-                                    intent5.putExtra("UsernameLobby",username);
-                                    startActivity(intent5);
-                                }
-                            }
-                        }
-
-                        if(trovati){
-
-
-                            domandeThread.start();
-
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });*/
             }
         }.start();
     }

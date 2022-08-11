@@ -43,6 +43,7 @@ public class LobbyThread extends Thread{
                 }
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (ds.hasChild(username)) {
+
                         if (ds.getChildrenCount() > 1) {
                             trovati = true;
                         } else {
@@ -65,13 +66,26 @@ public class LobbyThread extends Thread{
                 }
 
                 if(trovati){
-                    DomandeThread domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
-                    lobbyActivity.runOnUiThread(new Runnable() {
+                    lobbyStadiumRef.child(indexLobby).orderByKey().limitToFirst(1).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void run() {
-                            domandeThread.start();
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.getKey().equals(username)){
+                                DomandeThread domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
+                                lobbyActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        domandeThread.start();
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
                     });
+
                 }
             }
 
