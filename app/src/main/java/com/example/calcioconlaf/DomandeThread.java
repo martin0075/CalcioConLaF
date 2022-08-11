@@ -25,6 +25,9 @@ import java.util.concurrent.ExecutionException;
 public class DomandeThread extends Thread{
     LobbyActivity lobbyActivity;
     ArrayList<Quiz> domande;
+    int [] endpointVuoto={0,51,53,70,74,108,131,138,141,154,156,179,187,191,196,212,229,263,266,267,294,305,358,394,436,439,447,455,
+    469,480,486,492,498,499,505,506,520,520,521,524,528,531,534,540,541,544,548,549,552,561,564,575,576,580,590,591,595,613,622,667,669,
+    670,677,696,709,716,717,719,721,727,729,736,743,744,772,804,808,828,869,883,915,916,990};
     String username;
     String indexLobby;
     boolean receiveData=false;
@@ -51,19 +54,31 @@ public class DomandeThread extends Thread{
     public void setGame(ArrayList<Quiz> domande){
         int n;
         requestQueue=Volley.newRequestQueue(lobbyActivity);
-        while(cont<=10) {
-                n = r.nextInt(500);
-                Quiz quiz = new Quiz();
-                String URL = "https://v3.football.api-sports.io/venues?id=" + n;
-                //creo la richiesta
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            result= new JSONObject(response);
+        boolean vuoto=false;
 
-                            //Log.v("V","execute");
-                            if (result.getString("results").equals("1")) {
+        while(cont<10) {
+                n = r.nextInt(998);
+                for(int d=0; d<endpointVuoto.length;d++){
+                    if(n==endpointVuoto[d]){
+                        vuoto=true;
+                        d=endpointVuoto.length;
+                    }
+                    else{
+                        vuoto=false;
+                    }
+                }
+                if(!vuoto){
+                    Quiz quiz = new Quiz();
+                    String URL = "https://v3.football.api-sports.io/venues?id=" + n;
+                    //creo la richiesta
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                result= new JSONObject(response);
+
+
+
                                 Log.v("Log", result.toString() + "a");
 
 
@@ -75,12 +90,15 @@ public class DomandeThread extends Thread{
                                 quiz.setOption4(result1.getString("name"));
                                 quiz.setCity(result1.getString("city"));
                                 quiz.setCountry(result1.getString("country"));
+                                quiz.setOption1("");
+                                quiz.setOption2("");
+                                quiz.setOption3("");
 
 
                                 domande.add(quiz);
 
-                                if (domande.size() > 9) {
-                                    RisposteThread risposte = new RisposteThread(username, indexLobby, domande, lobbyActivity);
+                                if (domande.size() == 10) {
+                                    RisposteThread risposte = new RisposteThread(username, indexLobby, domande, lobbyActivity, endpointVuoto);
                                     lobbyActivity.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -90,36 +108,38 @@ public class DomandeThread extends Thread{
                                     });
 
                                 }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
                         }
 
-                    }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.v("Error", error.toString());
+                        }
+                    }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("x-rapidapi-key", "b25b06be0210744411a4ecfbb153f347");
+                            params.put("x-rapidapi-host", "v3.football.api-sports.io");
 
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.v("Error", error.toString());
-                    }
-                }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("x-rapidapi-key", "b25b06be0210744411a4ecfbb153f347");
-                        params.put("x-rapidapi-host", "v3.football.api-sports.io");
+                            return params;
+                        }
+                    };
 
-                        return params;
-                    }
-                };
+                    //aggiungo la richiesta alla coda
+                    //creo una coda di richiesta
 
-                //aggiungo la richiesta alla coda
-                //creo una coda di richiesta
-
-                requestQueue.add(stringRequest);
-                cont++;
+                    requestQueue.add(stringRequest);
+                    cont++;
+                }
         }
     }
+
     public ArrayList<Quiz> getDomande() {
         return domande;
     }
