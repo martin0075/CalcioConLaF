@@ -76,6 +76,7 @@ public class LobbyActivity extends AppCompatActivity {
 
             public void onFinish() {
                 lobbyThread=new LobbyThread(username,usernameLobby,indexLobby,lobbyActivity, domande);
+                Log.v("LobbyLobby",indexLobby);
                 lobbyThread.start();
 
 

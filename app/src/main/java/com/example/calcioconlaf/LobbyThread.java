@@ -70,7 +70,7 @@ public class LobbyThread extends Thread{
                     gamestadium.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.getChildrenCount()==0){
+                            if(snapshot.child(indexLobby).getChildrenCount()==0){
                                 DomandeThread domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
                                 lobbyActivity.runOnUiThread(new Runnable() {
                                     @Override

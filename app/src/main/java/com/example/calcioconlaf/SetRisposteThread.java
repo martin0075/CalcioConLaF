@@ -84,7 +84,7 @@ public class SetRisposteThread extends Thread{
         gameStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                gameStadiumRef.child("1").setValue(domande);
+                gameStadiumRef.child(indexLobby).child("domande").setValue(domande);
                 lobbyActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

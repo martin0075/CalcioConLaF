@@ -39,6 +39,8 @@ public class StadiumThread extends Thread{
                             indexLobby=ds.getKey();
                             Log.v("IndexLobby1", indexLobby);
                             lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
+                            FragmentToActivityThread fragmentToActivityThread=new FragmentToActivityThread(username,indexLobby,homefragment);
+                            fragmentToActivityThread.start();
 
                         }
                     }
@@ -49,8 +51,12 @@ public class StadiumThread extends Thread{
                     Log.v("IndexLobby3", indexLobby);
                     if(username==null) {
                         lobbyStadiumRef.child(indexLobby).child(username2).setValue(username2);
+                        FragmentToActivityThread fragmentToActivityThread=new FragmentToActivityThread(username2,indexLobby,homefragment);
+                        fragmentToActivityThread.start();
                     }else{
                         lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
+                        FragmentToActivityThread fragmentToActivityThread=new FragmentToActivityThread(username,indexLobby,homefragment);
+                        fragmentToActivityThread.start();
                     }
                 }
             }
@@ -60,26 +66,5 @@ public class StadiumThread extends Thread{
 
             }
         });
-        if(username==null){
-            homefragment.getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent= new Intent(homefragment.getActivity(), LobbyActivity.class);
-                    intent.putExtra("UsernameLobby", username2);
-                    intent.putExtra("IndexLobby", indexLobby);
-                    homefragment.getActivity().startActivity(intent);
-                }
-            });
-        }else{
-            homefragment.getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent= new Intent(homefragment.getActivity(), LobbyActivity.class);
-                    intent.putExtra("Username", username);
-                    intent.putExtra("IndexLobby", indexLobby);
-                    homefragment.getActivity().startActivity(intent);
-                }
-            });
-        }
     }
 }
