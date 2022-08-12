@@ -37,14 +37,16 @@ public class StadiumThread extends Thread{
                     for(DataSnapshot ds: snapshot.getChildren()) {
                         if(ds.getChildrenCount()<4){
                             indexLobby=ds.getKey();
-                            Log.v("Index 1", indexLobby);
+                            Log.v("IndexLobby1", indexLobby);
                             lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
 
                         }
                     }
                 }
                 if(indexLobby.equals("")){
+                    Log.v("IndexLobby2", indexLobby);
                     indexLobby= String.valueOf((snapshot.getChildrenCount()+1));
+                    Log.v("IndexLobby3", indexLobby);
                     if(username==null) {
                         lobbyStadiumRef.child(indexLobby).child(username2).setValue(username2);
                     }else{

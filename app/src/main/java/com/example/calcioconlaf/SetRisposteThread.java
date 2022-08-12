@@ -1,6 +1,15 @@
 package com.example.calcioconlaf;
 
+import android.content.Intent;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -8,16 +17,26 @@ public class SetRisposteThread extends Thread{
 
     ArrayList<Quiz> domande;
     ArrayList<String> opzioni;
+    public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
+    DatabaseReference ref = database.getReference();
+    DatabaseReference gameStadiumRef = ref.child("GameStadium");
+    LobbyActivity lobbyActivity;
+    String username;
+    String indexLobby;
 
-    public SetRisposteThread(ArrayList<Quiz> domande, ArrayList<String> opzioni) {
+    public SetRisposteThread(ArrayList<Quiz> domande, ArrayList<String> opzioni,LobbyActivity lobbyActivity,String username,String indexLobby) {
         this.domande=domande;
         this.opzioni=opzioni;
+        this.lobbyActivity=lobbyActivity;
+        this.username=username;
+        this.indexLobby=indexLobby;
     }
 
     @Override
     public void run() {
         super.run();
         addOption();
+        write();
     }
 
     public void addOption() {
@@ -59,7 +78,28 @@ public class SetRisposteThread extends Thread{
                 }
 
             }
-
         }
+    }
+    public void write(){
+        gameStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                gameStadiumRef.child("1").setValue(domande);
+                lobbyActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
+                        intent4.putExtra("Username", username);
+                        intent4.putExtra("IndexLobby", indexLobby);
+                        lobbyActivity.startActivity(intent4);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

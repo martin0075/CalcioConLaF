@@ -56,62 +56,13 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 stadiumThread = new StadiumThread(username, username2, homeFragment);
                 stadiumThread.start();
-
-                /*DatabaseReference ref = database.getReference();
-                DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
-
-
-                lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        indexLobby="";
-                        if(snapshot.getChildrenCount()>0){
-                            for(DataSnapshot ds: snapshot.getChildren()) {
-                                if(ds.getChildrenCount()<4){
-                                    indexLobby=ds.getKey();
-                                    Log.v("Index 1", indexLobby);
-                                    lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
-
-                                }
-                            }
-                        }
-                        if(indexLobby.equals("")){
-                            indexLobby= String.valueOf((snapshot.getChildrenCount()+1));
-                            Log.v("Index 2", indexLobby);
-                            if(username==null) {
-                                Log.v("Username",username2);
-                                lobbyStadiumRef.child(indexLobby).child(username2).setValue(username2);
-                            }else{
-                                lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-                Intent intent= new Intent(getActivity(), LobbyActivity.class);
-                if(username==null){
-                    intent.putExtra("UsernameLobby", username2);
-                    intent.putExtra("IndexLobby", indexLobby);
-                    startActivity(intent);
-                }else{
-                    intent.putExtra("Username", username);
-                    intent.putExtra("IndexLobby", indexLobby);
-                    startActivity(intent);
-                }
             }
-        });*/
+        });
 
-                imgBtnTransfer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+        imgBtnTransfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    }
-                });
             }
         });
     }
