@@ -57,29 +57,6 @@ public class LoginActivity extends AppCompatActivity {
                 String dati=username.getText()+" "+password.getText();
                 loginThread=new LoginThread(dati,username.getText().toString(),loginActivity);
                 loginThread.start();
-                /*usersRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        lista.clear();
-                        for(DataSnapshot ds: snapshot.getChildren()) {
-                            lista.add(ds.child("Username").getValue()+" "+ds.child("Password").getValue());
-                        }
-                        //Toast.makeText(LoginActivity.this,lista.get(0).toString(),Toast.LENGTH_SHORT).show();
-                        Log.v(TAG,lista.get(0).toString());
-                            if(lista.contains(dati)){
-                                Toast.makeText(LoginActivity.this,"Dati corretti",Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(LoginActivity.this,GameActivity.class);
-                                intent.putExtra("Username", username.getText().toString());
-                                startActivity(intent);
-                            }else{
-                                Toast.makeText(LoginActivity.this,"Dati mancanti o non corretti",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });*/
             }
         });
 

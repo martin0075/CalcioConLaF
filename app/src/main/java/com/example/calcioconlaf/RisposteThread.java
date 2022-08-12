@@ -82,6 +82,7 @@ public class RisposteThread extends Thread{
                                 opzioni.add(result3.getString("name"));
                                 if(opzioni.size()==30){
                                     SetRisposteThread setRisposte=new SetRisposteThread(domande, opzioni,lobbyActivity,username,indexLobby);
+
                                     lobbyActivity.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -119,17 +120,5 @@ public class RisposteThread extends Thread{
                 }
             }
         }
-        /*if(cont==domande.size()){
-            Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
-            intent4.putExtra("Username", username);
-            intent4.putExtra("IndexLobby", indexLobby);
-
-            lobbyActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    lobbyActivity.startActivity(intent4);
-                }
-            });
-        }*/
     }
 }
