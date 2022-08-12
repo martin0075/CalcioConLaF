@@ -83,6 +83,16 @@ public class LobbyThread extends Thread{
                             }
                             if(postoPrimoFiglio==tot){
                                 setPartita();
+                            }else {
+                                lobbyActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
+                                        intent4.putExtra("Username", username);
+                                        intent4.putExtra("IndexLobby", indexLobby);
+                                        lobbyActivity.startActivity(intent4);
+                                    }
+                                });
                             }
                         }
 
@@ -105,25 +115,13 @@ public class LobbyThread extends Thread{
         gamestadium.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(indexLobby).getChildrenCount()==0){
-                    DomandeThread domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
-                    lobbyActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            domandeThread.start();
-                        }
-                    });
-                }else{
-                    lobbyActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
-                            intent4.putExtra("Username", username);
-                            intent4.putExtra("IndexLobby", indexLobby);
-                            lobbyActivity.startActivity(intent4);
-                        }
-                    });
-                }
+                DomandeThread domandeThread = new DomandeThread(lobbyActivity, domande, username, indexLobby);
+                lobbyActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        domandeThread.start();
+                    }
+                });
             }
 
             @Override
