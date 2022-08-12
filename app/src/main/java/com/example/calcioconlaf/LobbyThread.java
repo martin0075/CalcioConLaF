@@ -66,34 +66,61 @@ public class LobbyThread extends Thread{
                 }
 
                 if(trovati){
-                    DatabaseReference gamestadium=ref.child("GameStadium");
-                    gamestadium.addListenerForSingleValueEvent(new ValueEventListener() {
+                    DatabaseReference lobbystadium=ref.child("LobbyStadium").child(indexLobby);
+                    Boolean primoFiglio=false;
+                    lobbystadium.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.child(indexLobby).getChildrenCount()==0){
-                                DomandeThread domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
-                                lobbyActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        domandeThread.start();
-                                    }
-                                });
-                            }else{
-                                lobbyActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
-                                        intent4.putExtra("Username", username);
-                                        intent4.putExtra("IndexLobby", indexLobby);
-                                        lobbyActivity.startActivity(intent4);
-                                    }
-                                });
+                            int postoPrimoFiglio = 0;
+                            int tot=(int) snapshot.getChildrenCount();
+                            int i=0;
+                            for(DataSnapshot ds:snapshot.getChildren()){
+                                if(ds.getValue().equals(username)){
+                                    postoPrimoFiglio=tot-i;
+                                }else{
+                                    i++;
+                                }
+                            }
+                            if(postoPrimoFiglio==tot){
+                                setPartita();
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void setPartita(){
+        DatabaseReference gamestadium=ref.child("GameStadium");
+        gamestadium.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(indexLobby).getChildrenCount()==0){
+                    DomandeThread domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
+                    lobbyActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            domandeThread.start();
+                        }
+                    });
+                }else{
+                    lobbyActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
+                            intent4.putExtra("Username", username);
+                            intent4.putExtra("IndexLobby", indexLobby);
+                            lobbyActivity.startActivity(intent4);
                         }
                     });
                 }
