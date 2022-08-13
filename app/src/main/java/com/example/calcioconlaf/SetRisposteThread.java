@@ -1,6 +1,8 @@
 package com.example.calcioconlaf;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SetRisposteThread extends Thread{
@@ -91,6 +94,8 @@ public class SetRisposteThread extends Thread{
                         Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
                         intent4.putExtra("Username", username);
                         intent4.putExtra("IndexLobby", indexLobby);
+                        intent4.putExtra("Domande",domande);
+
                         lobbyActivity.startActivity(intent4);
                     }
                 });

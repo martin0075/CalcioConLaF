@@ -12,10 +12,12 @@ import java.util.ArrayList;
 
 public class SetUtentiThread extends Thread{
     String indexLobby;
+    String username;
     ArrayList<PlayerGame> utenti=new ArrayList<>();
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
-    public SetUtentiThread(String indexLobby) {
+    public SetUtentiThread(String indexLobby,String username) {
+        this.username=username;
         this.indexLobby=indexLobby;
     }
 
@@ -29,8 +31,20 @@ public class SetUtentiThread extends Thread{
         lobbyStadium.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int postoPrimoFiglio = 0;
+                int tot=(int) snapshot.getChildrenCount();
+                int i=0;
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    utenti.add(new PlayerGame(ds.getKey(),false,false,false,false,0,false));
+                    utenti.add(new PlayerGame(ds.getKey(),false,false,false,false, 0,false));
+                    if(ds.getValue().equals(username)){
+                        postoPrimoFiglio=tot-i;
+                    }else{
+                        i++;
+                    }
+                }
+                if(postoPrimoFiglio==tot){
+                    PlayerGame utente=utenti.get(0);
+                    utente.setActivePlayer(true);
                 }
                 if(utenti.size()==snapshot.getChildrenCount()){
                     scriviUtenti();

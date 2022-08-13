@@ -1,6 +1,8 @@
 package com.example.calcioconlaf;
 
-public class Quiz {
+import java.io.Serializable;
+
+public class Quiz implements Serializable {
     private String urlImage;
     private String option1;
     private String option2;

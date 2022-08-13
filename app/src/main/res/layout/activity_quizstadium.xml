@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quizStadium"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00B4F403"
@@ -10,9 +11,10 @@
 
     <Button
         android:id="@+id/btn1"
-        android:layout_width="149dp"
-        android:layout_height="53dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:text="A"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
@@ -22,9 +24,10 @@
 
     <Button
         android:id="@+id/btn4"
-        android:layout_width="149dp"
-        android:layout_height="53dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:text="D"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.828"
@@ -34,9 +37,10 @@
 
     <Button
         android:id="@+id/btn2"
-        android:layout_width="149dp"
-        android:layout_height="53dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:text="B"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.828"
@@ -47,13 +51,13 @@
     <ImageView
         android:id="@+id/imageStadio"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="270dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324"
+        app:layout_constraintVertical_bias="0.405"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -67,13 +71,14 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.207" />
 
     <Button
         android:id="@+id/btn3"
-        android:layout_width="149dp"
-        android:layout_height="53dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:text="C"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
@@ -159,16 +164,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_width="409dp"
+        android:layout_height="146dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="105dp"
-            android:layout_height="120dp"
+            android:id="@+id/vert1"
+            android:layout_width="wrap_content"
+            android:layout_height="131dp"
             android:orientation="vertical">
 
             <ImageView
@@ -179,16 +186,25 @@
                 tools:srcCompat="@drawable/avatar1_foreground" />
 
             <TextView
+                android:id="@+id/txtUser1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User 1"
+                android:textAlignment="center" />
+
+            <TextView
                 android:id="@+id/txtAvatar1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Punteggio"
                 android:textAlignment="center" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="105dp"
-            android:layout_height="120dp"
+            android:id="@+id/vert2"
+            android:layout_width="wrap_content"
+            android:layout_height="131dp"
             android:orientation="vertical">
 
             <ImageView
@@ -199,6 +215,13 @@
                 tools:srcCompat="@drawable/avatar1_foreground" />
 
             <TextView
+                android:id="@+id/txtUser2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User 2"
+                android:textAlignment="center" />
+
+            <TextView
                 android:id="@+id/txtAvatar2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,8 +230,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="105dp"
-            android:layout_height="120dp"
+            android:id="@+id/vert3"
+            android:layout_width="wrap_content"
+            android:layout_height="131dp"
             android:orientation="vertical">
 
             <ImageView
@@ -219,6 +243,13 @@
                 tools:srcCompat="@drawable/avatar1_foreground" />
 
             <TextView
+                android:id="@+id/txtUser3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User 3"
+                android:textAlignment="center" />
+
+            <TextView
                 android:id="@+id/txtAvatar3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -227,8 +258,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="105dp"
-            android:layout_height="120dp"
+            android:id="@+id/vert4"
+            android:layout_width="wrap_content"
+            android:layout_height="131dp"
             android:orientation="vertical">
 
             <ImageView
@@ -237,6 +269,13 @@
                 android:layout_height="85dp"
                 app:srcCompat="@drawable/avatar1_foreground"
                 tools:srcCompat="@drawable/avatar1_foreground" />
+
+            <TextView
+                android:id="@+id/txtUser4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User 4"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/txtAvatar4"
