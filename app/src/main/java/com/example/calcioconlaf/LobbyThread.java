@@ -1,6 +1,7 @@
 package com.example.calcioconlaf;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -67,7 +68,6 @@ public class LobbyThread extends Thread{
 
                 if(trovati){
                     DatabaseReference lobbystadium=ref.child("LobbyStadium").child(indexLobby);
-                    Boolean primoFiglio=false;
                     lobbystadium.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -84,42 +84,47 @@ public class LobbyThread extends Thread{
                             if(postoPrimoFiglio==tot){
                                 setPartita();
                             }else {
-                                lobbyActivity.runOnUiThread(new Runnable() {
+                                new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
-                                        intent4.putExtra("Username", username);
-                                        intent4.putExtra("IndexLobby", indexLobby);
-                                        DatabaseReference game=ref.child("GameStadium").child(indexLobby).child("domande");
-                                        game.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        lobbyActivity.runOnUiThread(new Runnable() {
                                             @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                for(DataSnapshot ds:snapshot.getChildren()){
-                                                    Log.v("ds", String.valueOf(ds));
-                                                    String country= (String) ds.child("country").getValue();
-                                                    String answer= (String) ds.child("answer").getValue();
-                                                    String city= (String) ds.child("city").getValue();
-                                                    String option3= (String) ds.child("option3").getValue();
-                                                    String option4= (String) ds.child("option4").getValue();
-                                                    String option2= (String) ds.child("option2").getValue();
-                                                    String option1= (String) ds.child("option1").getValue();
-                                                    String urlImage= (String) ds.child("urlImage").getValue();
-                                                    domande.add(new Quiz(urlImage,option1,option2,option3,option4,answer,country,city));
-                                                }
-                                                if(domande.size()==10){
-                                                    Log.v("logaaa",domande.get(0).getAnswer());
-                                                    intent4.putExtra("DomandeElse",domande);
-                                                    lobbyActivity.startActivity(intent4);
-                                                }
-                                            }
+                                            public void run() {
+                                                Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
+                                                intent4.putExtra("Username", username);
+                                                intent4.putExtra("IndexLobby", indexLobby);
+                                                DatabaseReference game=ref.child("GameStadium").child(indexLobby).child("domande");
+                                                game.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        for(DataSnapshot ds:snapshot.getChildren()){
+                                                            Log.v("ds", String.valueOf(ds));
+                                                            String country= (String) ds.child("country").getValue();
+                                                            String answer= (String) ds.child("answer").getValue();
+                                                            String city= (String) ds.child("city").getValue();
+                                                            String option3= (String) ds.child("option3").getValue();
+                                                            String option4= (String) ds.child("option4").getValue();
+                                                            String option2= (String) ds.child("option2").getValue();
+                                                            String option1= (String) ds.child("option1").getValue();
+                                                            String urlImage= (String) ds.child("urlImage").getValue();
+                                                            domande.add(new Quiz(urlImage,option1,option2,option3,option4,answer,country,city));
+                                                        }
+                                                        if(domande.size()==10){
+                                                            Log.v("logaaa",domande.get(0).getAnswer());
+                                                            intent4.putExtra("DomandeElse",domande);
+                                                            lobbyActivity.startActivity(intent4);
+                                                        }
+                                                    }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
 
+                                                    }
+                                                });
                                             }
                                         });
                                     }
-                                });
+                                },20000);
                             }
                         }
 
