@@ -68,7 +68,8 @@ public class PartitaThread extends Thread{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    if(ds.child("activePlayer").getValue().equals(false)){
+                    Boolean activePlayer= (Boolean) ds.child("activePlayer").getValue();
+                    if(!activePlayer){
                         Button btn1=quizStadium.findViewById(R.id.btn1);
                         btn1.setEnabled(false);
                         Button btn2=quizStadium.findViewById(R.id.btn2);
