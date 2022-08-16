@@ -28,7 +28,7 @@ public class QuizStadium extends AppCompatActivity {
         }
         ReadPlayerGameThread readPlayerGameThread=new ReadPlayerGameThread(indexLobby,quizStadium);
         readPlayerGameThread.start();
-        PartitaThread partitaThread=new PartitaThread(domande,quizStadium);
+        PartitaThread partitaThread=new PartitaThread(domande,quizStadium,indexLobby);
         partitaThread.start();
     }
 }
