@@ -21,15 +21,17 @@ public class PartitaThread extends Thread{
     ArrayList<Quiz> domande=new ArrayList<>();
     QuizStadium quizStadium;
     String indexLobby;
+    String username;
     int i;
     int cont=0;
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
 
-    public PartitaThread(ArrayList<Quiz> domande,QuizStadium quizStadium,String indexLobby) {
+    public PartitaThread(ArrayList<Quiz> domande,QuizStadium quizStadium,String indexLobby,String username) {
         this.domande=domande;
         this.quizStadium=quizStadium;
         this.indexLobby=indexLobby;
+        this.username=username;
     }
 
     @Override
@@ -44,7 +46,6 @@ public class PartitaThread extends Thread{
             public void run() {
                 while(cont < domande.size()) {
                     check();
-                    Log.v("2","2");
                     String url = domande.get(i).getUrlImage();
                     ImageView img = quizStadium.findViewById(R.id.imageStadio);
                     Picasso.get().load(url).into(img);
@@ -63,27 +64,29 @@ public class PartitaThread extends Thread{
     }
     public void check(){
         DatabaseReference gameStadiumRef = ref.child("GameStadium").child(indexLobby).child("utenti");
-        Log.v("1","1");
         gameStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    Boolean activePlayer= (Boolean) ds.child("activePlayer").getValue();
-                    if(!activePlayer){
-                        Button btn1=quizStadium.findViewById(R.id.btn1);
-                        btn1.setEnabled(false);
-                        Button btn2=quizStadium.findViewById(R.id.btn2);
-                        btn2.setEnabled(false);
-                        Button btn3=quizStadium.findViewById(R.id.btn3);
-                        btn3.setEnabled(false);
-                        Button btn4=quizStadium.findViewById(R.id.btn4);
-                        btn4.setEnabled(false);
-                        ImageButton indizio1=quizStadium.findViewById(R.id.btnIndizio1);
-                        indizio1.setEnabled(false);
-                        ImageButton indizio2=quizStadium.findViewById(R.id.btnIndizio2);
-                        indizio2.setEnabled(false);
-                        ImageButton indizio3=quizStadium.findViewById(R.id.btnIndizio3);
-                        indizio3.setEnabled(false);
+                    if(ds.child("username").equals(username)){
+                        Boolean activePlayer= (Boolean) ds.child("activePlayer").getValue();
+                        Log.v("activePlayer", String.valueOf(activePlayer));
+                        if(!activePlayer){
+                            Button btn1=quizStadium.findViewById(R.id.btn1);
+                            btn1.setEnabled(false);
+                            Button btn2=quizStadium.findViewById(R.id.btn2);
+                            btn2.setEnabled(false);
+                            Button btn3=quizStadium.findViewById(R.id.btn3);
+                            btn3.setEnabled(false);
+                            Button btn4=quizStadium.findViewById(R.id.btn4);
+                            btn4.setEnabled(false);
+                            ImageButton indizio1=quizStadium.findViewById(R.id.btnIndizio1);
+                            indizio1.setEnabled(false);
+                            ImageButton indizio2=quizStadium.findViewById(R.id.btnIndizio2);
+                            indizio2.setEnabled(false);
+                            ImageButton indizio3=quizStadium.findViewById(R.id.btnIndizio3);
+                            indizio3.setEnabled(false);
+                        }
                     }
                 }
             }
