@@ -131,33 +131,33 @@ public class ReadPlayerGameThread extends Thread{
             quizStadium.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    LinearLayout layout3 =quizStadium.findViewById(R.id.vert3);
+                    //LinearLayout layout3 =quizStadium.findViewById(R.id.vert3);
 
                     TextView user3=quizStadium.findViewById(R.id.txtUser3);
                     TextView punt3=quizStadium.findViewById(R.id.txtAvatar3);
                     ImageView img3=quizStadium.findViewById(R.id.imgAvatar3);
-                    layout3.removeView(user3);
-                    layout3.removeView(punt3);
-                    layout3.removeView(img3);
+                    user3.setVisibility(View.INVISIBLE);
+                    punt3.setVisibility(View.INVISIBLE);
+                    img3.setVisibility(View.INVISIBLE);
 
-                    LinearLayout layout4 =quizStadium.findViewById(R.id.vert4);
+                    //LinearLayout layout4 =quizStadium.findViewById(R.id.vert4);
                     TextView user4=quizStadium.findViewById(R.id.txtUser4);
                     TextView punt4=quizStadium.findViewById(R.id.txtAvatar4);
                     ImageView img4=quizStadium.findViewById(R.id.imgAvatar4);
-                    layout4.removeView(user4);
-                    layout4.removeView(punt4);
-                    layout4.removeView(img4);
+                    user4.setVisibility(View.INVISIBLE);
+                    punt4.setVisibility(View.INVISIBLE);
+                    img4.setVisibility(View.INVISIBLE);
                 }
             });
         }
         if(n==1){
-            LinearLayout layout =quizStadium.findViewById(R.id.vert4);
+            //LinearLayout layout =quizStadium.findViewById(R.id.vert4);
             TextView user4=quizStadium.findViewById(R.id.txtUser4);
             TextView punt4=quizStadium.findViewById(R.id.txtAvatar4);
             ImageView img4=quizStadium.findViewById(R.id.imgAvatar4);
-            layout.removeView(user4);
-            layout.removeView(punt4);
-            layout.removeView(img4);
+            user4.setVisibility(View.INVISIBLE);
+            punt4.setVisibility(View.INVISIBLE);
+            img4.setVisibility(View.INVISIBLE);
         }
 
     }
