@@ -98,7 +98,6 @@ public class LobbyThread extends Thread{
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         for(DataSnapshot ds:snapshot.getChildren()){
-                                                            Log.v("ds", String.valueOf(ds));
                                                             String country= (String) ds.child("country").getValue();
                                                             String answer= (String) ds.child("answer").getValue();
                                                             String city= (String) ds.child("city").getValue();
@@ -124,7 +123,7 @@ public class LobbyThread extends Thread{
                                             }
                                         });
                                     }
-                                },30000);
+                                },15000);
                             }
                         }
 

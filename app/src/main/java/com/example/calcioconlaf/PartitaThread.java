@@ -94,6 +94,7 @@ public class PartitaThread extends Thread{
                             checkOption(opzione,view);
                         }
                     });
+                    return;
                 }
             }
         });
@@ -103,33 +104,31 @@ public class PartitaThread extends Thread{
         gameStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds: snapshot.getChildren()){
-                    if(ds.child("username").equals(username)){
-                        Boolean activePlayer= (Boolean) ds.child("activePlayer").getValue();
-                        Log.v("activePlayer", String.valueOf(activePlayer));
-                        if(!activePlayer){
-                            Button btn1=quizStadium.findViewById(R.id.btn1);
+                for(DataSnapshot ds:snapshot.getChildren()) {
+                    if(ds.child("username").getValue().equals(username)) {
+                        Boolean activePlayer = (Boolean) ds.child("activePlayer").getValue();
+                        Log.v("activePlayer2", String.valueOf(ds));
+                        if (!activePlayer) {
+                            Button btn1 = quizStadium.findViewById(R.id.btn1);
                             btn1.setEnabled(false);
-                            Button btn2=quizStadium.findViewById(R.id.btn2);
+                            Button btn2 = quizStadium.findViewById(R.id.btn2);
                             btn2.setEnabled(false);
-                            Button btn3=quizStadium.findViewById(R.id.btn3);
+                            Button btn3 = quizStadium.findViewById(R.id.btn3);
                             btn3.setEnabled(false);
-                            Button btn4=quizStadium.findViewById(R.id.btn4);
+                            Button btn4 = quizStadium.findViewById(R.id.btn4);
                             btn4.setEnabled(false);
-                            ImageButton indizio1=quizStadium.findViewById(R.id.btnIndizio1);
+                            ImageButton indizio1 = quizStadium.findViewById(R.id.btnIndizio1);
                             indizio1.setEnabled(false);
-                            ImageButton indizio2=quizStadium.findViewById(R.id.btnIndizio2);
+                            ImageButton indizio2 = quizStadium.findViewById(R.id.btnIndizio2);
                             indizio2.setEnabled(false);
-                            ImageButton indizio3=quizStadium.findViewById(R.id.btnIndizio3);
+                            ImageButton indizio3 = quizStadium.findViewById(R.id.btnIndizio3);
                             indizio3.setEnabled(false);
                         }
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
