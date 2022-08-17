@@ -9,8 +9,9 @@ public class PlayerGame {
     private boolean aiuto4;
     private int score;
     private boolean activePlayer;
+    private String rispostaSel;
 
-    public PlayerGame(String username, boolean aiuto1, boolean aiuto2, boolean aiuto3, boolean aiuto4, int score, boolean activePlayer) {
+    public PlayerGame(String username, boolean aiuto1, boolean aiuto2, boolean aiuto3, boolean aiuto4, int score, boolean activePlayer,String rispostaSel) {
         this.username = username;
         this.aiuto1 = aiuto1;
         this.aiuto2 = aiuto2;
@@ -18,6 +19,7 @@ public class PlayerGame {
         this.aiuto4 = aiuto4;
         this.score = score;
         this.activePlayer=activePlayer;
+        this.rispostaSel=rispostaSel;
     }
 
     public String getUsername() {
@@ -46,6 +48,14 @@ public class PlayerGame {
 
     public boolean isActivePlayer() {
         return activePlayer;
+    }
+
+    public String getRispostaSel() {
+        return rispostaSel;
+    }
+
+    public void setRispostaSel(String rispostaSel) {
+        this.rispostaSel = rispostaSel;
     }
 
     public void setActivePlayer(boolean activePlayer) {

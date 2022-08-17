@@ -35,7 +35,7 @@ public class SetUtentiThread extends Thread{
                 int tot=(int) snapshot.getChildrenCount();
                 int i=0;
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    utenti.add(new PlayerGame(ds.getKey(),false,false,false,false, 0,false));
+                    utenti.add(new PlayerGame(ds.getKey(),false,false,false,false, 0,false,""));
                     if(ds.getValue().equals(username)){
                         postoPrimoFiglio=tot-i;
                     }else{

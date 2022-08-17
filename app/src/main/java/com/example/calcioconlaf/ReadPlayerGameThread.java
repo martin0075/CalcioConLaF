@@ -51,7 +51,8 @@ public class ReadPlayerGameThread extends Thread{
                     boolean aiuto2= (boolean) ds.child("aiuto2").getValue();
                     boolean aiuto3= (boolean) ds.child("aiuto3").getValue();
                     String username= (String) ds.child("username").getValue();
-                    utentiList.add(new PlayerGame(username,aiuto1,aiuto2,aiuto3,aiuto4,score,activePlayer));
+                    String rispostaSel= (String) ds.child("rispostaSel").getValue();
+                    utentiList.add(new PlayerGame(username,aiuto1,aiuto2,aiuto3,aiuto4,score,activePlayer,rispostaSel));
 
                 }
                 if(utentiList.size()== snapshot.getChildrenCount()){
