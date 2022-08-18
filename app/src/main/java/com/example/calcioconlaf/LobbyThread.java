@@ -123,7 +123,7 @@ public class LobbyThread extends Thread{
                                             }
                                         });
                                     }
-                                },15000);
+                                },20000);
                             }
                         }
 
@@ -148,11 +148,13 @@ public class LobbyThread extends Thread{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DomandeThread domandeThread = new DomandeThread(lobbyActivity, domande, username, indexLobby);
                 SetUtentiThread setUtentiThread=new SetUtentiThread(indexLobby,username);
+                SetButtonThread buttonThread=new SetButtonThread(indexLobby);
                 lobbyActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         domandeThread.start();
                         setUtentiThread.start();
+                        buttonThread.start();
 
                     }
                 });

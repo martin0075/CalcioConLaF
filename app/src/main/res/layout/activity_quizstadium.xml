@@ -189,14 +189,13 @@
                 android:id="@+id/txtUser1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="User 1"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/txtAvatar1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Punteggio"
+                android:text="0"
                 android:textAlignment="center" />
 
         </LinearLayout>
@@ -218,14 +217,13 @@
                 android:id="@+id/txtUser2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="User 2"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/txtAvatar2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Punteggio"
+                android:text="0"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -246,14 +244,13 @@
                 android:id="@+id/txtUser3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="User 3"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/txtAvatar3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Punteggio"
+                android:text="0"
                 android:textAlignment="center" />
         </LinearLayout>
 
@@ -274,14 +271,13 @@
                 android:id="@+id/txtUser4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="User 4"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/txtAvatar4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Punteggio"
+                android:text="0"
                 android:textAlignment="center" />
         </LinearLayout>
     </LinearLayout>

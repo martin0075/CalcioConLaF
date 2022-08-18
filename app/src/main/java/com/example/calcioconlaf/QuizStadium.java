@@ -30,5 +30,6 @@ public class QuizStadium extends AppCompatActivity {
         readPlayerGameThread.start();
         PartitaThread partitaThread=new PartitaThread(domande,quizStadium,indexLobby,username);
         partitaThread.start();
+
     }
 }

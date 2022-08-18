@@ -51,12 +51,13 @@ public class PartitaThread extends Thread{
 
     }
     public void game(){
-        quizStadium.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                checkUtenteAttivo();
+        CheckGameThread checkGameThread=new CheckGameThread(quizStadium,indexLobby,username,domande);
+        checkGameThread.start();
+        //quizStadium.runOnUiThread(new Runnable() {
+          //  @Override
+            //public void run() {
                 Log.v("checkAttivo2", "checkAttivo2");
-                String url = domande.get(i).getUrlImage();
+                /*String url = domande.get(i).getUrlImage();
                 ImageView img = quizStadium.findViewById(R.id.imageStadio);
                 Picasso.get().load(url).into(img);
                 btnA = quizStadium.findViewById(R.id.btn1);
@@ -66,44 +67,11 @@ public class PartitaThread extends Thread{
                 btnA.setText(domande.get(i).getOption1());
                 btnB.setText(domande.get(i).getOption2());
                 btnC.setText(domande.get(i).getOption3());
-                btnD.setText(domande.get(i).getOption4());
-
-                btnA.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        opzione = (String) btnA.getText();
-                        utenti.get(indice).setRispostaSel(opzione);
-                        checkOption(opzione,0);
-                    }
-                });
-                btnB.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        opzione = (String) btnB.getText();
-                        utenti.get(indice).setRispostaSel(opzione);
-                        checkOption(opzione,1);
-                    }
-                });
-                btnC.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        opzione = (String) btnC.getText();
-                        utenti.get(indice).setRispostaSel(opzione);
-                        checkOption(opzione,2);
-                    }
-                });
-                btnD.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        opzione = (String) btnD.getText();
-                        utenti.get(indice).setRispostaSel(opzione);
-                        checkOption(opzione,3);
-                    }
-                });
-            }
-        });
+                btnD.setText(domande.get(i).getOption4());*/
+          //  }
+        //});
     }
-    public void checkUtenteAttivo(){
+    /*public void checkUtenteAttivo(){
         Log.v("checkAttivo","checkAttivo");
         DatabaseReference gameStadiumRef = ref.child("GameStadium").child(indexLobby).child("utenti");
         gameStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -171,7 +139,7 @@ public class PartitaThread extends Thread{
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-    }
+    }*/
     public boolean checkOption(String opzione,int bottone) {
         String risposta = domande.get(i).getAnswer();
 

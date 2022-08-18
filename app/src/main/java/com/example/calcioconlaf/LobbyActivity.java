@@ -67,7 +67,7 @@ public class LobbyActivity extends AppCompatActivity {
         //domandeThread=new DomandeThread(lobbyActivity, domande, username, indexLobby);
 
 
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 timer.setText("seconds remaining: " + millisUntilFinished / 1000);

@@ -87,7 +87,7 @@ public class ReadPlayerGameThread extends Thread{
                             TextView user1=quizStadium.findViewById(R.id.txtUser1);
                             TextView punt1=quizStadium.findViewById(R.id.txtAvatar1);
                             user1.setText(utentiList.get(i).getUsername());
-                            punt1.setText(String.valueOf(utentiList.get(i).getScore()));
+                            //punt1.setText(String.valueOf(utentiList.get(i).getScore()));
                         }
                     });
                     break;
@@ -98,7 +98,7 @@ public class ReadPlayerGameThread extends Thread{
                             TextView user2=quizStadium.findViewById(R.id.txtUser2);
                             TextView punt2=quizStadium.findViewById(R.id.txtAvatar2);
                             user2.setText(utentiList.get(i).getUsername());
-                            punt2.setText(String.valueOf(utentiList.get(i).getScore()));
+                            //punt2.setText(String.valueOf(utentiList.get(i).getScore()));
                         }
                     });
                     break;
@@ -109,7 +109,7 @@ public class ReadPlayerGameThread extends Thread{
                             TextView user3=quizStadium.findViewById(R.id.txtUser3);
                             TextView punt3=quizStadium.findViewById(R.id.txtAvatar3);
                             user3.setText(utentiList.get(i).getUsername());
-                            punt3.setText(String.valueOf(utentiList.get(i).getScore()));
+                            //punt3.setText(String.valueOf(utentiList.get(i).getScore()));
                         }
                     });
                     break;
@@ -120,7 +120,7 @@ public class ReadPlayerGameThread extends Thread{
                             TextView user4=quizStadium.findViewById(R.id.txtUser4);
                             TextView punt4=quizStadium.findViewById(R.id.txtAvatar4);
                             user4.setText(utentiList.get(i).getUsername());
-                            punt4.setText(String.valueOf(utentiList.get(i).getScore()));
+                            //punt4.setText(String.valueOf(utentiList.get(i).getScore()));
                         }
                     });
                     break;
