@@ -47,7 +47,7 @@ public class CheckGameThread extends Thread{
     ArrayList<ImageView> imageViewList = new ArrayList<>();
     int i=0;
     String opzione="";
-    int numeroElementi;
+    int numeroGiocatori;
     boolean cambioGame=false;
     public CheckGameThread(QuizStadium quizStadium, String indexLobby, String username, ArrayList<Quiz> domande){
         this.quizStadium=quizStadium;
@@ -78,6 +78,21 @@ public class CheckGameThread extends Thread{
         quizStadium.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                textViewList.clear();
+                textViewList.add(quizStadium.findViewById(R.id.txtUser1));
+                textViewList.add(quizStadium.findViewById(R.id.txtUser2));
+                textViewList.add(quizStadium.findViewById(R.id.txtUser3));
+                textViewList.add(quizStadium.findViewById(R.id.txtUser4));
+                Log.v("size1111", String.valueOf(textViewList.size()));
+                for(int giocatori=0;giocatori<textViewList.size();giocatori++){
+                    if(!textViewList.get(giocatori).getText().equals("")){
+                        numeroGiocatori++;
+                        Log.v("if!!!!", "if");
+
+                    }
+                }
+                Log.v("for!!!!", numeroGiocatori+"-1");
+
 
                 String url = domande.get(i).getUrlImage();
                 ImageView img = quizStadium.findViewById(R.id.imageStadio);
@@ -244,13 +259,8 @@ public class CheckGameThread extends Thread{
         textViewList.add(quizStadium.findViewById(R.id.txtUser2));
         textViewList.add(quizStadium.findViewById(R.id.txtUser3));
         textViewList.add(quizStadium.findViewById(R.id.txtUser4));
-        for(int elementi=0;elementi<textViewList.size();elementi++){
-            Log.v("for!!!!", "for");
-            if(!textViewList.get(elementi).getText().equals("")){
-                numeroElementi++;
-            }
-        }
-        Log.v("numeroElementi!!!!", String.valueOf(numeroElementi));
+
+
         if (!opzione.equals("")) {
             if(opzione.equals(risposta)){
                 DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game").child(String.valueOf(bottone));
@@ -296,25 +306,21 @@ public class CheckGameThread extends Thread{
                 i++;
                 settaBottoni();
                 cambioGame=false;
+                numeroGiocatori=0;
                 setGame();
             }else{
                 DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game").child(String.valueOf(bottone));
                 bottoneRef.setValue(false);
                 DatabaseReference activePlayerRef=ref.child("GameStadium").child(indexLobby).child("utenti");
 
-                for(int c=0;c<numeroElementi;c++){
+                Log.v("numGioc", String.valueOf(numeroGiocatori));
+                for(int c=0;c<numeroGiocatori;c++){
                     Log.v("c1",String.valueOf(c));
                     if(textViewList.get(c).getText().equals(username)) {
-                        if (c == numeroElementi - 1) {
-                            Log.v("logA1", String.valueOf(c));
-                            Log.v("elementi1", String.valueOf(numeroElementi));
-                            Log.v("c2",String.valueOf(c));
+                        if (c == numeroGiocatori - 1) {
                             activePlayerRef.child(String.valueOf(c)).child("activePlayer").setValue(false);
                             activePlayerRef.child(String.valueOf(0)).child("activePlayer").setValue(true);
                         } else {
-                            Log.v("logA2", String.valueOf(c));
-                            Log.v("elementi2", String.valueOf(numeroElementi));
-                            Log.v("c3",String.valueOf(c));
                             activePlayerRef.child(String.valueOf(c)).child("activePlayer").setValue(false);
                             activePlayerRef.child(String.valueOf(c + 1)).child("activePlayer").setValue(true);
                         }
