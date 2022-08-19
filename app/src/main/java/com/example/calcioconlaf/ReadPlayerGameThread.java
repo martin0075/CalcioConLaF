@@ -28,9 +28,14 @@ public class ReadPlayerGameThread extends Thread{
     ArrayList<PlayerGame> utentiList=new ArrayList<>();
     QuizStadium quizStadium;
     int i=0;
-    public ReadPlayerGameThread(String indexLobby,QuizStadium quizStadium) {
+    int numeroGiocatori;
+    String username;
+    ArrayList<Quiz> domande;
+    public ReadPlayerGameThread(String indexLobby,QuizStadium quizStadium,ArrayList<Quiz> domande,String username) {
         this.indexLobby=indexLobby;
         this.quizStadium=quizStadium;
+        this.domande=domande;
+        this.username=username;
     }
 
     @Override
@@ -53,8 +58,8 @@ public class ReadPlayerGameThread extends Thread{
                     String username= (String) ds.child("username").getValue();
                     String rispostaSel= (String) ds.child("rispostaSel").getValue();
                     utentiList.add(new PlayerGame(username,aiuto1,aiuto2,aiuto3,aiuto4,score,activePlayer,rispostaSel));
-
                 }
+                numeroGiocatori=utentiList.size();
                 if(utentiList.size()== snapshot.getChildrenCount()){
                     scriviUtenti();
                 }
@@ -68,6 +73,8 @@ public class ReadPlayerGameThread extends Thread{
                     int n=1;
                     cancellaGiocatori(n);
                 }
+                PartitaThread partitaThread=new PartitaThread(quizStadium,indexLobby,username,domande,numeroGiocatori);
+                partitaThread.start();
             }
 
             @Override
@@ -75,7 +82,6 @@ public class ReadPlayerGameThread extends Thread{
 
             }
         });
-
     }
     public void scriviUtenti(){
         for(i=0;i<utentiList.size();i++){

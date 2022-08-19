@@ -7,12 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class QuizStadium extends AppCompatActivity {
+    public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     ArrayList<PlayerGame> utenti=new ArrayList<>();
     ArrayList<Quiz> domande;
     QuizStadium quizStadium=QuizStadium.this;
+    int numeroGiocatori;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +31,8 @@ public class QuizStadium extends AppCompatActivity {
         }else{
             domande=(ArrayList<Quiz>) getIntent().getSerializableExtra("Domande");
         }
-        ReadPlayerGameThread readPlayerGameThread=new ReadPlayerGameThread(indexLobby,quizStadium);
+        ReadPlayerGameThread readPlayerGameThread=new ReadPlayerGameThread(indexLobby,quizStadium,domande,username);
         readPlayerGameThread.start();
-        PartitaThread partitaThread=new PartitaThread(domande,quizStadium,indexLobby,username);
-        partitaThread.start();
 
     }
 }

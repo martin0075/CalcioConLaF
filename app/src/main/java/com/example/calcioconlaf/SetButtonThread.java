@@ -20,12 +20,11 @@ public class SetButtonThread extends Thread{
         settaBottoni();
     }
     public void settaBottoni(){
-        ArrayList<String> bottoni=new ArrayList<>();
-        bottoni.add("null");
-        bottoni.add("null");
-        bottoni.add("null");
-        bottoni.add("null");
         DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game");
-        bottoneRef.setValue(bottoni);
+        bottoneRef.child("0").setValue("null");
+        bottoneRef.child("1").setValue("null");
+        bottoneRef.child("2").setValue("null");
+        bottoneRef.child("3").setValue("null");
+        bottoneRef.child("4").setValue(false);
     }
 }
