@@ -82,7 +82,6 @@ public class RisposteThread extends Thread{
                                 opzioni.add(result3.getString("name"));
                                 if(opzioni.size()==30){
                                     SetRisposteThread setRisposte=new SetRisposteThread(domande, opzioni,lobbyActivity,username,indexLobby);
-
                                     lobbyActivity.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {

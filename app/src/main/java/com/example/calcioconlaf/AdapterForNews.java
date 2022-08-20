@@ -1,15 +1,9 @@
 package com.example.calcioconlaf;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.text.method.LinkMovementMethod;
-import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,7 +60,7 @@ public class AdapterForNews extends RecyclerView.Adapter<AdapterForNews.ViewHold
 
         public ViewHolder(View v, OnNewsListerner onNewsListerner) {
             super(v);
-            img = v.findViewById(R.id.imgLogo);
+            img = v.findViewById(R.id.imgLeaderboard);
             orario = v.findViewById(R.id.txtOra);
             news=v.findViewById(R.id.txtNews);
             Cv = v.findViewById(R.id.newCard);

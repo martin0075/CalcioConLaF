@@ -60,19 +60,20 @@ public class DomandeThread extends Thread{
         int n;
         requestQueue=Volley.newRequestQueue(lobbyActivity);
         boolean vuoto=false;
-
+        ArrayList<Integer> presi=new ArrayList<>();
         while(cont<10) {
-                n = r.nextInt(1010);
-                for(int d=0; d<endpointVuoto.length;d++){
-                    if(n==endpointVuoto[d]){
-                        vuoto=true;
-                        d=endpointVuoto.length;
-                    }
-                    else{
-                        vuoto=false;
-                    }
+            n = r.nextInt(1010);
+            for (int d = 0; d < endpointVuoto.length; d++) {
+                if (n == endpointVuoto[d]) {
+                    vuoto = true;
+                    d = endpointVuoto.length;
+                } else {
+                    vuoto = false;
                 }
-                if(!vuoto){
+            }
+            if (!vuoto) {
+                if (!presi.contains(n)) {
+                    presi.add(n);
                     Quiz quiz = new Quiz();
                     String URL = "https://v3.football.api-sports.io/venues?id=" + n;
                     //creo la richiesta
@@ -80,8 +81,7 @@ public class DomandeThread extends Thread{
                         @Override
                         public void onResponse(String response) {
                             try {
-                                result= new JSONObject(response);
-
+                                result = new JSONObject(response);
 
 
                                 Log.v("Log", result.toString() + "a");
@@ -92,12 +92,13 @@ public class DomandeThread extends Thread{
                                 quiz.setUrlImage(result1.getString("image"));
                                 quiz.setAnswer(result1.getString("name"));
 
-                                quiz.setOption4(result1.getString("name"));
+
                                 quiz.setCity(result1.getString("city"));
                                 quiz.setCountry(result1.getString("country"));
                                 quiz.setOption1("");
                                 quiz.setOption2("");
                                 quiz.setOption3("");
+                                quiz.setOption4("");
 
 
                                 domande.add(quiz);
@@ -108,7 +109,7 @@ public class DomandeThread extends Thread{
                                         @Override
                                         public void run() {
                                             risposte.start();
-                                            Log.v("Lunghezza",String.valueOf(domande.size()));
+                                            Log.v("Lunghezza", String.valueOf(domande.size()));
                                         }
                                     });
 
@@ -142,6 +143,7 @@ public class DomandeThread extends Thread{
                     requestQueue.add(stringRequest);
                     cont++;
                 }
+            }
         }
     }
 

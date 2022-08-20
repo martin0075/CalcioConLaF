@@ -1,6 +1,7 @@
 package com.example.calcioconlaf;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -24,6 +25,8 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,6 +37,7 @@ public class PartitaThread extends Thread{
     DatabaseReference ref = database.getReference();
     ArrayList<PlayerGame> utenti=new ArrayList<>();
     int indice=0;
+    int a;
     String username;
     Button btnA;
     Button btnB;
@@ -44,6 +48,7 @@ public class PartitaThread extends Thread{
     TextView punt3;
     TextView punt4;
     String punti="";
+    int puntClassifica;
     ArrayList<Quiz> domande=new ArrayList<>();
     ArrayList<TextView> textViewList = new ArrayList<>();
     ArrayList<ImageView> imageViewList = new ArrayList<>();
@@ -52,6 +57,7 @@ public class PartitaThread extends Thread{
     int numeroGiocatori;
     Timer timer=new Timer();
     Timer timer2=new Timer();
+    boolean indovinato=false;
     public PartitaThread(QuizStadium quizStadium, String indexLobby, String username, ArrayList<Quiz> domande,int numeroGiocatori){
         this.quizStadium=quizStadium;
         this.indexLobby=indexLobby;
@@ -72,7 +78,7 @@ public class PartitaThread extends Thread{
                 checkPunteggio();
                 checkUtenteAttivo();
             }
-        },0,1000);
+        },0,100);
         timer2.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -82,18 +88,12 @@ public class PartitaThread extends Thread{
     }
     public void setGame(){
         if(i>9){
-            timer.cancel();
-            btnA.setEnabled(false);
-            btnB.setEnabled(false);
-            btnC.setEnabled(false);
-            btnD.setEnabled(false);
-            ImageButton indizio1 = quizStadium.findViewById(R.id.btnIndizio1);
-            indizio1.setEnabled(false);
-            ImageButton indizio2 = quizStadium.findViewById(R.id.btnIndizio2);
-            indizio2.setEnabled(false);
-            ImageButton indizio3 = quizStadium.findViewById(R.id.btnIndizio3);
-            indizio3.setEnabled(false);
-            finishGame();
+            quizStadium.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    finishGame();
+                }
+            });
         }else {
             quizStadium.runOnUiThread(new Runnable() {
                 @Override
@@ -109,10 +109,12 @@ public class PartitaThread extends Thread{
                     btnB.setBackgroundColor(Color.MAGENTA);
                     btnC.setBackgroundColor(Color.MAGENTA);
                     btnD.setBackgroundColor(Color.MAGENTA);
+
                     btnA.setText(domande.get(i).getOption1());
                     btnB.setText(domande.get(i).getOption2());
                     btnC.setText(domande.get(i).getOption3());
                     btnD.setText(domande.get(i).getOption4());
+
 
                     punt1=quizStadium.findViewById(R.id.txtAvatar1);
                     punt2=quizStadium.findViewById(R.id.txtAvatar2);
@@ -271,8 +273,6 @@ public class PartitaThread extends Thread{
             if(opzione.equals(risposta)){
                 DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game").child(String.valueOf(bottone));
                 bottoneRef.setValue(true);
-                DatabaseReference indovinatoRef = ref.child("GameStadium").child(indexLobby).child("game").child("4");
-                indovinatoRef.setValue(true);
                 DatabaseReference scoreRef = ref.child("GameStadium").child(indexLobby).child("utenti");
                 for(int a=0;a<textViewList.size();a++){
                     if(textViewList.get(a).getText().equals(username)){
@@ -347,15 +347,19 @@ public class PartitaThread extends Thread{
                             switch (valore) {
                                 case 0:
                                     btnA.setBackgroundColor(Color.GREEN);
+                                    indovinato=true;
                                     break;
                                 case 1:
                                     btnB.setBackgroundColor(Color.GREEN);
+                                    indovinato=true;
                                     break;
                                 case 2:
                                     btnC.setBackgroundColor(Color.GREEN);
+                                    indovinato=true;
                                     break;
                                 case 3:
                                     btnD.setBackgroundColor(Color.GREEN);
+                                    indovinato=true;
                                     break;
                             }
                         } else {
@@ -446,11 +450,13 @@ public class PartitaThread extends Thread{
     public void newGame(){
         settaBottoni();
         setGame();
-        DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game");
-        bottoneRef.child("4").setValue(false);
+        indovinato=false;
     }
     public void checkNewGame(){
-        DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game");
+        if(indovinato){
+            newGame();
+        }
+        /*DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game");
         bottoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -463,11 +469,93 @@ public class PartitaThread extends Thread{
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
     }
     public void finishGame(){
-        new AlertDialog.Builder(quizStadium).setTitle("Result").setMessage("Punteggio: ").show();
+        timer.cancel();
+        btnA.setEnabled(false);
+        btnB.setEnabled(false);
+        btnC.setEnabled(false);
+        btnD.setEnabled(false);
+        ImageButton indizio1 = quizStadium.findViewById(R.id.btnIndizio1);
+        indizio1.setEnabled(false);
+        ImageButton indizio2 = quizStadium.findViewById(R.id.btnIndizio2);
+        indizio2.setEnabled(false);
+        ImageButton indizio3 = quizStadium.findViewById(R.id.btnIndizio3);
+        indizio3.setEnabled(false);
+        DatabaseReference utentiRef = ref.child("GameStadium").child(indexLobby).child("utenti");
+        ArrayList<Integer> punteggi=new ArrayList<Integer>();
+        ArrayList<String> nomiUtente=new ArrayList<String>();
+        utentiRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int punteggioMax=0;
+                String usernameVincitore="";
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    int score= Integer.valueOf(String.valueOf(ds.child("score").getValue()));
+                    String nome=String.valueOf(ds.child("username").getValue());
+                    if(Integer.valueOf(String.valueOf(ds.child("score").getValue()))>punteggioMax){
+                        punteggioMax=Integer.valueOf(String.valueOf(ds.child("score").getValue()));
+                        usernameVincitore=String.valueOf(ds.child("username").getValue());
+                    }
+                    punteggi.add(score);
+                    nomiUtente.add(nome);
+                }
+                if(punteggi.size()==numeroGiocatori){
+                    for(a=0;a<punteggi.size();a++){
+                        if(nomiUtente.get(a).equals(username)){
+                            puntClassifica=punteggi.get(a);
+                            if(usernameVincitore.equals(username)){
+                                AlertDialog alertDialog;
+                                alertDialog=new AlertDialog.Builder(quizStadium).setTitle("Result")
+                                        .setMessage(username+" sei il vincitore, il tuo punteggio e' di: "+puntClassifica).show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent=new Intent(quizStadium,GameActivity.class);
+                                        quizStadium.startActivity(intent);
+                                    }
+                                },2000);
+                            }else{
+                                AlertDialog alertDialog;
+                                alertDialog=new AlertDialog.Builder(quizStadium).setTitle("Result")
+                                        .setMessage(username+" non hai vinto, il tuo punteggio è di: "+puntClassifica).show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent=new Intent(quizStadium,GameActivity.class);
+                                        quizStadium.startActivity(intent);
+                                    }
+                                },2000);
+                            }
+                        }
+                        DatabaseReference classificaRef=ref.child("LeaderBoardStadium").child(username);
+                        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.getChildrenCount()>0){
+                                    int puntVecchio=Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                    if(puntVecchio<puntClassifica){
+                                        classificaRef.setValue(puntClassifica);
+                                    }
+                                }else{
+                                    classificaRef.setValue(puntClassifica);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
 

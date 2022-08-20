@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SetRisposteThread extends Thread{
 
@@ -42,7 +43,7 @@ public class SetRisposteThread extends Thread{
         write();
     }
 
-    public void addOption() {
+    /*public void addOption() {
         Log.v("size1", String.valueOf(opzioni.size()));
         int cont=0;
         for (int i = 0; i < domande.size(); i++) {
@@ -80,6 +81,70 @@ public class SetRisposteThread extends Thread{
                     a--;
                 }
 
+            }
+        }
+    }*/
+    public void addOption(){
+        int cont=0;
+        for (int i = 0; i < domande.size(); i++) {
+            ArrayList<String> opzioniShuffle=new ArrayList<>();
+            opzioniShuffle.add(domande.get(i).getAnswer());
+            for (int a = 0; a < 3; a++) {
+                opzioniShuffle.add(opzioni.get(cont));
+                opzioni.remove(cont);
+                if(cont!=0){
+                    cont=0;
+                }
+                /*if ((!(domande.get(i).getOption1().equals(opzioni.get(cont))))
+                        && (!(domande.get(i).getOption2().equals(opzioni.get(cont))))
+                        && (!(domande.get(i).getOption3().equals(opzioni.get(cont)))
+                        && (!(domande.get(i).getOption4().equals(opzioni.get(cont)))))) {
+                    switch (a) {
+                        case 0:
+                            domande.get(i).setOption1(opzioni.get(cont));
+                            opzioni.remove(cont);
+                            if(cont!=0){
+                                cont=0;
+                            }
+                            break;
+                        case 1:
+                            domande.get(i).setOption2(opzioni.get(cont));
+                            opzioni.remove(cont);
+                            if(cont!=0){
+                                cont=0;
+                            }
+                            break;
+                        case 2:
+                            domande.get(i).setOption3(opzioni.get(cont));
+                            opzioni.remove(cont);
+                            if(cont!=0){
+                                cont=0;
+                            }
+                            break;
+                    }
+                }
+                else{
+                    cont++;
+                    a--;
+                }*/
+
+            }
+            Collections.shuffle(opzioniShuffle);
+            for(int x=0;x<4;x++) {
+                switch (x) {
+                    case 0:
+                        domande.get(i).setOption1(opzioniShuffle.get(x));
+                        break;
+                    case 1:
+                        domande.get(i).setOption2(opzioniShuffle.get(x));
+                        break;
+                    case 2:
+                        domande.get(i).setOption3(opzioniShuffle.get(x));
+                        break;
+                    case 3:
+                        domande.get(i).setOption4(opzioniShuffle.get(x));
+                        break;
+                }
             }
         }
     }

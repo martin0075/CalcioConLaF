@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ReadPlayerGameThread extends Thread{
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -166,6 +167,5 @@ public class ReadPlayerGameThread extends Thread{
             punt4.setVisibility(View.INVISIBLE);
             img4.setVisibility(View.INVISIBLE);
         }
-
     }
 }
