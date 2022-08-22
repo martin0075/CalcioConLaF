@@ -54,7 +54,7 @@ public class NewsThread extends Thread{
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("x-rapidapi-key", "bedb2fe714msh252489034ac87a7p162fc5jsnd07235a8b8a6");
+                params.put("x-rapidapi-key", "117b925256mshfc747e9485b704cp17f88ajsn3b8c02b4353f");
                 params.put("x-rapidapi-host", "football98.p.rapidapi.com");
 
                 return params;

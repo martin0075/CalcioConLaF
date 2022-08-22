@@ -130,7 +130,7 @@ public class DomandeThread extends Thread{
                         @Override
                         public Map<String, String> getHeaders() throws AuthFailureError {
                             Map<String, String> params = new HashMap<String, String>();
-                            params.put("x-rapidapi-key", "b25b06be0210744411a4ecfbb153f347");
+                            params.put("x-rapidapi-key", "3de8d2d4a7acf04769f77ac5ebd17840");
                             params.put("x-rapidapi-host", "v3.football.api-sports.io");
 
                             return params;
