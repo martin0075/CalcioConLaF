@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -43,6 +44,9 @@ public class PartitaThread extends Thread{
     Button btnB;
     Button btnC;
     Button btnD;
+    ImageButton help1;
+    ImageButton help2;
+    ImageButton help3;
     TextView punt1;
     TextView punt2;
     TextView punt3;
@@ -77,6 +81,8 @@ public class PartitaThread extends Thread{
                 checkColor();
                 checkPunteggio();
                 checkUtenteAttivo();
+                checkHelp();
+
             }
         },0,100);
         timer2.schedule(new TimerTask() {
@@ -168,6 +174,49 @@ public class PartitaThread extends Thread{
                             btnD.setEnabled(false);
                         }
                     });
+
+                    help1=quizStadium.findViewById(R.id.btnIndizio1);
+                    help2=quizStadium.findViewById(R.id.btnIndizio2);
+                    help3=quizStadium.findViewById(R.id.btnIndizio3);
+                    help1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String citta = domande.get(i).getCity();
+                            Toast.makeText(quizStadium, "Città: " + citta, Toast.LENGTH_LONG).show();
+                            DatabaseReference helpRef = ref.child("GameStadium").child(indexLobby).child("utenti");
+                            for (int a = 0; a < textViewList.size(); a++) {
+                                if (textViewList.get(a).getText().equals(username)) {
+                                    helpRef.child(String.valueOf(a)).child(("aiuto1")).setValue(true);
+                                    help1.setClickable(false);
+                                    help1.setEnabled(false);
+                                    help1.setBackgroundColor(Color.RED);
+                                }
+                            }
+                        }
+                    });
+                    help2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String nazione=domande.get(i).getCountry();
+                            Toast.makeText(quizStadium,"Nazione: "+nazione,Toast.LENGTH_LONG).show();
+                            DatabaseReference helpRef = ref.child("GameStadium").child(indexLobby).child("utenti");
+                            for(int b=0;b<textViewList.size();b++) {
+                                if (textViewList.get(b).getText().equals(username)) {
+                                    helpRef.child(String.valueOf(b)).child(("aiuto2")).setValue(true);
+                                    help2.setClickable(false);
+                                    help2.setEnabled(false);
+                                    help2.setBackgroundColor(Color.RED);
+                                }
+                            }
+
+                        }
+                    });
+                    help3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
                 }
             });
         }
@@ -207,42 +256,30 @@ public class PartitaThread extends Thread{
                         indice=contatore;
                         textViewList.get(contatore).setBackgroundColor(Color.YELLOW);
                         imageViewList.get(contatore).setBackgroundColor(Color.YELLOW);
-                        Log.v("prova", String.valueOf(textViewList.get(contatore).getText()));
                         if(textViewList.get(contatore).getText().equals(username)){
-                            //Button btn1 = quizStadium.findViewById(R.id.btn1);
                             btnA.setEnabled(true);
-                            //Button btn2 = quizStadium.findViewById(R.id.btn2);
                             btnB.setEnabled(true);
-                            //Button btn3 = quizStadium.findViewById(R.id.btn3);
                             btnC.setEnabled(true);
-                            //Button btn4 = quizStadium.findViewById(R.id.btn4);
                             btnD.setEnabled(true);
-                            ImageButton indizio1 = quizStadium.findViewById(R.id.btnIndizio1);
-                            indizio1.setEnabled(true);
-                            ImageButton indizio2 = quizStadium.findViewById(R.id.btnIndizio2);
-                            indizio2.setEnabled(true);
-                            ImageButton indizio3 = quizStadium.findViewById(R.id.btnIndizio3);
-                            indizio3.setEnabled(true);
+                            help1.setEnabled(true);
+                            help1.setClickable(true);
+                            help2.setEnabled(true);
+                            help2.setClickable(true);
+
                         }
                         contatore++;
                     }else{
                         textViewList.get(contatore).setBackgroundColor(Color.WHITE);
                         imageViewList.get(contatore).setBackgroundColor(Color.WHITE);
                         if(textViewList.get(contatore).getText().equals(username)){
-                            //Button btn1 = quizStadium.findViewById(R.id.btn1);
                             btnA.setEnabled(false);
-                            //Button btn2 = quizStadium.findViewById(R.id.btn2);
                             btnB.setEnabled(false);
-                            //Button btn3 = quizStadium.findViewById(R.id.btn3);
                             btnC.setEnabled(false);
-                            //Button btn4 = quizStadium.findViewById(R.id.btn4);
                             btnD.setEnabled(false);
-                            ImageButton indizio1 = quizStadium.findViewById(R.id.btnIndizio1);
-                            indizio1.setEnabled(false);
-                            ImageButton indizio2 = quizStadium.findViewById(R.id.btnIndizio2);
-                            indizio2.setEnabled(false);
-                            ImageButton indizio3 = quizStadium.findViewById(R.id.btnIndizio3);
-                            indizio3.setEnabled(false);
+                            help1.setEnabled(false);
+                            help1.setClickable(false);
+                            help2.setEnabled(false);
+                            help2.setClickable(false);
                         }
                         contatore++;
                     }
@@ -316,9 +353,7 @@ public class PartitaThread extends Thread{
                 bottoneRef.setValue(false);
                 DatabaseReference activePlayerRef=ref.child("GameStadium").child(indexLobby).child("utenti");
 
-                Log.v("numGioc", String.valueOf(numeroGiocatori));
                 for(int c=0;c<numeroGiocatori;c++){
-                    Log.v("c1",String.valueOf(c));
                     if(textViewList.get(c).getText().equals(username)) {
                         if (c == numeroGiocatori - 1) {
                             activePlayerRef.child(String.valueOf(c)).child("activePlayer").setValue(false);
@@ -456,12 +491,67 @@ public class PartitaThread extends Thread{
         if(indovinato){
             newGame();
         }
-        /*DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game");
-        bottoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    }
+    public void checkHelp(){
+        DatabaseReference helpRef = ref.child("GameStadium").child(indexLobby).child("utenti");
+        helpRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if((Boolean)snapshot.child("4").getValue()){
-                    newGame();
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    if(ds.child("username").getValue().equals(username)){
+                        Boolean aiuto1 = (Boolean) ds.child("aiuto1").getValue();
+                        Boolean aiuto2=(Boolean) ds.child("aiuto2").getValue();
+                        if(aiuto1){
+                            help1.setClickable(false);
+                            help1.setEnabled(false);
+                            help1.setBackgroundColor(Color.RED);
+                        }/*else {
+                            help1.setClickable(false);
+                            help1.setEnabled(false);
+                            help1.setBackgroundColor(Color.GREEN);
+
+                        }*/
+                        if(aiuto2) {
+                            help2.setClickable(false);
+                            help2.setEnabled(false);
+                            help2.setBackgroundColor(Color.RED);
+                        }/*else {
+                            help2.setClickable(false);
+                            help2.setEnabled(false);
+                            help2.setBackgroundColor(Color.GREEN);
+
+                        }*/
+                    }
+                    /*if(aiuto1){
+                        for(int a=0;a<textViewList.size();a++) {
+                            if (textViewList.get(a).getText().equals(username)) {
+                                help1.setClickable(false);
+                                help1.setEnabled(false);
+                                help1.setBackgroundColor(Color.RED);
+                            }
+                        }*/
+                    /*}else{
+                        for(int b=0;b<textViewList.size();b++){
+                            if(textViewList.get(b).getText().equals(username)){
+                                help1.setBackgroundColor(Color.TRANSPARENT);
+                            }
+                        }
+                    }
+                    if(aiuto2){
+                        for(int c=0;c<textViewList.size();c++) {
+                            if (textViewList.get(c).getText().equals(username)) {
+                                help2.setClickable(false);
+                                help2.setEnabled(false);
+                                help2.setBackgroundColor(Color.RED);
+                            }
+                        }
+                    }else{
+                        for(int d=0;d<textViewList.size();d++) {
+                            if (textViewList.get(d).getText().equals(username)) {
+                                help2.setBackgroundColor(Color.TRANSPARENT);
+                            }
+                        }
+                    }*/
                 }
             }
 
@@ -469,7 +559,7 @@ public class PartitaThread extends Thread{
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });*/
+        });
     }
     public void finishGame(){
         timer.cancel();
@@ -500,10 +590,6 @@ public class PartitaThread extends Thread{
                     }
                     punteggi.add(score);
                     nomiUtente.add(nome);
-                }
-                for(int e=0;e< snapshot.getChildrenCount();e++){
-                    Log.v("punteggi", String.valueOf(punteggi.get(e)));
-                    Log.v("nomi", String.valueOf(nomiUtente.get(e)));
                 }
                 if(punteggi.size()==numeroGiocatori){
                     for(a=0;a<punteggi.size();a++){
