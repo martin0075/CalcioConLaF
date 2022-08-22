@@ -48,7 +48,7 @@ public class AdapterForLeaderboard extends RecyclerView.Adapter<AdapterForLeader
     public interface OnLeaderboardListener{
         void onLeaderboardClick(int position);
     }
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         OnLeaderboardListener onLeaderboardListerner;
         public ImageView img;
         public TextView username;
@@ -59,11 +59,6 @@ public class AdapterForLeaderboard extends RecyclerView.Adapter<AdapterForLeader
             img=v.findViewById(R.id.imgLeaderboard);
             username=v.findViewById(R.id.textUsername);
             punteggio=v.findViewById(R.id.textPunteggio);
-            itemView.setOnClickListener(this);
-        }
-        @Override
-        public void onClick(View view) {
-            onLeaderboardListerner.onLeaderboardClick(getAdapterPosition());
         }
     }
 }

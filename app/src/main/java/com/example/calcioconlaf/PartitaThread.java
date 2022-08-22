@@ -501,6 +501,10 @@ public class PartitaThread extends Thread{
                     punteggi.add(score);
                     nomiUtente.add(nome);
                 }
+                for(int e=0;e< snapshot.getChildrenCount();e++){
+                    Log.v("punteggi", String.valueOf(punteggi.get(e)));
+                    Log.v("nomi", String.valueOf(nomiUtente.get(e)));
+                }
                 if(punteggi.size()==numeroGiocatori){
                     for(a=0;a<punteggi.size();a++){
                         if(nomiUtente.get(a).equals(username)){

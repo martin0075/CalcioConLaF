@@ -89,15 +89,18 @@ public class LeaderboardFragment extends Fragment {
                 }
                 if(listOfElements.size()==size){
                     for(int i=0;i<listOfElements.size();i++){
-                        for(int j=0;j<listOfElements.size();j++){
+                        for(int j=i+1;j<listOfElements.size();j++){
                             if(listOfElements.get(j).getPunteggio()>listOfElements.get(i).getPunteggio()){
                                 int temp=listOfElements.get(i).getPunteggio();
                                 listOfElements.get(i).setPunteggio(listOfElements.get(j).getPunteggio());
                                 listOfElements.get(j).setPunteggio(temp);
                             }
                         }
+                        Log.v("list", listOfElements.get(i).getUsername());
                     }
-                    Collections.reverse(listOfElements);
+                    for(int a=0;a<listOfElements.size();a++){
+                        Log.v("list2", listOfElements.get(a).getUsername());
+                    }
                     show();
                 }
             }
