@@ -56,6 +56,7 @@ public class PartitaThread extends Thread{
     ArrayList<Quiz> domande=new ArrayList<>();
     ArrayList<TextView> textViewList = new ArrayList<>();
     ArrayList<ImageView> imageViewList = new ArrayList<>();
+    ArrayList<String> sbagliate=new ArrayList<>();
     int i=0;
     String opzione="";
     int numeroGiocatori;
@@ -122,13 +123,12 @@ public class PartitaThread extends Thread{
                     btnD.setText(domande.get(i).getOption4());
 
 
-                    punt1=quizStadium.findViewById(R.id.txtAvatar1);
-                    punt2=quizStadium.findViewById(R.id.txtAvatar2);
-                    punt3=quizStadium.findViewById(R.id.txtAvatar3);
-                    punt4=quizStadium.findViewById(R.id.txtAvatar4);
+                    punt1 = quizStadium.findViewById(R.id.txtAvatar1);
+                    punt2 = quizStadium.findViewById(R.id.txtAvatar2);
+                    punt3 = quizStadium.findViewById(R.id.txtAvatar3);
+                    punt4 = quizStadium.findViewById(R.id.txtAvatar4);
 
                     i++;
-
 
 
                     btnA.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +136,8 @@ public class PartitaThread extends Thread{
                         public void onClick(View view) {
                             opzione = (String) btnA.getText();
                             utenti.get(indice).setRispostaSel(opzione);
-                            int bottone=0;
-                            checkOption(opzione,bottone);
+                            int bottone = 0;
+                            checkOption(opzione, bottone);
                             btnA.setEnabled(false);
 
                         }
@@ -147,8 +147,8 @@ public class PartitaThread extends Thread{
                         public void onClick(View view) {
                             opzione = (String) btnB.getText();
                             utenti.get(indice).setRispostaSel(opzione);
-                            int bottone=1;
-                            checkOption(opzione,bottone);
+                            int bottone = 1;
+                            checkOption(opzione, bottone);
                             btnB.setEnabled(false);
 
                         }
@@ -158,8 +158,8 @@ public class PartitaThread extends Thread{
                         public void onClick(View view) {
                             opzione = (String) btnC.getText();
                             utenti.get(indice).setRispostaSel(opzione);
-                            int bottone=2;
-                            checkOption(opzione,bottone);
+                            int bottone = 2;
+                            checkOption(opzione, bottone);
                             btnC.setEnabled(false);
 
                         }
@@ -169,15 +169,15 @@ public class PartitaThread extends Thread{
                         public void onClick(View view) {
                             opzione = (String) btnD.getText();
                             utenti.get(indice).setRispostaSel(opzione);
-                            int bottone=3;
-                            checkOption(opzione,bottone);
+                            int bottone = 3;
+                            checkOption(opzione, bottone);
                             btnD.setEnabled(false);
                         }
                     });
 
-                    help1=quizStadium.findViewById(R.id.btnIndizio1);
-                    help2=quizStadium.findViewById(R.id.btnIndizio2);
-                    help3=quizStadium.findViewById(R.id.btnIndizio3);
+                    help1 = quizStadium.findViewById(R.id.btnIndizio1);
+                    help2 = quizStadium.findViewById(R.id.btnIndizio2);
+                    help3 = quizStadium.findViewById(R.id.btnIndizio3);
                     help1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -197,10 +197,10 @@ public class PartitaThread extends Thread{
                     help2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String nazione=domande.get(i).getCountry();
-                            Toast.makeText(quizStadium,"Nazione: "+nazione,Toast.LENGTH_LONG).show();
+                            String nazione = domande.get(i).getCountry();
+                            Toast.makeText(quizStadium, "Nazione: " + nazione, Toast.LENGTH_LONG).show();
                             DatabaseReference helpRef = ref.child("GameStadium").child(indexLobby).child("utenti");
-                            for(int b=0;b<textViewList.size();b++) {
+                            for (int b = 0; b < textViewList.size(); b++) {
                                 if (textViewList.get(b).getText().equals(username)) {
                                     helpRef.child(String.valueOf(b)).child(("aiuto2")).setValue(true);
                                     help2.setClickable(false);
@@ -211,10 +211,117 @@ public class PartitaThread extends Thread{
 
                         }
                     });
+                    ArrayList<String> opt = new ArrayList<>();
+                    opt.add(domande.get(i).getOption1());
+                    opt.add(domande.get(i).getOption2());
+                    opt.add(domande.get(i).getOption3());
+                    opt.add(domande.get(i).getOption4());
                     help3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
 
+                            Toast.makeText(quizStadium, "1 opzione eliminata", Toast.LENGTH_LONG).show();
+                            DatabaseReference helpRef = ref.child("GameStadium").child(indexLobby).child("utenti");
+                            boolean trovato = false;
+                            while (!trovato) {
+                                Random random = new Random();
+                                int dim = opt.size();
+                                int elimina = random.nextInt(dim);
+                                switch (elimina) {
+                                    case 0:
+                                        String opt1= String.valueOf(btnA.getText());
+                                            if(!sbagliate.contains(opt1)) {
+                                                if (!opt1.equals(domande.get(i - 1).getAnswer())) {
+                                                    Log.v("domande1", domande.get(i - 1).getOption1());
+                                                    Log.v("domande2", domande.get(i - 1).getAnswer());
+                                                    Log.v("elimina1", String.valueOf(elimina));
+                                                    DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
+                                                    game.child(String.valueOf(elimina)).setValue(false);
+                                                    for (int c = 0; c < textViewList.size(); c++) {
+                                                        if (textViewList.get(c).getText().equals(username)) {
+                                                            helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
+                                                            help3.setClickable(false);
+                                                            help3.setEnabled(false);
+                                                            help3.setBackgroundColor(Color.RED);
+                                                        }
+                                                    }
+                                                }
+                                            trovato = true;
+                                        }else{
+                                                trovato=false;
+                                            }
+                                        break;
+                                    case 1:
+                                        String opt2= String.valueOf(btnB.getText());
+                                        if(!sbagliate.contains(opt2)) {
+                                            if (!opt2.equals(domande.get(i - 1).getAnswer())) {
+                                                Log.v("domande1", domande.get(i - 1).getOption2());
+                                                Log.v("domande2", domande.get(i - 1).getAnswer());
+                                                Log.v("elimina2", String.valueOf(elimina));
+                                                DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
+                                                game.child(String.valueOf(elimina)).setValue(false);
+                                                for (int c = 0; c < textViewList.size(); c++) {
+                                                    if (textViewList.get(c).getText().equals(username)) {
+                                                        helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
+                                                        help3.setClickable(false);
+                                                        help3.setEnabled(false);
+                                                        help3.setBackgroundColor(Color.RED);
+                                                    }
+                                                }
+                                            }
+                                            trovato = true;
+                                        }else {
+                                            trovato = false;
+                                        }
+                                        break;
+                                    case 2:
+                                        String opt3= String.valueOf(btnC.getText());
+                                            if (!sbagliate.contains(opt3)) {
+                                                if (!domande.get(i - 1).getOption3().equals(domande.get(i - 1).getAnswer())) {
+                                                    Log.v("domande1", domande.get(i - 1).getOption3());
+                                                    Log.v("domande2", domande.get(i - 1).getAnswer());
+                                                    Log.v("elimina3", String.valueOf(elimina));
+                                                    DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
+                                                    game.child(String.valueOf(elimina)).setValue(false);
+                                                    for (int c = 0; c < textViewList.size(); c++) {
+                                                        if (textViewList.get(c).getText().equals(username)) {
+                                                            helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
+                                                            help3.setClickable(false);
+                                                            help3.setEnabled(false);
+                                                            help3.setBackgroundColor(Color.RED);
+                                                        }
+                                                    }
+                                                }
+                                                trovato=true;
+                                            }else{
+                                                trovato=false;
+                                            }
+                                        break;
+                                    case 3:
+                                        String opt4= String.valueOf(btnD.getText());
+                                            if(!sbagliate.contains(opt4)) {
+                                                if (!opt4.equals(domande.get(i - 1).getAnswer())) {
+                                                    Log.v("domande1", domande.get(i - 1).getOption4());
+                                                    Log.v("domande2", domande.get(i - 1).getAnswer());
+                                                    Log.v("elimina4", String.valueOf(elimina));
+                                                    DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
+                                                    game.child(String.valueOf(elimina)).setValue(false);
+                                                    for (int c = 0; c < textViewList.size(); c++) {
+                                                        if (textViewList.get(c).getText().equals(username)) {
+                                                            helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
+                                                            help3.setClickable(false);
+                                                            help3.setEnabled(false);
+                                                            help3.setBackgroundColor(Color.RED);
+                                                        }
+                                                    }
+                                                }
+                                                trovato = true;
+                                            }else {
+                                                trovato = false;
+                                            }
+                                        break;
+                                }
+                            }
                         }
                     });
                 }
@@ -265,6 +372,9 @@ public class PartitaThread extends Thread{
                             help1.setClickable(true);
                             help2.setEnabled(true);
                             help2.setClickable(true);
+                            help3.setEnabled(true);
+                            help3.setClickable(true);
+
 
                         }
                         contatore++;
@@ -280,6 +390,8 @@ public class PartitaThread extends Thread{
                             help1.setClickable(false);
                             help2.setEnabled(false);
                             help2.setClickable(false);
+                            help3.setEnabled(false);
+                            help3.setClickable(false);
                         }
                         contatore++;
                     }
@@ -370,6 +482,7 @@ public class PartitaThread extends Thread{
         return true;
     }
     public void checkColor() {
+        sbagliate.clear();
         DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game");
         bottoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -402,15 +515,22 @@ public class PartitaThread extends Thread{
                             switch (valore) {
                                 case 0:
                                     btnA.setBackgroundColor(Color.RED);
+                                    sbagliate.add(String.valueOf(btnA.getText()));
                                     break;
                                 case 1:
                                     btnB.setBackgroundColor(Color.RED);
+                                    sbagliate.add(String.valueOf(btnB.getText()));
+
                                     break;
                                 case 2:
                                     btnC.setBackgroundColor(Color.RED);
+                                    sbagliate.add(String.valueOf(btnC.getText()));
+
                                     break;
                                 case 3:
                                     btnD.setBackgroundColor(Color.RED);
+                                    sbagliate.add(String.valueOf(btnD.getText()));
+
                                     break;
                             }
                         }
@@ -501,6 +621,7 @@ public class PartitaThread extends Thread{
                     if(ds.child("username").getValue().equals(username)){
                         Boolean aiuto1 = (Boolean) ds.child("aiuto1").getValue();
                         Boolean aiuto2=(Boolean) ds.child("aiuto2").getValue();
+                        Boolean aiuto3=(Boolean) ds.child("aiuto2").getValue();
                         if(aiuto1){
                             help1.setClickable(false);
                             help1.setEnabled(false);
@@ -515,12 +636,12 @@ public class PartitaThread extends Thread{
                             help2.setClickable(false);
                             help2.setEnabled(false);
                             help2.setBackgroundColor(Color.RED);
-                        }/*else {
-                            help2.setClickable(false);
-                            help2.setEnabled(false);
-                            help2.setBackgroundColor(Color.GREEN);
-
-                        }*/
+                        }
+                        if(aiuto3){
+                            help3.setClickable(false);
+                            help3.setEnabled(false);
+                            help3.setBackgroundColor(Color.RED);
+                        }
                     }
                     /*if(aiuto1){
                         for(int a=0;a<textViewList.size();a++) {
