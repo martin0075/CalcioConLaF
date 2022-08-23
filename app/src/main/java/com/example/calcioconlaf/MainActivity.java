@@ -31,8 +31,17 @@ public class MainActivity extends AppCompatActivity {
         news.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent login=new Intent(MainActivity.this, NewsActivity.class);
-                startActivity(login);
+                Intent news=new Intent(MainActivity.this, NewsActivity.class);
+                startActivity(news);
+            }
+        });
+
+        Button regolamento=findViewById(R.id.btnRegolamento);
+        regolamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent regolamentoI=new Intent(MainActivity.this, RegolamentoActivity.class);
+                startActivity(regolamentoI);
             }
         });
     }
