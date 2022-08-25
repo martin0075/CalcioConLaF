@@ -52,7 +52,8 @@ public class RisposteThreadTransfer extends Thread{
     @Override
     public void run() {
         super.run();
-        setOption(domande);
+        //setOption(domande);
+        controlla();
     }
     public void setOption(ArrayList<QuizTransfer> domande) {
         requestQueue1 = Volley.newRequestQueue(lobbyActivity);
