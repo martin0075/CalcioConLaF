@@ -1,19 +1,12 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.Login;
 
 
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.os.HandlerCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,7 +52,7 @@ public class RegisterThread extends Thread {
                         @Override
                         public void run() {
                             Toast.makeText(registerActivity,"Registrazione effettuata",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(registerActivity,LoginActivity.class);
+                            Intent intent=new Intent(registerActivity, LoginActivity.class);
                             registerActivity.startActivity(intent);
                         }
                     });

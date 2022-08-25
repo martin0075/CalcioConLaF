@@ -1,9 +1,6 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 public class DomandeThread extends Thread{
     LobbyActivity lobbyActivity;

@@ -1,11 +1,9 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.GameActivity;
+import com.example.calcioconlaf.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,10 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -723,7 +720,7 @@ public class PartitaThread extends Thread{
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Intent intent=new Intent(quizStadium,GameActivity.class);
+                                        Intent intent=new Intent(quizStadium, GameActivity.class);
                                         quizStadium.startActivity(intent);
                                     }
                                 },2000);

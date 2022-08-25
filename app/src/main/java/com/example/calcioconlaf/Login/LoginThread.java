@@ -1,11 +1,11 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.Login;
 
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.GameActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +44,7 @@ public class LoginThread extends Thread{
                         @Override
                         public void run() {
                             Toast.makeText(loginActivity,"Dati corretti",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(loginActivity,GameActivity.class);
+                            Intent intent=new Intent(loginActivity, GameActivity.class);
                             intent.putExtra("Username", username);
                             loginActivity.startActivity(intent);
                         }

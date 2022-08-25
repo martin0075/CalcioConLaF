@@ -1,4 +1,4 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,6 +25,5 @@ public class SetButtonThread extends Thread{
         bottoneRef.child("1").setValue("null");
         bottoneRef.child("2").setValue("null");
         bottoneRef.child("3").setValue("null");
-        bottoneRef.child("4").setValue(false);
     }
 }

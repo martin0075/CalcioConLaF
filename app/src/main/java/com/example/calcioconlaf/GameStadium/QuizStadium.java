@@ -1,13 +1,11 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
+import com.example.calcioconlaf.R;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;

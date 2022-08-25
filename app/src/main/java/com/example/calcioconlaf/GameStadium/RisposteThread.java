@@ -1,6 +1,5 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
-import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;

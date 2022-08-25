@@ -1,11 +1,10 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.HomeFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

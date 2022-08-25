@@ -1,19 +1,18 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.GameStadium.LobbyActivity;
+import com.example.calcioconlaf.GameStadium.Quiz;
+import com.example.calcioconlaf.GameStadium.QuizStadium;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 

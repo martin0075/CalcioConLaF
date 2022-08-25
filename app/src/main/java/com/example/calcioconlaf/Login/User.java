@@ -1,4 +1,4 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.Login;
 
 public class User {
     public String Username;

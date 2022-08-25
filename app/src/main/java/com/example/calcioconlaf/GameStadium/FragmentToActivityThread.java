@@ -1,7 +1,10 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
 import android.content.Intent;
 import android.util.Log;
+
+import com.example.calcioconlaf.GameStadium.LobbyActivity;
+import com.example.calcioconlaf.HomeFragment;
 
 public class FragmentToActivityThread extends Thread{
     String username;

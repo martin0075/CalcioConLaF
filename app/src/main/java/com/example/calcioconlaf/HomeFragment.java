@@ -1,7 +1,5 @@
 package com.example.calcioconlaf;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,11 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.example.calcioconlaf.GameStadium.StadiumThread;
+import com.example.calcioconlaf.GameTransfer.TransferThread;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +29,7 @@ public class HomeFragment extends Fragment {
     public String indexLobby;
     StadiumThread stadiumThread;
     HomeFragment homeFragment=HomeFragment.this;
+    TransferThread transferThread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +59,8 @@ public class HomeFragment extends Fragment {
         imgBtnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                TransferThread transferThread=new TransferThread(username, username2, homeFragment);
+                transferThread.start();
             }
         });
     }

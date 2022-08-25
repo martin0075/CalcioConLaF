@@ -1,4 +1,4 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
 public class PlayerGame {
 

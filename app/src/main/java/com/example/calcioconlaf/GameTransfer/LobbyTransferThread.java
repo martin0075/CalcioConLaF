@@ -1,4 +1,4 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameTransfer;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,6 +6,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.GameActivity;
+import com.example.calcioconlaf.GameStadium.DomandeThread;
+import com.example.calcioconlaf.GameStadium.LobbyActivity;
+import com.example.calcioconlaf.GameStadium.Quiz;
+import com.example.calcioconlaf.GameStadium.QuizStadium;
+import com.example.calcioconlaf.GameStadium.SetButtonThread;
+import com.example.calcioconlaf.GameStadium.SetUtentiThread;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,29 +21,29 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class LobbyThread extends Thread{
+public class LobbyTransferThread extends Thread{
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
-    DatabaseReference lobbyStadiumRef = ref.child("LobbyStadium");
+    DatabaseReference lobbyTransferRef = ref.child("LobbyTransfer");
     boolean trovati;
     String username;
     String usernameLobby;
     String indexLobby;
-    LobbyActivity lobbyActivity;
-    ArrayList<Quiz> domande;
+    LobbyActivityTransfer lobbyActivity;
+    ArrayList<QuizTransfer> domande;
 
-    public LobbyThread(String username,String usernameLobby,String indexLobby,LobbyActivity lobbyActivity, ArrayList<Quiz> domande){
-        this.username=username;
-        this.usernameLobby=usernameLobby;
-        this.lobbyActivity=lobbyActivity;
-        this.indexLobby=indexLobby;
-        this.domande=domande;
+    public LobbyTransferThread(String username, String usernameLobby, String indexLobby, LobbyActivityTransfer lobbyActivity, ArrayList<QuizTransfer> domande) {
+        this.username = username;
+        this.usernameLobby = usernameLobby;
+        this.indexLobby = indexLobby;
+        this.lobbyActivity = lobbyActivity;
+        this.domande = domande;
     }
 
     @Override
     public void run() {
         trovati=false;
-        lobbyStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        lobbyTransferRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (username == null) {
@@ -49,15 +56,15 @@ public class LobbyThread extends Thread{
                             trovati = true;
                         } else {
                             if (snapshot.getChildrenCount() == 1) {
-                                lobbyStadiumRef.child("").setValue("");
-                                lobbyStadiumRef.child(ds.getKey()).removeValue();
+                                lobbyTransferRef.child("").setValue("");
+                                lobbyTransferRef.child(ds.getKey()).removeValue();
                             } else {
-                                lobbyStadiumRef.child(ds.getKey()).removeValue();
+                                lobbyTransferRef.child(ds.getKey()).removeValue();
                             }
                             lobbyActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent5 = new Intent(lobbyActivity, GameActivity.class);
+                                    Intent intent5 = new Intent(lobbyActivity, GameActivityTransfer.class);
                                     intent5.putExtra("UsernameLobby", username);
                                     lobbyActivity.startActivity(intent5);
                                 }
@@ -65,25 +72,24 @@ public class LobbyThread extends Thread{
                         }
                     }
                 }
-
-                if(trovati){
-                    DatabaseReference lobbystadium=ref.child("LobbyStadium").child(indexLobby);
-                    lobbystadium.addListenerForSingleValueEvent(new ValueEventListener() {
+                if (trovati) {
+                    DatabaseReference lobbyTransfer = ref.child("LobbyTransfer").child(indexLobby);
+                    lobbyTransfer.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             int postoPrimoFiglio = 0;
-                            int tot=(int) snapshot.getChildrenCount();
-                            int i=0;
-                            for(DataSnapshot ds:snapshot.getChildren()){
-                                if(ds.getValue().equals(username)){
-                                    postoPrimoFiglio=tot-i;
-                                }else{
+                            int tot = (int) snapshot.getChildrenCount();
+                            int i = 0;
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                if (ds.getValue().equals(username)) {
+                                    postoPrimoFiglio = tot - i;
+                                } else {
                                     i++;
                                 }
                             }
-                            if(postoPrimoFiglio==tot){
+                            if (postoPrimoFiglio == tot) {
                                 setPartita();
-                            }else {
+                            } else {
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -93,20 +99,20 @@ public class LobbyThread extends Thread{
                                                 Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
                                                 intent4.putExtra("Username", username);
                                                 intent4.putExtra("IndexLobby", indexLobby);
-                                                DatabaseReference game=ref.child("GameStadium").child(indexLobby).child("domande");
+                                                DatabaseReference game=ref.child("GameTransfer").child(indexLobby).child("domande");
                                                 game.addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         for(DataSnapshot ds:snapshot.getChildren()){
-                                                            String country= (String) ds.child("country").getValue();
-                                                            String answer= (String) ds.child("answer").getValue();
-                                                            String city= (String) ds.child("city").getValue();
+                                                            Integer id= (Integer) ds.child("id").getValue();
+                                                            String url= (String) ds.child("immagine").getValue();
+                                                            String domanda= (String) ds.child("domanda").getValue();
                                                             String option3= (String) ds.child("option3").getValue();
                                                             String option4= (String) ds.child("option4").getValue();
                                                             String option2= (String) ds.child("option2").getValue();
                                                             String option1= (String) ds.child("option1").getValue();
-                                                            String urlImage= (String) ds.child("urlImage").getValue();
-                                                            domande.add(new Quiz(urlImage,option1,option2,option3,option4,answer,country,city));
+                                                            String answer= (String) ds.child("answer").getValue();
+                                                            domande.add(new QuizTransfer(url,option1,option2,option3,option4,answer,domanda,id));
                                                         }
                                                         if(domande.size()==10){
                                                             Log.v("logaaa",domande.get(0).getAnswer());
@@ -134,7 +140,6 @@ public class LobbyThread extends Thread{
                     });
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -142,17 +147,17 @@ public class LobbyThread extends Thread{
         });
     }
     public void setPartita(){
-        DatabaseReference gamestadium=ref.child("GameStadium");
-        gamestadium.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference gameTransfer=ref.child("GameTransfer");
+        gameTransfer.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DomandeThread domandeThread = new DomandeThread(lobbyActivity, domande, username, indexLobby);
-                SetUtentiThread setUtentiThread=new SetUtentiThread(indexLobby,username);
-                SetButtonThread buttonThread=new SetButtonThread(indexLobby);
+                FotoThreadTransfer fotoThreadTransfer = new FotoThreadTransfer(lobbyActivity, domande, username, indexLobby);
+                SetUtentiThreadTransfer setUtentiThread=new SetUtentiThreadTransfer(indexLobby,username);
+                SetButtonThreadTransfer buttonThread=new SetButtonThreadTransfer(indexLobby);
                 lobbyActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        domandeThread.start();
+                        fotoThreadTransfer.start();
                         setUtentiThread.start();
                         buttonThread.start();
 

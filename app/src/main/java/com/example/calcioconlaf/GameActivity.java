@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.calcioconlaf.HomeFragment;
+import com.example.calcioconlaf.LeaderboardFragment;
+import com.example.calcioconlaf.R;
+import com.example.calcioconlaf.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;

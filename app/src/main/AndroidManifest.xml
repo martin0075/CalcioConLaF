@@ -12,10 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalcioConLaF">
         <activity
+            android:name=".GameTransfer.QuizTransferActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameTransfer.GameActivityTransfer"
+            android:exported="false" />
+        <activity
             android:name=".RegolamentoActivity"
             android:exported="false" />
         <activity
-            android:name=".LobbyActivity"
+            android:name=".GameStadium.LobbyActivity"
             android:exported="false" />
         <activity
             android:name=".GameActivity"
@@ -24,13 +30,16 @@
             android:name=".NewsActivity"
             android:exported="false" />
         <activity
-            android:name=".QuizStadium"
+            android:name=".GameStadium.QuizStadium"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Login.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameTransfer.LobbyActivityTransfer"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

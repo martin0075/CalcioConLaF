@@ -1,25 +1,24 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.GameStadium;
 
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.calcioconlaf.GameStadium.PartitaThread;
+import com.example.calcioconlaf.GameStadium.PlayerGame;
+import com.example.calcioconlaf.GameStadium.Quiz;
+import com.example.calcioconlaf.GameStadium.QuizStadium;
+import com.example.calcioconlaf.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ReadPlayerGameThread extends Thread{
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
