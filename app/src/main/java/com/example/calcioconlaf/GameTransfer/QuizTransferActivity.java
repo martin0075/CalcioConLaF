@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 
 import com.example.calcioconlaf.GameStadium.PlayerGame;
 import com.example.calcioconlaf.GameStadium.Quiz;
@@ -12,9 +13,10 @@ import com.example.calcioconlaf.GameStadium.ReadPlayerGameThread;
 import com.example.calcioconlaf.R;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class QuizTransferActivity extends AppCompatActivity {
+public class QuizTransferActivity extends AppCompatActivity{
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     ArrayList<PlayerGame> utenti=new ArrayList<>();
     ArrayList<QuizTransfer> domande;
@@ -32,7 +34,8 @@ public class QuizTransferActivity extends AppCompatActivity {
         }else{
             domande=(ArrayList<QuizTransfer>) getIntent().getSerializableExtra("Domande");
         }
-        //ReadPlayerGameThread readPlayerGameThread=new ReadPlayerGameThread(indexLobby,quizStadium,domande,username);
-        //readPlayerGameThread.start();
+        ReadPlayerGameThreadTransfer readPlayerGameThread=new ReadPlayerGameThreadTransfer(indexLobby,quizTransferActivity,domande,username);
+        readPlayerGameThread.start();
     }
+
 }

@@ -1,6 +1,8 @@
 package com.example.calcioconlaf.GameTransfer;
 
-public class QuizTransfer {
+import java.io.Serializable;
+
+public class QuizTransfer implements Serializable {
     private String urlImage;
     private String option1;
     private String option2;

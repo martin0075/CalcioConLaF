@@ -51,7 +51,6 @@ public class RisposteThread extends Thread{
         requestQueue1=Volley.newRequestQueue(lobbyActivity);
         while(c<domande.size()){
 
-            cont++;
 
             for(a=0; a<3; a++) {
                 int num = r.nextInt(947);
@@ -78,6 +77,7 @@ public class RisposteThread extends Thread{
                             try {
                                 JSONObject result2 = new JSONObject(response);
                                 JSONObject result3=(JSONObject) result2.getJSONArray("response").get(0);
+                                Log.v("provola", String.valueOf(result3));
                                 opzioni.add(result3.getString("name"));
                                 if(opzioni.size()==30){
                                     SetRisposteThread setRisposte=new SetRisposteThread(domande, opzioni,lobbyActivity,username,indexLobby);

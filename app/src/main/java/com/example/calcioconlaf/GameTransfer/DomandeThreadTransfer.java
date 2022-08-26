@@ -32,6 +32,7 @@ public class DomandeThreadTransfer extends Thread{
     String indexLobby;
     int cont=0;
     int x=0;
+    int y;
     int [] endPointVuoto;
     ArrayList<String> risposte=new ArrayList<>();
     Random r=new Random();
@@ -51,11 +52,13 @@ public class DomandeThreadTransfer extends Thread{
     public void run() {
         super.run();
         setDomande(domande);
+        //controlla();
     }
     public void setDomande(ArrayList<QuizTransfer> domande){
         requestQueue= Volley.newRequestQueue(lobbyActivity);
         for(i=0;i<domande.size();i++){
             int id=domande.get(i).getId();
+
             Log.v("id", String.valueOf(id));
             String URL = "https://api-football-v1.p.rapidapi.com/v3/transfers?player=" + id;
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -65,7 +68,9 @@ public class DomandeThreadTransfer extends Thread{
                         result = new JSONObject(response);
                         int newId= Integer.parseInt(result.getJSONObject("parameters").getString("player"));
                         for(int z=0;z<10;z++){
+
                             if(newId==domande.get(z).getId()){
+                                contaElementi++;
                                 Log.v("result2", String.valueOf(result));
                                 JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
                                 JSONObject result2=(JSONObject) result1.getJSONArray("transfers").get(0);
@@ -97,16 +102,6 @@ public class DomandeThreadTransfer extends Thread{
                                 z=10;
                             }
                         }
-                        if(domande.size()==10){
-                            RisposteThreadTransfer risposteThreadTransfer=new RisposteThreadTransfer(username,indexLobby,domande,lobbyActivity);
-                            lobbyActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    risposteThreadTransfer.start();
-                                    Log.v("Lunghezza", String.valueOf(domande.size()));
-                                }
-                            });
-                        }
                     } catch (JSONException | ParseException e) {
                         e.printStackTrace();
                     }
@@ -129,19 +124,26 @@ public class DomandeThreadTransfer extends Thread{
             requestQueue.add(stringRequest);
             cont++;
         }
-    }
-    public void verificaMese(ArrayList<Date> date){
-
+        if(domande.size()==10){
+            RisposteThreadTransfer risposteThreadTransfer=new RisposteThreadTransfer(username,indexLobby,domande,lobbyActivity);
+            lobbyActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    risposteThreadTransfer.start();
+                    Log.v("Lunghezza", String.valueOf(domande.size()));
+                }
+            });
+        }
     }
     public void controlla(){
         requestQueue= Volley.newRequestQueue(lobbyActivity);
-        for(x=890;x<1010;x++){
-            String URL = "https://api-football-v1.p.rapidapi.com/v3/transfers?player="+x;
+        for(y=850;y<1010;y++){
+            String URL = "https://api-football-v1.p.rapidapi.com/v3/teams?id="+y;
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        result = new JSONObject(response);
+                        JSONObject result=new JSONObject(response);
                         if(result.getJSONArray("response").length()==0){
                             Log.v("result1", String.valueOf(result.getJSONArray("parameters").get(0)));
                         }

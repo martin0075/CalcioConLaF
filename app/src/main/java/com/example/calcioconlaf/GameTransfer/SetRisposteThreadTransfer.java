@@ -1,6 +1,8 @@
 package com.example.calcioconlaf.GameTransfer;
 
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
@@ -16,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SetRisposteThreadTransfer extends Thread {
+public class SetRisposteThreadTransfer extends Thread{
     ArrayList<QuizTransfer> domande;
     ArrayList<String> opzioni;
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -32,7 +34,6 @@ public class SetRisposteThreadTransfer extends Thread {
         this.username=username;
         this.indexLobby=indexLobby;
     }
-
     @Override
     public void run() {
         super.run();

@@ -9,11 +9,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.calcioconlaf.GameStadium.Quiz;
-import com.example.calcioconlaf.GameStadium.SetRisposteThread;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,20 +26,19 @@ public class RisposteThreadTransfer extends Thread{
     String indexLobby;
     ArrayList<QuizTransfer> domande;
     LobbyActivityTransfer lobbyActivity;
-    int [] endPointVuoto={};
+    int [] endPointVuoto={429,802,954,1006};
     int c;
     JSONObject result;
     int a;
-    int x=0;
+    int y=0;
     int cont=0;
     int n=0;
     Random r=new Random();
+    RequestQueue requestQueue;
     RequestQueue requestQueue1;
-    RequestQueue requestQueue2;
     ArrayList<String> opzioni=new ArrayList<>();
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
-    DatabaseReference lobbyTransferRef = ref.child("prova");
     public RisposteThreadTransfer(String username, String indexLobby, ArrayList<QuizTransfer> domande, LobbyActivityTransfer lobbyActivity){
         this.username=username;
         this.indexLobby=indexLobby;
@@ -52,14 +50,13 @@ public class RisposteThreadTransfer extends Thread{
     @Override
     public void run() {
         super.run();
-        //setOption(domande);
-        controlla();
+        setOption(domande);
+        //controlla();
     }
     public void setOption(ArrayList<QuizTransfer> domande) {
         requestQueue1 = Volley.newRequestQueue(lobbyActivity);
         while (c < domande.size()) {
 
-            cont++;
 
             for (a = 0; a < 3; a++) {
                 int num = r.nextInt(1010);
@@ -73,6 +70,7 @@ public class RisposteThreadTransfer extends Thread{
                         vuoto = false;
                     }
                 }
+
                 if (!vuoto) {
                     String URL1 = "https://v3.football.api-sports.io/teams?id=" + num;
                     //creo una coda di richiesta
@@ -82,11 +80,15 @@ public class RisposteThreadTransfer extends Thread{
                         @Override
                         public void onResponse(String response) {
                             try {
-                                JSONObject result2 = new JSONObject(response);
-                                JSONObject result3=(JSONObject) result2.getJSONArray("response").get(0);
-                                String nomeSq=result3.getJSONObject("team").getString("name");
+                                JSONObject result=new JSONObject(response);
+                                JSONArray arr = new JSONArray(result.getString("response"));
+                                JSONObject jObj=arr.getJSONObject(0).getJSONObject("team");
+                                String nomeSq = jObj.getString("name");
+                                Log.v("result44", String.valueOf(nomeSq));
+
                                 opzioni.add(nomeSq);
                                 if(opzioni.size()==30){
+                                    Log.v("contatore", String.valueOf(cont));
                                     SetRisposteThreadTransfer setRisposte=new SetRisposteThreadTransfer(domande, opzioni,lobbyActivity,username,indexLobby);
                                     lobbyActivity.runOnUiThread(new Runnable() {
                                         @Override
@@ -126,17 +128,15 @@ public class RisposteThreadTransfer extends Thread{
         }
     }
     public void controlla(){
-        requestQueue2= Volley.newRequestQueue(lobbyActivity);
-        for(x=0;x<250;x++){
-            String URL = "https://api-football-v1.p.rapidapi.com/v3/players?id=" + x+"&"+"season="+2020;
+        requestQueue= Volley.newRequestQueue(lobbyActivity);
+        for(y=1;y<150;y++){
+            String URL = "https://api-football-v1.p.rapidapi.com/v3/teams?id="+y;
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        result = new JSONObject(response);
-                        if(result.getJSONArray("response").length()==0){
-                            Log.v("result1", String.valueOf(result.getJSONArray("parameters").get(0)));
-                        }
+                        JSONObject result1 = new JSONObject(response);
+                        Log.v("risultato", String.valueOf(result1));
                         //JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -157,7 +157,7 @@ public class RisposteThreadTransfer extends Thread{
                     return params;
                 }
             };
-            requestQueue2.add(stringRequest);
+            requestQueue.add(stringRequest);
             cont++;
         }
     }
