@@ -23,6 +23,7 @@ public class LoginThread extends Thread{
     String dati;
     String username;
     LoginActivity loginActivity;
+    LoginThread loginThread=LoginThread.this;
 
 
     public LoginThread(String dati,String username,LoginActivity loginActivity){
@@ -32,7 +33,7 @@ public class LoginThread extends Thread{
     }
     @Override
     public void run() {
-        usersRef.addValueEventListener(new ValueEventListener() {
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 lista.clear();
@@ -47,6 +48,8 @@ public class LoginThread extends Thread{
                             Intent intent=new Intent(loginActivity, GameActivity.class);
                             intent.putExtra("Username", username);
                             loginActivity.startActivity(intent);
+
+
                         }
                     });
                 }else{

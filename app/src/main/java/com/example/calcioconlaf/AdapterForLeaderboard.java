@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class AdapterForLeaderboard extends RecyclerView.Adapter<AdapterForLeader
         public ImageView img;
         public TextView username;
         public TextView punteggio;
+
         public ViewHolder(View v) {
             super(v);
             this.onLeaderboardListerner=onLeaderboardListerner;

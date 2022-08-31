@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,9 @@ public class SettingFragment extends Fragment {
     public String newUsername;
     public String newPassword;
     private EditUsernameThread editUsername;
-
+    private EditPasswordThread editPassword;
+    SettingFragment settingFragment=SettingFragment.this;
+    GameActivity gameActivity=(GameActivity)settingFragment.getActivity();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +59,9 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
                 if(username.getText().length()>0){
                     newUsername=username.getText().toString();
-                    editUsername=new EditUsernameThread(username1, newUsername);
+                    String user=title.getText().toString();
+                    //title.setText(newUsername);
+                    editUsername=new EditUsernameThread(user, newUsername, settingFragment, title);
                     editUsername.start();
                 }
             }
@@ -67,6 +72,10 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
                 if(password.getText().length()>0){
                     newPassword=password.getText().toString();
+                    String user=title.getText().toString();
+                    editPassword=new EditPasswordThread(user, newPassword, settingFragment);
+                    editPassword.start();
+
                 }
             }
         });

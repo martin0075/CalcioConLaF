@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -51,14 +52,26 @@ public class LeaderboardFragment extends Fragment {
             _rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         } else {
         }
-        getDati();
+
+
+
         return _rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getDati();
+        Button btnStadium=leaderboardFragment.getView().findViewById(R.id.btnStadium);
+        //Button btnTransfer=leaderboardFragment.getActivity().findViewById(R.id.btnTransfer);
+
+        btnStadium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDati();
+                show();
+            }
+        });
+
     }
     public void show() {
         recyclerView=_rootView.findViewById(R.id.recyclerLeaderboard);
@@ -88,9 +101,12 @@ public class LeaderboardFragment extends Fragment {
                     for(int i=0;i<listOfElements.size();i++){
                         for(int j=i+1;j<listOfElements.size();j++){
                             if(listOfElements.get(j).getPunteggio()>listOfElements.get(i).getPunteggio()){
-                                int temp=listOfElements.get(i).getPunteggio();
+                                int scoreTemp=listOfElements.get(i).getPunteggio();
+                                String userTemp=listOfElements.get(i).getUsername();
                                 listOfElements.get(i).setPunteggio(listOfElements.get(j).getPunteggio());
-                                listOfElements.get(j).setPunteggio(temp);
+                                listOfElements.get(i).setUsername((listOfElements.get(j).getUsername()));
+                                listOfElements.get(j).setPunteggio(scoreTemp);
+                                listOfElements.get(j).setUsername(userTemp);
                             }
                         }
                         Log.v("list", listOfElements.get(i).getUsername());
@@ -98,7 +114,7 @@ public class LeaderboardFragment extends Fragment {
                     for(int a=0;a<listOfElements.size();a++){
                         Log.v("list2", listOfElements.get(a).getUsername());
                     }
-                    show();
+
                 }
             }
 

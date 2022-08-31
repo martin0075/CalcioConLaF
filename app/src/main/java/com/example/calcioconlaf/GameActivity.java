@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.calcioconlaf.Login.LoginThread;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DatabaseReference;
@@ -18,11 +19,13 @@ public class GameActivity extends AppCompatActivity {
     SettingFragment setting = new SettingFragment();
     LeaderboardFragment leaderboard;
     RegolamentoFragment regolamento;
+
     public FirebaseDatabase database = FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         leaderboard = new LeaderboardFragment();
         regolamento=new RegolamentoFragment();
@@ -39,6 +42,7 @@ public class GameActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("Username", username);
         bundle.putString("UsernameLobby", usernameLobby);
+
         home.setArguments(bundle);
         setting.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, home).commit();

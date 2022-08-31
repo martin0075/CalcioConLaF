@@ -9,8 +9,6 @@
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/drawable/ic_png_transparent_computer_icons_desktop_transfer_icon_angle_text_payment_thumbnail.xml" value="0.1495" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/drawable/ic_premier.xml" value="0.1495" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/drawable/ic_seriea.xml" value="0.1495" />
-        <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/drawable/regolamento_foreground.xml" value="0.1" />
-        <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/drawable/roundedbutton.xml" value="0.1345" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/drawable/roundstyle.xml" value="0.1" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/drawable/stadium.xml" value="0.1495" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/activity_game.xml" value="0.16530797101449277" />
@@ -26,11 +24,8 @@
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/activity_regolamento.xml" value="0.22" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/fragment_home.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/fragment_leaderboard.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/fragment_regolamento.xml" value="0.14266304347826086" />
-        <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/fragment_setting.xml" value="0.14266304347826086" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/leaderboardelement.xml" value="0.1" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/layout/newselement.xml" value="0.1" />
-        <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/menu/bottom_nav.xml" value="0.1" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/menu/news_nav.xml" value="0.1" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/mipmap-anydpi-v26/Av1.xml" value="0.1" />
         <entry key="..\:/Users/dadeu/Desktop/CalcioConLaF/app/src/main/res/mipmap-anydpi-v26/ic_seriea.xml" value="0.1" />
@@ -50,6 +45,7 @@
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_quizstadium.xml" value="0.3671875" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/activity_register.xml" value="0.26875" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/fragment_home.xml" value="0.3671875" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/fragment_leaderboard.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/CalcioConLaF/app/src/main/res/layout/fragment_setting.xml" value="0.3333333333333333" />
       </map>
     </option>
