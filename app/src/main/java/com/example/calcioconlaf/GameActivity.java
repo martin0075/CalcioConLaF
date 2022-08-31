@@ -40,6 +40,7 @@ public class GameActivity extends AppCompatActivity {
         bundle.putString("Username", username);
         bundle.putString("UsernameLobby", usernameLobby);
         home.setArguments(bundle);
+        setting.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, home).commit();
 
         nav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

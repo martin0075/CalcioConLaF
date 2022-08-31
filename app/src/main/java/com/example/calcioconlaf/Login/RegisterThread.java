@@ -22,6 +22,7 @@ public class RegisterThread extends Thread {
     public FirebaseDatabase database = FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
     DatabaseReference usersRef = ref.child("Users");
+
     String nomeT;
     String mailT;
     String pwT;
