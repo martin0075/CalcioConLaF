@@ -6,9 +6,6 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.example.calcioconlaf.GameStadium.LobbyActivity;
-import com.example.calcioconlaf.GameStadium.Quiz;
-import com.example.calcioconlaf.GameStadium.QuizStadium;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +35,6 @@ public class SetRisposteThreadTransfer extends Thread{
     public void run() {
         super.run();
         addOption();
-        write();
     }
     public void addOption(){
         int cont=0;
@@ -70,29 +66,7 @@ public class SetRisposteThreadTransfer extends Thread{
                 }
             }
         }
-    }
-    public void write(){
-        gameTransfer.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                gameTransfer.child(indexLobby).child("domande").setValue(domande);
-                lobbyActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent4=new Intent(lobbyActivity, QuizTransferActivity.class);
-                        intent4.putExtra("Username", username);
-                        intent4.putExtra("IndexLobby", indexLobby);
-                        intent4.putExtra("Domande",domande);
-
-                        lobbyActivity.startActivity(intent4);
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        SetIndiziThread setIndiziThread=new SetIndiziThread(domande,lobbyActivity,indexLobby,username);
+        setIndiziThread.start();
     }
 }

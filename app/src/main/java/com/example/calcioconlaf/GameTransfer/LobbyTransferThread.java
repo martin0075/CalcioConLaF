@@ -5,14 +5,6 @@ import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-
-import com.example.calcioconlaf.GameActivity;
-import com.example.calcioconlaf.GameStadium.DomandeThread;
-import com.example.calcioconlaf.GameStadium.LobbyActivity;
-import com.example.calcioconlaf.GameStadium.Quiz;
-import com.example.calcioconlaf.GameStadium.QuizStadium;
-import com.example.calcioconlaf.GameStadium.SetButtonThread;
-import com.example.calcioconlaf.GameStadium.SetUtentiThread;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -96,7 +88,7 @@ public class LobbyTransferThread extends Thread{
                                         lobbyActivity.runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
+                                                Intent intent4=new Intent(lobbyActivity, QuizTransferActivity.class);
                                                 intent4.putExtra("Username", username);
                                                 intent4.putExtra("IndexLobby", indexLobby);
                                                 DatabaseReference game=ref.child("GameTransfer").child(indexLobby).child("domande");
@@ -104,15 +96,18 @@ public class LobbyTransferThread extends Thread{
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         for(DataSnapshot ds:snapshot.getChildren()){
-                                                            Integer id= (Integer) ds.child("id").getValue();
-                                                            String url= (String) ds.child("immagine").getValue();
+                                                            String id= String.valueOf(ds.child("id").getValue());
+                                                            String url= (String) ds.child("urlImage").getValue();
                                                             String domanda= (String) ds.child("domanda").getValue();
                                                             String option3= (String) ds.child("option3").getValue();
                                                             String option4= (String) ds.child("option4").getValue();
                                                             String option2= (String) ds.child("option2").getValue();
                                                             String option1= (String) ds.child("option1").getValue();
                                                             String answer= (String) ds.child("answer").getValue();
-                                                            domande.add(new QuizTransfer(url,option1,option2,option3,option4,answer,domanda,id));
+                                                            String city= (String) ds.child("city").getValue();
+                                                            String country= (String) ds.child("country").getValue();
+                                                            String idTeam= (String) ds.child("idTeam").getValue();
+                                                            domande.add(new QuizTransfer(url,option1,option2,option3,option4,answer,domanda,id,city,country,idTeam));
                                                         }
                                                         if(domande.size()==10){
                                                             Log.v("logaaa",domande.get(0).getAnswer());

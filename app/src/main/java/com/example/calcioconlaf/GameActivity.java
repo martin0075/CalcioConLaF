@@ -1,42 +1,31 @@
 package com.example.calcioconlaf;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.calcioconlaf.HomeFragment;
-import com.example.calcioconlaf.LeaderboardFragment;
-import com.example.calcioconlaf.R;
-import com.example.calcioconlaf.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
     BottomNavigationView nav;
-    HomeFragment home=new HomeFragment();
-    SettingFragment setting=new SettingFragment();
+    HomeFragment home = new HomeFragment();
+    SettingFragment setting = new SettingFragment();
     LeaderboardFragment leaderboard;
-    public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
+    RegolamentoFragment regolamento;
+    public FirebaseDatabase database = FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         leaderboard = new LeaderboardFragment();
+        regolamento=new RegolamentoFragment();
         setContentView(R.layout.activity_game);
 
         nav = findViewById(R.id.navigation);
@@ -65,6 +54,9 @@ public class GameActivity extends AppCompatActivity {
                         return true;
                     case R.id.leaderboards:
                         getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, leaderboard).commit();
+                        return true;
+                    case R.id.regolamento:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.conteiner, regolamento).commit();
                         return true;
 
                 }

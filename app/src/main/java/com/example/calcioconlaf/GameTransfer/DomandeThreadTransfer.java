@@ -9,14 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.calcioconlaf.GameStadium.RisposteThread;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,9 +49,10 @@ public class DomandeThreadTransfer extends Thread{
         //controlla();
     }
     public void setDomande(ArrayList<QuizTransfer> domande){
+        ArrayList<String> ids=new ArrayList<>();
         requestQueue= Volley.newRequestQueue(lobbyActivity);
         for(i=0;i<domande.size();i++){
-            int id=domande.get(i).getId();
+            String id=domande.get(i).getId();
 
             Log.v("id", String.valueOf(id));
             String URL = "https://api-football-v1.p.rapidapi.com/v3/transfers?player=" + id;
@@ -66,16 +61,18 @@ public class DomandeThreadTransfer extends Thread{
                 public void onResponse(String response) {
                     try {
                         result = new JSONObject(response);
-                        int newId= Integer.parseInt(result.getJSONObject("parameters").getString("player"));
+                        String newId= result.getJSONObject("parameters").getString("player");
                         for(int z=0;z<10;z++){
-
-                            if(newId==domande.get(z).getId()){
-                                contaElementi++;
+                            if(newId.equals(domande.get(z).getId())){
                                 Log.v("result2", String.valueOf(result));
                                 JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
                                 JSONObject result2=(JSONObject) result1.getJSONArray("transfers").get(0);
                                 String data=result2.getString("date");
                                 String risposta=result2.getJSONObject("teams").getJSONObject("in").getString("name");
+                                String idTeam=result2.getJSONObject("teams").getJSONObject("in").getString("id");
+                                Log.v("idTeam",idTeam);
+                                domande.get(z).setIdTeam(idTeam);
+                                Log.v("idddddd",domande.get(z).getIdTeam());
                                 domande.get(z).setAnswer(risposta);
                                 String nome=result1.getJSONObject("player").getString("name");
                                 Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(data);
@@ -84,15 +81,15 @@ public class DomandeThreadTransfer extends Thread{
                                 int corrente=d.getYear()+1900;
                                 if(date1.getMonth()==0){
                                     if(anno>corrente){
-                                        String domanda="Dove si trasferira' "+nome+"nella sessione invernale del "+anno+" ?";
+                                        String domanda="Dove si trasferira' "+nome+" nella sessione invernale del "+anno+" ?";
                                         domande.get(z).setDomanda(domanda);
                                     }else{
-                                        String domanda="Dove si e' trasferito "+nome+"nella sessione invernale del "+anno+" ?";
+                                        String domanda="Dove si e' trasferito "+nome+" nella sessione invernale del "+anno+" ?";
                                         domande.get(z).setDomanda(domanda);
                                     }
                                 }else{
                                     if(anno>corrente){
-                                        String domanda="Dove si trasferira' "+nome+"nella sessione estiva del "+anno+" ?";
+                                        String domanda="Dove si trasferira' "+nome+" nella sessione estiva del "+anno+" ?";
                                         domande.get(z).setDomanda(domanda);
                                     }else{
                                         String domanda="Dove si e' trasferito "+nome+" nella sessione estiva del "+anno+" ?";
@@ -125,6 +122,7 @@ public class DomandeThreadTransfer extends Thread{
             cont++;
         }
         if(domande.size()==10){
+            Log.v("sizeeee", String.valueOf(ids.size()));
             RisposteThreadTransfer risposteThreadTransfer=new RisposteThreadTransfer(username,indexLobby,domande,lobbyActivity);
             lobbyActivity.runOnUiThread(new Runnable() {
                 @Override

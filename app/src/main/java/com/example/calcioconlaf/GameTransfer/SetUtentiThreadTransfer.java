@@ -2,7 +2,6 @@ package com.example.calcioconlaf.GameTransfer;
 
 import androidx.annotation.NonNull;
 
-import com.example.calcioconlaf.GameStadium.PlayerGame;
 import com.example.calcioconlaf.GameTransfer.PlayerGameTransfer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

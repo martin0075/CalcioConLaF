@@ -28,6 +28,7 @@ public class RisposteThreadTransfer extends Thread{
     LobbyActivityTransfer lobbyActivity;
     int [] endPointVuoto={429,802,954,1006};
     int c;
+    int x;
     JSONObject result;
     int a;
     int y=0;
@@ -84,8 +85,6 @@ public class RisposteThreadTransfer extends Thread{
                                 JSONArray arr = new JSONArray(result.getString("response"));
                                 JSONObject jObj=arr.getJSONObject(0).getJSONObject("team");
                                 String nomeSq = jObj.getString("name");
-                                Log.v("result44", String.valueOf(nomeSq));
-
                                 opzioni.add(nomeSq);
                                 if(opzioni.size()==30){
                                     Log.v("contatore", String.valueOf(cont));

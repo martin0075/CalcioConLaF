@@ -9,5 +9,9 @@
     <item android:title="Settings"
         android:icon="@drawable/ic_settings"
         android:id="@+id/settings"/>
+    <item
+        android:id="@+id/regolamento"
+        android:icon="@drawable/regolamento_foreground"
+        android:title="Regolamento" />
 </menu>
 

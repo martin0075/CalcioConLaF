@@ -2,8 +2,6 @@ package com.example.calcioconlaf.GameTransfer;
 
 import android.content.Intent;
 import android.util.Log;
-
-import com.example.calcioconlaf.GameStadium.LobbyActivity;
 import com.example.calcioconlaf.HomeFragment;
 
 public class FragmentToActivityThreadTransfer extends Thread{

@@ -6,10 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 
-import com.example.calcioconlaf.GameStadium.PlayerGame;
-import com.example.calcioconlaf.GameStadium.Quiz;
-import com.example.calcioconlaf.GameStadium.QuizStadium;
-import com.example.calcioconlaf.GameStadium.ReadPlayerGameThread;
 import com.example.calcioconlaf.R;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,7 +14,7 @@ import java.util.ArrayList;
 
 public class QuizTransferActivity extends AppCompatActivity{
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
-    ArrayList<PlayerGame> utenti=new ArrayList<>();
+    ArrayList<PlayerGameTransfer> utenti=new ArrayList<>();
     ArrayList<QuizTransfer> domande;
     QuizTransferActivity quizTransferActivity=QuizTransferActivity.this;
     int numeroGiocatori;

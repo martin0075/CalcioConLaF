@@ -6,11 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
-import com.example.calcioconlaf.GameStadium.PartitaThread;
-import com.example.calcioconlaf.GameStadium.PlayerGame;
-import com.example.calcioconlaf.GameStadium.Quiz;
-import com.example.calcioconlaf.GameStadium.QuizStadium;
 import com.example.calcioconlaf.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +26,12 @@ public class ReadPlayerGameThreadTransfer extends Thread{
     int numeroGiocatori;
     String username;
     ArrayList<QuizTransfer> domande;
+    public ReadPlayerGameThreadTransfer(String indexLobby,QuizTransferActivity quizTransferActivity,ArrayList<QuizTransfer> domande,String username) {
+        this.indexLobby = indexLobby;
+        this.quizTransferActivity=quizTransferActivity;
+        this.domande=domande;
+        this.username=username;
+    }
     @Override
     public void run() {
         super.run();
@@ -66,8 +67,8 @@ public class ReadPlayerGameThreadTransfer extends Thread{
                     int n=1;
                     cancellaGiocatori(n);
                 }
-                PartitaThreadTransfer partitaThread=new PartitaThreadTransfer();
-                partitaThread.start();
+                PartitaThreadTransfer partitaThreadTransfer=new PartitaThreadTransfer(quizTransferActivity,indexLobby,username,domande,numeroGiocatori);
+                partitaThreadTransfer.start();
             }
 
             @Override
@@ -160,12 +161,5 @@ public class ReadPlayerGameThreadTransfer extends Thread{
             punt4.setVisibility(View.INVISIBLE);
             img4.setVisibility(View.INVISIBLE);
         }
-    }
-
-    public ReadPlayerGameThreadTransfer(String indexLobby,QuizTransferActivity quizTransferActivity,ArrayList<QuizTransfer> domande,String username) {
-        this.indexLobby = indexLobby;
-        this.quizTransferActivity=quizTransferActivity;
-        this.domande=domande;
-        this.username=username;
     }
 }

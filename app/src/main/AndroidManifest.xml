@@ -18,9 +18,6 @@
             android:name=".GameTransfer.GameActivityTransfer"
             android:exported="false" />
         <activity
-            android:name=".RegolamentoActivity"
-            android:exported="false" />
-        <activity
             android:name=".GameStadium.LobbyActivity"
             android:exported="false" />
         <activity

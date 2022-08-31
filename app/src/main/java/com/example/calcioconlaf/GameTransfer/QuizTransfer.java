@@ -10,10 +10,13 @@ public class QuizTransfer implements Serializable {
     private String option4;
     private String answer;
     private String domanda;
-    private int id;
+    private String id;
+    String idTeam;
+    private String city;
+    private String country;
     public QuizTransfer(){}
 
-    public QuizTransfer(String urlImage, String option1, String option2, String option3, String option4, String answer,String domanda,int id) {
+    public QuizTransfer(String urlImage, String option1, String option2, String option3, String option4, String answer,String domanda,String id,String city,String country,String idTeam) {
         this.urlImage = urlImage;
         this.option1 = option1;
         this.option2 = option2;
@@ -22,13 +25,40 @@ public class QuizTransfer implements Serializable {
         this.answer = answer;
         this.domanda=domanda;
         this.id=id;
+        this.city=city;
+        this.country=country;
+        this.idTeam=idTeam;
     }
 
-    public int getId() {
+    public String getIdTeam() {
+        return idTeam;
+    }
+
+    public void setIdTeam(String idTeam) {
+        this.idTeam = idTeam;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

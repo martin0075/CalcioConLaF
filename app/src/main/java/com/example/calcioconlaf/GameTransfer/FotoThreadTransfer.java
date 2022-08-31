@@ -9,8 +9,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.calcioconlaf.GameStadium.Quiz;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,7 +71,7 @@ public class FotoThreadTransfer extends Thread{
                                 result = new JSONObject(response);
                                 JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
                                 JSONObject result2 = (JSONObject) result1.get("player");
-                                quizTransfer.setId(Integer.parseInt(result2.getString("id")));
+                                quizTransfer.setId(result2.getString("id"));
                                 quizTransfer.setUrlImage(result2.getString("photo"));
 
                                 domande.add(quizTransfer);
