@@ -1,5 +1,7 @@
 package com.example.calcioconlaf;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -62,13 +64,22 @@ public class LeaderboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button btnStadium=leaderboardFragment.getView().findViewById(R.id.btnStadium);
-        //Button btnTransfer=leaderboardFragment.getActivity().findViewById(R.id.btnTransfer);
+        Button btnTransfer=leaderboardFragment.getActivity().findViewById(R.id.btnTransfer);
 
         btnStadium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getDati();
-                show();
+                getDatiStadium();
+                btnStadium.setBackgroundColor(Color.GREEN);
+                btnTransfer.setBackgroundColor(Color.parseColor("#673AB7"));
+            }
+        });
+        btnTransfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDatiTransfer();
+                btnTransfer.setBackgroundColor(Color.GREEN);
+                btnStadium.setBackgroundColor(Color.parseColor("#673AB7"));
             }
         });
 
@@ -80,7 +91,7 @@ public class LeaderboardFragment extends Fragment {
         mAdapter=new AdapterForLeaderboard(listOfElements,getChildFragmentManager());
         recyclerView.setAdapter(mAdapter);
     }
-    public void getDati(){
+    public void getDatiStadium(){
         DatabaseReference classificaRef=ref.child("LeaderBoardStadium");
         classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -114,7 +125,52 @@ public class LeaderboardFragment extends Fragment {
                     for(int a=0;a<listOfElements.size();a++){
                         Log.v("list2", listOfElements.get(a).getUsername());
                     }
+                    show();
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+    public void getDatiTransfer(){
+        DatabaseReference classificaRef=ref.child("LeaderBoardTransfer");
+        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int size=Integer.parseInt(String.valueOf(snapshot.getChildrenCount()));
+                listOfElements.clear();
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    String usernameClass=ds.getKey();
+                    int punteggio=Integer.parseInt(String.valueOf(ds.getValue()));
+                    Log.v("punteggio", String.valueOf(punteggio));
+                    Log.v("username", String.valueOf(usernameClass));
+                    LeaderboardElement elemento=new LeaderboardElement(usernameClass,punteggio);
+                    listOfElements.add(elemento);
+                    //Log.v("elemento", String.valueOf(listOfElements.get(0).getPunteggio()));
+                }
+                if(listOfElements.size()==size){
+                    for(int i=0;i<listOfElements.size();i++){
+                        for(int j=i+1;j<listOfElements.size();j++){
+                            if(listOfElements.get(j).getPunteggio()>listOfElements.get(i).getPunteggio()){
+                                int scoreTemp=listOfElements.get(i).getPunteggio();
+                                String userTemp=listOfElements.get(i).getUsername();
+                                listOfElements.get(i).setPunteggio(listOfElements.get(j).getPunteggio());
+                                listOfElements.get(i).setUsername((listOfElements.get(j).getUsername()));
+                                listOfElements.get(j).setPunteggio(scoreTemp);
+                                listOfElements.get(j).setUsername(userTemp);
+                            }
+                        }
+                        Log.v("list", listOfElements.get(i).getUsername());
+                    }
+                    for(int a=0;a<listOfElements.size();a++){
+                        Log.v("list2", listOfElements.get(a).getUsername());
+                    }
+                    show();
                 }
             }
 

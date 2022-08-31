@@ -51,7 +51,7 @@ public class SettingFragment extends Fragment {
         Button btnEditPassword=getView().findViewById(R.id.btnEditPassword);
         EditText username=getView().findViewById(R.id.txtEditUsername);
         EditText password=getView().findViewById(R.id.txtEditPassword);
-        EditText title=getView().findViewById(R.id.txtTileUser);
+        TextView title=getView().findViewById(R.id.txtTileUser);
         title.setText(username1);
 
         btnEditUsername.setOnClickListener(new View.OnClickListener() {

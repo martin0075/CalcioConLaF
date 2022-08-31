@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+
+import com.example.calcioconlaf.GameActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +58,7 @@ public class LobbyTransferThread extends Thread{
                             lobbyActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent5 = new Intent(lobbyActivity, GameActivityTransfer.class);
+                                    Intent intent5 = new Intent(lobbyActivity, GameActivity.class);
                                     intent5.putExtra("UsernameLobby", username);
                                     lobbyActivity.startActivity(intent5);
                                 }

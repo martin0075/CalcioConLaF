@@ -3,6 +3,7 @@ package com.example.calcioconlaf;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,10 +25,10 @@ public class EditUsernameThread extends Thread{
     String username;
     String newUsername;
     SettingFragment settingFragment;
-    EditText title;
+    TextView title;
 
 
-    public EditUsernameThread(String username, String newUsername,  SettingFragment settingFragment, EditText title) {
+    public EditUsernameThread(String username, String newUsername,  SettingFragment settingFragment, TextView title) {
         this.username = username;
         this.newUsername=newUsername;
         this.settingFragment=settingFragment;
@@ -54,7 +55,7 @@ public class EditUsernameThread extends Thread{
                                 settingFragment.getActivity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(settingFragment.getActivity(), "Username modificato correttamente",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(settingFragment.getActivity(), "Username modificato correttamente",Toast.LENGTH_SHORT).show();;
                                     }
                                 });
                                 leaderbordStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
