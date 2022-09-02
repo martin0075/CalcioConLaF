@@ -1,11 +1,13 @@
 package com.example.calcioconlaf;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.calcioconlaf.Login.EditPasswordThread;
 import com.example.calcioconlaf.Login.EditUsernameThread;
+import com.example.calcioconlaf.Login.LoginActivity;
+import com.google.android.material.navigation.NavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,20 +26,20 @@ import com.example.calcioconlaf.Login.EditUsernameThread;
  * create an instance of this fragment.
  */
 public class SettingFragment extends Fragment {
-/*
+
 
     public String username1;
-    public String newUsername;
-    public String newPassword;
-    private EditUsernameThread editUsername;
-    private EditPasswordThread editPassword;
     SettingFragment settingFragment=SettingFragment.this;
-    GameActivity gameActivity=(GameActivity)settingFragment.getActivity();
+    GameActivity gameActivity= (GameActivity) settingFragment.getActivity();
+    private LayoutInflater mInflater;
+    private ViewGroup mContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         username1=getArguments().getString("Username");
+        mInflater = inflater;
+        mContainer = container;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_setting, container, false);
     }
@@ -44,38 +48,47 @@ public class SettingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btnEditUsername=getView().findViewById(R.id.btnEditUsername);
-        Button btnEditPassword=getView().findViewById(R.id.btnEditPassword);
-        EditText username=getView().findViewById(R.id.txtEditUsername);
-        EditText password=getView().findViewById(R.id.txtEditPassword);
-        TextView title=getView().findViewById(R.id.txtTileUser);
-        title.setText(username1);
-
-        btnEditUsername.setOnClickListener(new View.OnClickListener() {
+        Button feedback=getActivity().findViewById(R.id.feedback);
+        feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(username.getText().length()>0){
-                    newUsername=username.getText().toString();
-                    String user=title.getText().toString();
-                    //title.setText(newUsername);
-                    editUsername=new EditUsernameThread(user, newUsername, edit, title);
-                    editUsername.start();
-                }
+                settingFragment.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent feedint=new Intent(getActivity(),FeedbackActivity.class);
+                        settingFragment.getActivity().startActivity(feedint);
+                    }
+                });
             }
         });
-
-       btnEditPassword.setOnClickListener(new View.OnClickListener() {
+        Button about=getActivity().findViewById(R.id.about);
+        about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(password.getText().length()>0){
-                    newPassword=password.getText().toString();
-                    String user=title.getText().toString();
-                    editPassword=new EditPasswordThread(user, newPassword, editA);
-                    editPassword.start();
+                settingFragment.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent aboutInt=new Intent(settingFragment.getActivity(),AboutActivity.class);
+                        settingFragment.getActivity().startActivity(aboutInt);
+                    }
+                });
+            }
+        });
+        Button version=getActivity().findViewById(R.id.version);
+        version.setText("Version 1.0.0");
 
-                }
+        Button logout=getActivity().findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                settingFragment.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent logout=new Intent(settingFragment.getActivity(), LoginActivity.class);
+                        settingFragment.getActivity().startActivity(logout);
+                    }
+                });
             }
         });
     }
-    */
 }

@@ -125,7 +125,6 @@ public class PartitaThread extends Thread{
                     punt3 = quizStadium.findViewById(R.id.txtAvatar3);
                     punt4 = quizStadium.findViewById(R.id.txtAvatar4);
 
-                    i++;
 
 
                     btnA.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +177,7 @@ public class PartitaThread extends Thread{
                     help1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String citta = domande.get(i).getCity();
+                            String citta = domande.get(i-1).getCity();
                             Toast.makeText(quizStadium, "Città: " + citta, Toast.LENGTH_LONG).show();
                             DatabaseReference helpRef = ref.child("GameStadium").child(indexLobby).child("utenti");
                             for (int a = 0; a < textViewList.size(); a++) {
@@ -194,7 +193,7 @@ public class PartitaThread extends Thread{
                     help2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String nazione = domande.get(i).getCountry();
+                            String nazione = domande.get(i-1).getCountry();
                             Toast.makeText(quizStadium, "Nazione: " + nazione, Toast.LENGTH_LONG).show();
                             DatabaseReference helpRef = ref.child("GameStadium").child(indexLobby).child("utenti");
                             for (int b = 0; b < textViewList.size(); b++) {
@@ -321,6 +320,7 @@ public class PartitaThread extends Thread{
                             }
                         }
                     });
+                    i++;
                 }
             });
         }

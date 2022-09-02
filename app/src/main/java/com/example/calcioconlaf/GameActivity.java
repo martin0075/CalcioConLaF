@@ -39,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
         String usernameLobby = intent2.getStringExtra("UsernameLobby");
 
 
+
         Bundle bundle = new Bundle();
         bundle.putString("Username", username);
         bundle.putString("UsernameLobby", usernameLobby);

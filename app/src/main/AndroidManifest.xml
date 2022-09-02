@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalcioConLaF">
         <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+        <activity
             android:name=".Login.EditActivity"
             android:exported="false" />
         <activity

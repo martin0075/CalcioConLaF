@@ -1,133 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/roundstyle"
+    android:backgroundTint="#3F51B5"
     android:orientation="vertical"
-    android:background="@color/purple_700"
-    tools:context=".SettingFragment">
+    android:textAlignment="center"
+    tools:context=".Login.LoginActivity">
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="135dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/feedback"
+            android:layout_width="290dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="Feedback"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/about"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <Button
+            android:id="@+id/version"
+            android:layout_width="290dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="Version"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/avatar1_foreground"/>
+        <Button
+            android:id="@+id/about"
+            android:layout_width="290dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="About us"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/version"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/txtTileUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text=""
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-            
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="20dp"
-               android:layout_marginEnd="20dp"
-               android:layout_marginTop="40dp"
-               android:orientation="vertical"
-               android:padding="15dp"
-               android:textColor="@color/night_mode">
-
-               <RelativeLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
-
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_centerVertical="true"
-                       android:text="Username"
-                       android:textColor="#FFFFFF"
-                       android:textStyle="bold" />
-
-                   <EditText
-                       android:id="@+id/txtEditUsername"
-                       android:layout_width="240dp"
-                       android:layout_height="wrap_content"
-                       android:layout_marginLeft="100dp"
-                       android:background="#F6F0F0"
-                       android:backgroundTint="#EFE9E9"
-                       android:text=""
-                       android:textColor="#0C0B0B"
-                       android:textStyle="bold" />
-               </RelativeLayout>
-
-               <androidx.appcompat.widget.AppCompatButton
-                   android:id="@+id/btnEditUsername"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_gravity="center"
-                   android:layout_marginTop="20dp"
-                   android:backgroundTint="#00BCD4"
-                   android:paddingStart="20dp"
-                   android:paddingEnd="20dp"
-                   android:text="Edit" />
-           </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:textColor="@color/night_mode">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="Password"
-                        android:textColor="#FFFFFF"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/txtEditPassword"
-                        android:layout_width="240dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
-                        android:background="#F6F0F0"
-                        android:backgroundTint="#EFE9E9"
-                        android:text=""
-                        android:textColor="#0C0A0A"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnEditPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="#00BCD4"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:text="Edit" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="290dp"
+            android:layout_height="100dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="Log-out"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
