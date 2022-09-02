@@ -1,4 +1,4 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.Login;
 
 import android.content.Intent;
 import android.util.Log;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.Login.EditActivity;
 import com.example.calcioconlaf.Login.LoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,16 +23,17 @@ public class EditUsernameThread extends Thread{
     DatabaseReference ref = database.getReference();
     DatabaseReference usersRef = ref.child("Users");
     DatabaseReference leaderbordStadiumRef=ref.child("LeaderBoardStadium");
+    DatabaseReference leaderboardTransferRef=ref.child("LeaderBoardTransfer");
     String username;
     String newUsername;
-    SettingFragment settingFragment;
+    EditActivity editActivity;
     TextView title;
 
 
-    public EditUsernameThread(String username, String newUsername,  SettingFragment settingFragment, TextView title) {
+    public EditUsernameThread(String username, String newUsername, EditActivity editActivity, TextView title) {
         this.username = username;
         this.newUsername=newUsername;
-        this.settingFragment=settingFragment;
+        this.editActivity=editActivity;
         this.title=title;
 
     }
@@ -52,10 +54,12 @@ public class EditUsernameThread extends Thread{
                             if(username.equals(ds.child("Username").getValue().toString())){
                                 usersRef.child(ds.getKey()).child("Username").setValue(newUsername);
                                 title.setText(newUsername);
-                                settingFragment.getActivity().runOnUiThread(new Runnable() {
+                                editActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(settingFragment.getActivity(), "Username modificato correttamente",Toast.LENGTH_SHORT).show();;
+                                        Intent intent=new Intent(editActivity,LoginActivity.class);
+                                        editActivity.startActivity(intent);
+                                        Toast.makeText(editActivity, "Username modificato correttamente",Toast.LENGTH_SHORT).show();;
                                     }
                                 });
                                 leaderbordStadiumRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -79,11 +83,32 @@ public class EditUsernameThread extends Thread{
 
                                     }
                                 });
+                                leaderboardTransferRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Log.v("user", username);
+                                        for (DataSnapshot ds : snapshot.getChildren()) {
+
+                                            if(ds.getKey().equals(username)){
+                                                String val=ds.getValue().toString();
+                                                leaderboardTransferRef.child(ds.getKey()).removeValue();
+                                                leaderboardTransferRef.child(newUsername).setValue(val);
+
+                                            }
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                         }
                     }
                     else{
-                        Toast.makeText(settingFragment.getActivity(), "Username già presente",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(editActivity, "Username già presente",Toast.LENGTH_SHORT).show();
                     }
                 }
             }

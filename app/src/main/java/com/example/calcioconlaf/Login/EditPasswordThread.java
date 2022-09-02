@@ -1,10 +1,13 @@
-package com.example.calcioconlaf;
+package com.example.calcioconlaf.Login;
 
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.Login.EditActivity;
+import com.example.calcioconlaf.Login.LoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,13 +20,13 @@ public class EditPasswordThread extends Thread{
     DatabaseReference usersRef = ref.child("Users");
     String username;
     String newPassword;
-    SettingFragment settingFragment;
+    EditActivity editActivity;
 
 
-    public EditPasswordThread(String username, String newPassword, SettingFragment settingFragment) {
+    public EditPasswordThread(String username, String newPassword, EditActivity editActivity) {
         this.username = username;
         this.newPassword=newPassword;
-        this.settingFragment=settingFragment;
+        this.editActivity=editActivity;
 
     }
 
@@ -36,10 +39,12 @@ public class EditPasswordThread extends Thread{
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if(username.equals(ds.child("Username").getValue().toString())){
                         usersRef.child(ds.getKey()).child("Password").setValue(newPassword);
-                        settingFragment.getActivity().runOnUiThread(new Runnable() {
+                        editActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(settingFragment.getActivity(), "Password modificata correttamente",Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(editActivity, LoginActivity.class);
+                                editActivity.startActivity(intent);
+                                Toast.makeText(editActivity, "Password modificata correttamente",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

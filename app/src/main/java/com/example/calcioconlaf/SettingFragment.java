@@ -6,18 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.calcioconlaf.GameStadium.StadiumThread;
-import com.example.calcioconlaf.GameTransfer.TransferThread;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.calcioconlaf.Login.EditPasswordThread;
+import com.example.calcioconlaf.Login.EditUsernameThread;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * create an instance of this fragment.
  */
 public class SettingFragment extends Fragment {
-
+/*
 
     public String username1;
     public String newUsername;
@@ -61,23 +58,24 @@ public class SettingFragment extends Fragment {
                     newUsername=username.getText().toString();
                     String user=title.getText().toString();
                     //title.setText(newUsername);
-                    editUsername=new EditUsernameThread(user, newUsername, settingFragment, title);
+                    editUsername=new EditUsernameThread(user, newUsername, edit, title);
                     editUsername.start();
                 }
             }
         });
 
-        btnEditPassword.setOnClickListener(new View.OnClickListener() {
+       btnEditPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(password.getText().length()>0){
                     newPassword=password.getText().toString();
                     String user=title.getText().toString();
-                    editPassword=new EditPasswordThread(user, newPassword, settingFragment);
+                    editPassword=new EditPasswordThread(user, newPassword, editA);
                     editPassword.start();
 
                 }
             }
         });
     }
+    */
 }

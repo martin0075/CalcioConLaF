@@ -49,5 +49,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(register);
             }
         });
+
+        Button edit=findViewById(R.id.btnEdit);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent editIntent=new Intent(LoginActivity.this, EditActivity.class);
+                startActivity(editIntent);
+            }
+        });
     }
 }

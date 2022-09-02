@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalcioConLaF">
         <activity
+            android:name=".Login.EditActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameTransfer.QuizTransferActivity"
             android:exported="false" />
         <activity
