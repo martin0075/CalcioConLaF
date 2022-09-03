@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/titleReg"
+        android:id="@+id/titleAb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGOLAMENTO UFFICIALE"
+        android:text="ABOUT US"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -21,9 +21,11 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
-        android:id="@+id/textReg"
+        android:id="@+id/textAb"
         android:layout_width="417dp"
         android:layout_height="550dp"
+        android:fontFamily="serif"
+        android:includeFontPadding="false"
         android:lineSpacingExtra="8sp"
         android:paddingLeft="30sp"
         android:paddingRight="30sp"

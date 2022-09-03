@@ -1,5 +1,6 @@
 package com.example.calcioconlaf;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class HomeFragment extends Fragment {
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     public String username;
     public String username2;
+    String username1;
     public String indexLobby;
     StadiumThread stadiumThread;
     HomeFragment homeFragment=HomeFragment.this;
@@ -63,5 +65,10 @@ public class HomeFragment extends Fragment {
                 transferThread.start();
             }
         });
+        if(username==null){
+            username1=username2;
+        }else{
+            username1=username;
+        }
     }
 }

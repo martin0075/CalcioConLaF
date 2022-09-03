@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Recensione implements Serializable {
     String recensione;
-    int punteggio;
+    float punteggio;
 
     public Recensione(){}
 
@@ -21,11 +21,11 @@ public class Recensione implements Serializable {
         this.recensione = recensione;
     }
 
-    public int getPunteggio() {
+    public float getPunteggio() {
         return punteggio;
     }
 
-    public void setPunteggio(int punteggio) {
+    public void setPunteggio(float punteggio) {
         this.punteggio = punteggio;
     }
 }
