@@ -61,9 +61,7 @@ public class SetIndiziThread extends Thread{
                 public void onResponse(String response) {
                     try {
                         result1 = new JSONObject(response);
-                        Log.v("jobj1", String.valueOf(result1));
                         JSONObject result2 = (JSONObject) result1.getJSONArray("response").get(0);
-                        Log.v("jobj2", String.valueOf(result2));
                         //JSONArray arr = new JSONArray(result2.getString("response"));
                         JSONObject jObj=result2.getJSONObject("team");
                         String newId = result2.getJSONObject("team").getString("id");

@@ -73,7 +73,8 @@ public class RisposteThreadTransfer extends Thread{
                 }
 
                 if (!vuoto) {
-                    String URL1 = "https://v3.football.api-sports.io/teams?id=" + num;
+                    String URL1 = "https://api-football-v1.p.rapidapi.com/v3/teams?id=" + num;
+                    //https://api-football-v1.p.rapidapi.com/v3/teams?id=33
                     //creo una coda di richiesta
                     //RequestQueue requestQueue1 = Volley.newRequestQueue(this);
 
@@ -84,9 +85,13 @@ public class RisposteThreadTransfer extends Thread{
                                 JSONObject result=new JSONObject(response);
                                 JSONArray arr = new JSONArray(result.getString("response"));
                                 JSONObject jObj=arr.getJSONObject(0).getJSONObject("team");
+                                //Log.v("jobfgh", String.valueOf(jObj));
                                 String nomeSq = jObj.getString("name");
                                 opzioni.add(nomeSq);
                                 if(opzioni.size()==30){
+                                    for(int f=0;f<opzioni.size();f++){
+                                        Log.v("opzioni",opzioni.get(f));
+                                    }
                                     Log.v("contatore", String.valueOf(cont));
                                     SetRisposteThreadTransfer setRisposte=new SetRisposteThreadTransfer(domande, opzioni,lobbyActivity,username,indexLobby);
                                     lobbyActivity.runOnUiThread(new Runnable() {
@@ -109,8 +114,8 @@ public class RisposteThreadTransfer extends Thread{
                         @Override
                         public Map<String, String> getHeaders() throws AuthFailureError {
                             Map<String, String> params = new HashMap<String, String>();
-                            params.put("x-rapidapi-key", "3de8d2d4a7acf04769f77ac5ebd17840");
-                            params.put("x-rapidapi-host", "v3.football.api-sports.io");
+                            params.put("x-rapidapi-key", "c728752071msh66c91d630cb7b30p106f24jsnd0ef66ad62b5");
+                            params.put("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
                             params.put("cont", String.valueOf(c));
 
 

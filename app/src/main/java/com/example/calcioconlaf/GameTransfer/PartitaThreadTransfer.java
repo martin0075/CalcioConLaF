@@ -126,7 +126,6 @@ public class PartitaThreadTransfer extends Thread{
                     punt3 = quizTransferActivity.findViewById(R.id.txtAvatar3);
                     punt4 = quizTransferActivity.findViewById(R.id.txtAvatar4);
 
-                    i++;
 
 
                     btnA.setOnClickListener(new View.OnClickListener() {
@@ -203,17 +202,17 @@ public class PartitaThreadTransfer extends Thread{
                                     helpRef.child(String.valueOf(b)).child(("aiuto2")).setValue(true);
                                     help2.setClickable(false);
                                     help2.setEnabled(false);
-                                    help2.setBackgroundColor(Color.RED);
+                                    view.setBackgroundColor(Color.RED);
                                 }
                             }
 
                         }
                     });
                     ArrayList<String> opt = new ArrayList<>();
-                    opt.add(domande.get(i-1).getOption1());
-                    opt.add(domande.get(i-1).getOption2());
-                    opt.add(domande.get(i-1).getOption3());
-                    opt.add(domande.get(i-1).getOption4());
+                    opt.add(domande.get(i).getOption1());
+                    opt.add(domande.get(i).getOption2());
+                    opt.add(domande.get(i).getOption3());
+                    opt.add(domande.get(i).getOption4());
                     help3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -322,6 +321,7 @@ public class PartitaThreadTransfer extends Thread{
                             }
                         }
                     });
+                    i++;
                 }
             });
         }

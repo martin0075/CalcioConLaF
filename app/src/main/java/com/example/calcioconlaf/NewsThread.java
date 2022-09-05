@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.impl.EnglishReasonPhraseCatalog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,15 +30,19 @@ public class NewsThread extends Thread{
     }
     public void callApi(String url, ArrayList<NewsElement> listOfElements, RecyclerView recyclerView) {
         RequestQueue requestQueue = Volley.newRequestQueue(newsActivity);
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 try {
-                    JSONArray result = new JSONArray(response);
-                    for (int i = 0; i < result.length(); i++) {
-                        JSONObject result1 = (JSONObject) result.get(i);
-                        Log.v("Prova", result1.getString("PublisherDate"));
-                        listOfElements.add(new NewsElement(result1.getString("PublisherDate"), result1.getString("Title"), result1.getString("Image"), result1.getString("PublisherName"), result1.getString("NewsLink")));
+                    JSONObject result=new JSONObject(response);
+                    JSONArray result1=result.getJSONArray("news");
+                    JSONObject result3=result.getJSONObject("share");
+                    Log.v("result",String.valueOf(result1));
+                    for (int i = 0; i < result1.length(); i++) {
+                        JSONObject result2 = (JSONObject) result1.get(i);
+                        listOfElements.add(new NewsElement(result2.getString("newsDate"), result2.getString("newsHeadline"), result2.getString("newsFirstImage"), result2.getString("newsSource"), result3.getString("url")));
                     }
                     mAdapter = new AdapterForNews(listOfElements, newsActivity::onNewsClick);
                     recyclerView.setAdapter(mAdapter);
@@ -55,7 +60,7 @@ public class NewsThread extends Thread{
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("x-rapidapi-key", "c728752071msh66c91d630cb7b30p106f24jsnd0ef66ad62b5");
-                params.put("x-rapidapi-host", "football98.p.rapidapi.com");
+                params.put("x-rapidapi-host", "transfermarket.p.rapidapi.com");
 
                 return params;
             }

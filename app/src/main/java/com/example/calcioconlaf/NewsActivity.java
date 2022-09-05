@@ -37,7 +37,7 @@ public class NewsActivity extends AppCompatActivity implements AdapterForNews.On
 
         newsThread=new NewsThread(newsActivity,mAdapter);
 
-        String URL2 = "https://football98.p.rapidapi.com/liga/news";
+        String URL2 = "https://transfermarket.p.rapidapi.com/news/list-by-competition?id=ES1";
         //creo una coda di richiesta
         newsThread.callApi(URL2,listOfElements,recyclerView);
         //callApi(URL2,listOfElements,recyclerView);
@@ -49,25 +49,25 @@ public class NewsActivity extends AppCompatActivity implements AdapterForNews.On
 
                 switch(item.getItemId()){
                     case R.id.premier:
-                        String URL = "https://football98.p.rapidapi.com/premierleague/news";
+                        String URL = "https://transfermarket.p.rapidapi.com/news/list-by-competition?id=GB1";
                         newsThread.callApi(URL,listOfElements,recyclerView);
                         return true;
                     case R.id.seriea:
-                        String URL1 = "https://football98.p.rapidapi.com/seriea/news";
+                        String URL1 = "https://transfermarket.p.rapidapi.com/news/list-by-competition?id=IT1";
                         //creo una coda di richiesta
                         newsThread.callApi(URL1,listOfElements,recyclerView);
                         return true;
                     case R.id.liga:
-                        String URL2 = "https://football98.p.rapidapi.com/liga/news";
+                        //String URL2 = "https://transfermarket.p.rapidapi.com/news/list-by-competition?id=ES1";
                         //creo una coda di richiesta
                         newsThread.callApi(URL2,listOfElements,recyclerView);
                         return true;
                     case R.id.ligue1:
-                        String URL3 = "https://football98.p.rapidapi.com/ligue1/news";
+                        String URL3 = "https://transfermarket.p.rapidapi.com/news/list-by-competition?id=FR1";
                         newsThread.callApi(URL3,listOfElements,recyclerView);
                         return true;
                     case R.id.bundes:
-                        String URL4 = "https://football98.p.rapidapi.com/bundesliga/news";
+                        String URL4 = "https://transfermarket.p.rapidapi.com/news/list-by-competition?id=L1";
                         newsThread.callApi(URL4,listOfElements,recyclerView);
 
                         return true;
