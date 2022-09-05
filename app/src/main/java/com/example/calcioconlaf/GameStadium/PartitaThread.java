@@ -620,9 +620,9 @@ public class PartitaThread extends Thread{
         bottoneRef.child("3").setValue("null");
     }
     public void newGame(){
+        indovinato=false;
         settaBottoni();
         setGame();
-        indovinato=false;
     }
     public void checkNewGame(){
         if(indovinato){
@@ -730,51 +730,76 @@ public class PartitaThread extends Thread{
                     nomiUtente.add(nome);
                 }
                 if(punteggi.size()==numeroGiocatori){
-                    for(a=0;a<punteggi.size();a++){
-                        if(nomiUtente.get(a).equals(username)){
-                            puntClassifica=punteggi.get(a);
-                            if(usernameVincitore.equals(username)){
-                                AlertDialog alertDialog;
-                                alertDialog=new AlertDialog.Builder(quizStadium).setTitle("Result")
-                                        .setMessage(username+" sei il vincitore, il tuo punteggio e' di: "+puntClassifica).show();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent=new Intent(quizStadium, GameActivity.class);
-                                        quizStadium.startActivity(intent);
-                                    }
-                                },2000);
-                            }else{
-                                AlertDialog alertDialog;
-                                alertDialog=new AlertDialog.Builder(quizStadium).setTitle("Result")
-                                        .setMessage(username+" non hai vinto, il tuo punteggio è di: "+puntClassifica).show();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent=new Intent(quizStadium,GameActivity.class);
-                                        quizStadium.startActivity(intent);
-                                    }
-                                },2000);
-                            }
+                    Boolean pareggio=false;
+                    int contaPari=0;
+                    for(int f=0;f<punteggi.size();f++){
+                        if(punteggi.get(f)!=contaPari){
+                            contaPari=punteggi.get(f);
+                        }else{
+                            pareggio=true;
                         }
-                        DatabaseReference classificaRef=ref.child("LeaderBoardStadium").child(username);
-                        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    }
+                    if(pareggio){
+                        AlertDialog alertDialog;
+                        alertDialog=new AlertDialog.Builder(quizStadium).setTitle("Result")
+                                .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+contaPari).show();
+                        new Handler().postDelayed(new Runnable() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.getChildrenCount()>0){
-                                    int puntVecchio=Integer.parseInt(String.valueOf(snapshot.getValue()));
-                                    if(puntVecchio<puntClassifica){
-                                        classificaRef.setValue(puntClassifica);
-                                    }
-                                }else{
-                                    classificaRef.setValue(puntClassifica);
+                            public void run() {
+                                Intent intent=new Intent(quizStadium, GameActivity.class);
+                                quizStadium.startActivity(intent);
+                                ref.child("GameTransfer").child(indexLobby).setValue(null);
+                            }
+                        },2000);
+                    }
+                    else {
+                        for (a = 0; a < punteggi.size(); a++) {
+                            if (nomiUtente.get(a).equals(username)) {
+                                puntClassifica = punteggi.get(a);
+                                if (usernameVincitore.equals(username)) {
+                                    AlertDialog alertDialog;
+                                    alertDialog = new AlertDialog.Builder(quizStadium).setTitle("Result")
+                                            .setMessage(username + " sei il vincitore, il tuo punteggio e' di: " + puntClassifica).show();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(quizStadium, GameActivity.class);
+                                            quizStadium.startActivity(intent);
+                                        }
+                                    }, 2000);
+                                } else {
+                                    AlertDialog alertDialog;
+                                    alertDialog = new AlertDialog.Builder(quizStadium).setTitle("Result")
+                                            .setMessage(username + " non hai vinto, il tuo punteggio è di: " + puntClassifica).show();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(quizStadium, GameActivity.class);
+                                            quizStadium.startActivity(intent);
+                                        }
+                                    }, 2000);
                                 }
                             }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                            DatabaseReference classificaRef = ref.child("LeaderBoardStadium").child(username);
+                            classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.getChildrenCount() > 0) {
+                                        int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                        if (puntVecchio < puntClassifica) {
+                                            classificaRef.setValue(puntClassifica);
+                                        }
+                                    } else {
+                                        classificaRef.setValue(puntClassifica);
+                                    }
+                                }
 
-                            }
-                        });
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
                     }
                 }
             }

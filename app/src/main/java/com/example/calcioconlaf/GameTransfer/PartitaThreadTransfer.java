@@ -684,7 +684,6 @@ public class PartitaThreadTransfer extends Thread{
                     nomiUtente.add(nome);
                 }
                 if(punteggi.size()==numeroGiocatori){
-                    ref.child("GameTransfer").child(indexLobby).setValue(null);
                     Boolean pareggio=false;
                     int contaPari=0;
                     for(int f=0;f<punteggi.size();f++){
@@ -697,12 +696,13 @@ public class PartitaThreadTransfer extends Thread{
                     if(pareggio){
                         AlertDialog alertDialog;
                         alertDialog=new AlertDialog.Builder(quizTransferActivity).setTitle("Result")
-                                .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+puntClassifica).show();
+                                .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+contaPari).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 Intent intent=new Intent(quizTransferActivity, GameActivity.class);
                                 quizTransferActivity.startActivity(intent);
+                                ref.child("GameTransfer").child(indexLobby).setValue(null);
                             }
                         },2000);
                     }else{
@@ -718,6 +718,7 @@ public class PartitaThreadTransfer extends Thread{
                                         public void run() {
                                             Intent intent=new Intent(quizTransferActivity, GameActivity.class);
                                             quizTransferActivity.startActivity(intent);
+                                            ref.child("GameTransfer").child(indexLobby).setValue(null);
                                         }
                                     },2000);
                                 }else{
@@ -729,6 +730,7 @@ public class PartitaThreadTransfer extends Thread{
                                         public void run() {
                                             Intent intent=new Intent(quizTransferActivity,GameActivity.class);
                                             quizTransferActivity.startActivity(intent);
+                                            ref.child("GameTransfer").child(indexLobby).setValue(null);
                                         }
                                     },2000);
                                 }
