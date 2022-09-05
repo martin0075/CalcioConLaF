@@ -71,7 +71,7 @@ public class DomandeThread extends Thread{
                 if (!presi.contains(n)) {
                     presi.add(n);
                     Quiz quiz = new Quiz();
-                    String URL = "https://v3.football.api-sports.io/venues?id=" + n;
+                    String URL = "https://api-football-v1.p.rapidapi.com/v3/venues?id=" + n;
                     //creo la richiesta
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                         @Override
@@ -126,8 +126,8 @@ public class DomandeThread extends Thread{
                         @Override
                         public Map<String, String> getHeaders() throws AuthFailureError {
                             Map<String, String> params = new HashMap<String, String>();
-                            params.put("x-rapidapi-key", "3de8d2d4a7acf04769f77ac5ebd17840");
-                            params.put("x-rapidapi-host", "v3.football.api-sports.io");
+                            params.put("x-rapidapi-key", "c728752071msh66c91d630cb7b30p106f24jsnd0ef66ad62b5");
+                            params.put("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
 
                             return params;
                         }
