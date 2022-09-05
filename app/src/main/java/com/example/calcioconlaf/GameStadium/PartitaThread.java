@@ -748,7 +748,7 @@ public class PartitaThread extends Thread{
                             public void run() {
                                 Intent intent=new Intent(quizStadium, GameActivity.class);
                                 quizStadium.startActivity(intent);
-                                ref.child("GameTransfer").child(indexLobby).setValue(null);
+                                ref.child("GameStadium").child(indexLobby).setValue(null);
                             }
                         },2000);
                     }
@@ -765,6 +765,7 @@ public class PartitaThread extends Thread{
                                         public void run() {
                                             Intent intent = new Intent(quizStadium, GameActivity.class);
                                             quizStadium.startActivity(intent);
+                                            ref.child("GameStadium").child(indexLobby).setValue(null);
                                         }
                                     }, 2000);
                                 } else {
@@ -776,6 +777,7 @@ public class PartitaThread extends Thread{
                                         public void run() {
                                             Intent intent = new Intent(quizStadium, GameActivity.class);
                                             quizStadium.startActivity(intent);
+                                            ref.child("GameStadium").child(indexLobby).setValue(null);
                                         }
                                     }, 2000);
                                 }
@@ -809,7 +811,6 @@ public class PartitaThread extends Thread{
 
             }
         });
-        ref.child("GameStadium").child(indexLobby).setValue(null);
     }
 }
 
