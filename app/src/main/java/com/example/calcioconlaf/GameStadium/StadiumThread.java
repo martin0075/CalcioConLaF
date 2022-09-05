@@ -41,6 +41,11 @@ public class StadiumThread extends Thread{
                             FragmentToActivityThread fragmentToActivityThread=new FragmentToActivityThread(username,indexLobby,homefragment);
                             fragmentToActivityThread.start();
 
+                        }else{
+                            indexLobby=String.valueOf(Integer.valueOf(ds.getKey())+1);
+                            lobbyStadiumRef.child(indexLobby).child(username).setValue(username);
+                            FragmentToActivityThread fragmentToActivityThread=new FragmentToActivityThread(username,indexLobby,homefragment);
+                            fragmentToActivityThread.start();
                         }
                     }
                 }

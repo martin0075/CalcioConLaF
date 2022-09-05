@@ -126,7 +126,7 @@ public class LobbyTransferThread extends Thread{
                                             }
                                         });
                                     }
-                                },20000);
+                                },10000);
                             }
                         }
 

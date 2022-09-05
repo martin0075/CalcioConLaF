@@ -11,6 +11,8 @@ import com.example.calcioconlaf.HomeFragment;
 import com.example.calcioconlaf.R;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -58,6 +60,9 @@ public class LobbyActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
+                timer.setText("");
+                TextView text=findViewById(R.id.txtAttendPlayers);
+                text.setText("Partita in caricamento...");
                 lobbyThread=new LobbyThread(username,usernameLobby,indexLobby,lobbyActivity, domande);
                 lobbyThread.start();
 

@@ -240,10 +240,12 @@ public class PartitaThreadTransfer extends Thread{
                                                         help3.setClickable(false);
                                                         help3.setEnabled(false);
                                                         help3.setBackgroundColor(Color.RED);
+                                                        trovato = true;
                                                     }
                                                 }
+                                            }else{
+                                                trovato=false;
                                             }
-                                            trovato = true;
                                         }else{
                                             trovato=false;
                                         }
@@ -263,10 +265,12 @@ public class PartitaThreadTransfer extends Thread{
                                                         help3.setClickable(false);
                                                         help3.setEnabled(false);
                                                         help3.setBackgroundColor(Color.RED);
+                                                        trovato = true;
                                                     }
                                                 }
+                                            }else{
+                                                trovato=false;
                                             }
-                                            trovato = true;
                                         }else {
                                             trovato = false;
                                         }
@@ -286,10 +290,12 @@ public class PartitaThreadTransfer extends Thread{
                                                         help3.setClickable(false);
                                                         help3.setEnabled(false);
                                                         help3.setBackgroundColor(Color.RED);
+                                                        trovato=true;
                                                     }
                                                 }
+                                            }else{
+                                                trovato=false;
                                             }
-                                            trovato=true;
                                         }else{
                                             trovato=false;
                                         }
@@ -309,10 +315,12 @@ public class PartitaThreadTransfer extends Thread{
                                                         help3.setClickable(false);
                                                         help3.setEnabled(false);
                                                         help3.setBackgroundColor(Color.RED);
+                                                        trovato = true;
                                                     }
                                                 }
+                                            }else{
+                                                trovato=false;
                                             }
-                                            trovato = true;
                                         }else {
                                             trovato = false;
                                         }
@@ -619,17 +627,12 @@ public class PartitaThreadTransfer extends Thread{
                     if(ds.child("username").getValue().equals(username)){
                         Boolean aiuto1 = (Boolean) ds.child("aiuto1").getValue();
                         Boolean aiuto2=(Boolean) ds.child("aiuto2").getValue();
-                        Boolean aiuto3=(Boolean) ds.child("aiuto2").getValue();
+                        Boolean aiuto3=(Boolean) ds.child("aiuto3").getValue();
                         if(aiuto1){
                             help1.setClickable(false);
                             help1.setEnabled(false);
                             help1.setBackgroundColor(Color.RED);
-                        }/*else {
-                            help1.setClickable(false);
-                            help1.setEnabled(false);
-                            help1.setBackgroundColor(Color.GREEN);
-
-                        }*/
+                        }
                         if(aiuto2) {
                             help2.setClickable(false);
                             help2.setEnabled(false);
@@ -641,36 +644,6 @@ public class PartitaThreadTransfer extends Thread{
                             help3.setBackgroundColor(Color.RED);
                         }
                     }
-                    /*if(aiuto1){
-                        for(int a=0;a<textViewList.size();a++) {
-                            if (textViewList.get(a).getText().equals(username)) {
-                                help1.setClickable(false);
-                                help1.setEnabled(false);
-                                help1.setBackgroundColor(Color.RED);
-                            }
-                        }*/
-                    /*}else{
-                        for(int b=0;b<textViewList.size();b++){
-                            if(textViewList.get(b).getText().equals(username)){
-                                help1.setBackgroundColor(Color.TRANSPARENT);
-                            }
-                        }
-                    }
-                    if(aiuto2){
-                        for(int c=0;c<textViewList.size();c++) {
-                            if (textViewList.get(c).getText().equals(username)) {
-                                help2.setClickable(false);
-                                help2.setEnabled(false);
-                                help2.setBackgroundColor(Color.RED);
-                            }
-                        }
-                    }else{
-                        for(int d=0;d<textViewList.size();d++) {
-                            if (textViewList.get(d).getText().equals(username)) {
-                                help2.setBackgroundColor(Color.TRANSPARENT);
-                            }
-                        }
-                    }*/
                 }
             }
 
@@ -765,5 +738,6 @@ public class PartitaThreadTransfer extends Thread{
 
             }
         });
+        ref.child("GameTransfer").child(indexLobby).setValue(null);
     }
 }

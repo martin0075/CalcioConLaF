@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.calcioconlaf.GameStadium.FragmentToActivityThread;
 import com.example.calcioconlaf.HomeFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +42,11 @@ public class TransferThread extends Thread{
                             FragmentToActivityThreadTransfer fragmentToActivityThread=new FragmentToActivityThreadTransfer(usernameTransfer,indexLobbyTransfer,homefragment);
                             fragmentToActivityThread.start();
 
+                        }else{
+                            indexLobbyTransfer=String.valueOf(Integer.valueOf(ds.getKey())+1);
+                            lobbyTransferRef.child(indexLobbyTransfer).child(usernameTransfer).setValue(usernameTransfer);
+                            FragmentToActivityThreadTransfer fragmentToActivityThread=new FragmentToActivityThreadTransfer(usernameTransfer,indexLobbyTransfer,homefragment);
+                            fragmentToActivityThread.start();
                         }
                     }
                 }

@@ -238,11 +238,16 @@ public class PartitaThread extends Thread{
                                                             helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                             help3.setClickable(false);
                                                             help3.setEnabled(false);
+                                                            Boolean prova=help3.isEnabled();
+                                                            Boolean prova2=help3.isClickable();
                                                             help3.setBackgroundColor(Color.RED);
+                                                            trovato = true;
+                                                            c=textViewList.size()-1;
                                                         }
                                                     }
+                                                }else{
+                                                    trovato=false;
                                                 }
-                                            trovato = true;
                                         }else{
                                                 trovato=false;
                                             }
@@ -261,11 +266,16 @@ public class PartitaThread extends Thread{
                                                         helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                         help3.setClickable(false);
                                                         help3.setEnabled(false);
+                                                        Boolean prova=help3.isEnabled();
+                                                        Boolean prova2=help3.isClickable();
                                                         help3.setBackgroundColor(Color.RED);
+                                                        trovato = true;
+                                                        c=textViewList.size()-1;
                                                     }
                                                 }
+                                            }else{
+                                                trovato=false;
                                             }
-                                            trovato = true;
                                         }else {
                                             trovato = false;
                                         }
@@ -284,11 +294,16 @@ public class PartitaThread extends Thread{
                                                             helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                             help3.setClickable(false);
                                                             help3.setEnabled(false);
+                                                            Boolean prova=help3.isEnabled();
+                                                            Boolean prova2=help3.isClickable();
                                                             help3.setBackgroundColor(Color.RED);
+                                                            trovato=true;
+                                                            c=textViewList.size()-1;
                                                         }
                                                     }
+                                                }else{
+                                                    trovato=false;
                                                 }
-                                                trovato=true;
                                             }else{
                                                 trovato=false;
                                             }
@@ -307,11 +322,16 @@ public class PartitaThread extends Thread{
                                                             helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                             help3.setClickable(false);
                                                             help3.setEnabled(false);
+                                                            Boolean prova=help3.isEnabled();
+                                                            Boolean prova2=help3.isClickable();
                                                             help3.setBackgroundColor(Color.RED);
+                                                            trovato = true;
+                                                            c=textViewList.size()-1;
                                                         }
                                                     }
+                                                }else{
+                                                    trovato=false;
                                                 }
-                                                trovato = true;
                                             }else {
                                                 trovato = false;
                                             }
@@ -618,7 +638,7 @@ public class PartitaThread extends Thread{
                     if(ds.child("username").getValue().equals(username)){
                         Boolean aiuto1 = (Boolean) ds.child("aiuto1").getValue();
                         Boolean aiuto2=(Boolean) ds.child("aiuto2").getValue();
-                        Boolean aiuto3=(Boolean) ds.child("aiuto2").getValue();
+                        Boolean aiuto3=(Boolean) ds.child("aiuto3").getValue();
                         if(aiuto1){
                             help1.setClickable(false);
                             help1.setEnabled(false);
@@ -764,6 +784,7 @@ public class PartitaThread extends Thread{
 
             }
         });
+        ref.child("GameStadium").child(indexLobby).setValue(null);
     }
 }
 

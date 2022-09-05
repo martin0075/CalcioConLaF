@@ -22,6 +22,7 @@ public class SetRisposteThread extends Thread{
     ArrayList<String> opzioni;
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
+    DatabaseReference lobbyRef = ref.child("LobbyStadium");
     DatabaseReference gameStadiumRef = ref.child("GameStadium");
     LobbyActivity lobbyActivity;
     String username;
@@ -170,5 +171,6 @@ public class SetRisposteThread extends Thread{
 
             }
         });
+        lobbyRef.child(indexLobby).setValue(null);
     }
 }

@@ -54,6 +54,9 @@ public class LobbyActivityTransfer extends AppCompatActivity {
             }
 
             public void onFinish() {
+                timer.setText("");
+                TextView text=findViewById(R.id.txtAttendPlayers);
+                text.setText("Partita in caricamento...");
                 lobbyTransferThread=new LobbyTransferThread(usernameTransfer,usernameLobbyTransfer,indexLobbyTransfer,lobbyActivity, domande);
                 lobbyTransferThread.start();
 

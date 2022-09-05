@@ -39,6 +39,7 @@ public class SetIndiziThread extends Thread{
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
     DatabaseReference gameTransfer = ref.child("GameTransfer");
+    DatabaseReference lobbyRef=ref.child("LobbyTransfer");
 
     public SetIndiziThread(ArrayList<QuizTransfer> domande,LobbyActivityTransfer lobbyActivity,String indexLobby,String username) {
         this.domande=domande;
@@ -127,5 +128,6 @@ public class SetIndiziThread extends Thread{
 
             }
         });
+        lobbyRef.child(indexLobby).setValue(null);
     }
 }
