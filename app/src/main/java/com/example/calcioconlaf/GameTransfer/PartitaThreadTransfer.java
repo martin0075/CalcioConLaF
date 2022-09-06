@@ -699,6 +699,11 @@ public class PartitaThreadTransfer extends Thread{
                         }
                     }
                     if(pareggio){
+                        for (a = 0; a < punteggi.size(); a++) {
+                            if (nomiUtente.get(a).equals(username)) {
+                                puntClassifica = punteggi.get(a);
+                            }
+                        }
                         AlertDialog alertDialog;
                         alertDialog=new AlertDialog.Builder(quizTransferActivity).setTitle("Result")
                                 .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+contaPari).show();
@@ -710,6 +715,27 @@ public class PartitaThreadTransfer extends Thread{
                                 ref.child("GameTransfer").child(indexLobby).setValue(null);
                             }
                         },2000);
+                        DatabaseReference classificaRef = ref.child("LeaderboardTransfer").child(username);
+                        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.getChildrenCount() > 0) {
+                                    int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                    Log.v("puntVecchio", String.valueOf(puntVecchio));
+                                    Log.v("puntClassifica", String.valueOf(puntClassifica));
+                                    if (puntVecchio < puntClassifica) {
+                                        classificaRef.setValue(puntClassifica);
+                                    }
+                                } else {
+                                    classificaRef.setValue(puntClassifica);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }else{
                         for(a=0;a<punteggi.size();a++){
                             if(nomiUtente.get(a).equals(username)){
