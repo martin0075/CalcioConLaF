@@ -488,7 +488,6 @@ public class PartitaThreadTransfer extends Thread{
         return true;
     }
     public void checkColor() {
-        sbagliate.clear();
         DatabaseReference bottoneRef = ref.child("GameTransfer").child(indexLobby).child("game");
         bottoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -521,22 +520,27 @@ public class PartitaThreadTransfer extends Thread{
                             switch (valore) {
                                 case 0:
                                     btnA.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnA.getText()));
+                                    if(!sbagliate.contains(String.valueOf(btnA.getText()))){
+                                        sbagliate.add(String.valueOf(btnA.getText()));
+                                    }
                                     break;
                                 case 1:
                                     btnB.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnB.getText()));
-
+                                    if(!sbagliate.contains(String.valueOf(btnB.getText()))){
+                                        sbagliate.add(String.valueOf(btnB.getText()));
+                                    }
                                     break;
                                 case 2:
                                     btnC.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnC.getText()));
-
+                                    if(!sbagliate.contains(String.valueOf(btnC.getText()))){
+                                        sbagliate.add(String.valueOf(btnC.getText()));
+                                    }
                                     break;
                                 case 3:
                                     btnD.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnD.getText()));
-
+                                    if(!sbagliate.contains(String.valueOf(btnD.getText()))){
+                                        sbagliate.add(String.valueOf(btnD.getText()));
+                                    }
                                     break;
                             }
                         }
@@ -610,6 +614,7 @@ public class PartitaThreadTransfer extends Thread{
     }
     public void newGame(){
         indovinato=false;
+        sbagliate.clear();
         settaBottoni();
         setGame();
     }

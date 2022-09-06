@@ -1,6 +1,7 @@
 package com.example.calcioconlaf.GameStadium;
 
 import android.content.Intent;
+import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
@@ -153,17 +154,22 @@ public class SetRisposteThread extends Thread{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 gameStadiumRef.child(indexLobby).child("domande").setValue(domande);
-                lobbyActivity.runOnUiThread(new Runnable() {
+                new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent4=new Intent(lobbyActivity, QuizStadium.class);
-                        intent4.putExtra("Username", username);
-                        intent4.putExtra("IndexLobby", indexLobby);
-                        intent4.putExtra("Domande",domande);
+                        lobbyActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent4 = new Intent(lobbyActivity, QuizStadium.class);
+                                intent4.putExtra("Username", username);
+                                intent4.putExtra("IndexLobby", indexLobby);
+                                intent4.putExtra("Domande", domande);
 
-                        lobbyActivity.startActivity(intent4);
+                                lobbyActivity.startActivity(intent4);
+                            }
+                        });
                     }
-                });
+                }, 5000);
             }
 
             @Override

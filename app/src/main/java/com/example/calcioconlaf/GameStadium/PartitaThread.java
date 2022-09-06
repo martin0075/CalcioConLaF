@@ -226,20 +226,19 @@ public class PartitaThread extends Thread{
                                 switch (elimina) {
                                     case 0:
                                         String opt1= String.valueOf(btnA.getText());
+                                        Log.v("opt",opt1);
                                             if(!sbagliate.contains(opt1)) {
+                                                Log.v("sbagliate","sbagliate");
                                                 if (!opt1.equals(domande.get(i - 1).getAnswer())) {
-                                                    Log.v("domande1", domande.get(i - 1).getOption1());
-                                                    Log.v("domande2", domande.get(i - 1).getAnswer());
-                                                    Log.v("elimina1", String.valueOf(elimina));
+                                                    Log.v("risposta","risposta");
                                                     DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
                                                     game.child(String.valueOf(elimina)).setValue(false);
                                                     for (int c = 0; c < textViewList.size(); c++) {
                                                         if (textViewList.get(c).getText().equals(username)) {
+                                                            Log.v("ifuser","ifuser");
                                                             helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                             help3.setClickable(false);
                                                             help3.setEnabled(false);
-                                                            Boolean prova=help3.isEnabled();
-                                                            Boolean prova2=help3.isClickable();
                                                             help3.setBackgroundColor(Color.RED);
                                                             trovato = true;
                                                             c=textViewList.size()-1;
@@ -247,22 +246,25 @@ public class PartitaThread extends Thread{
                                                     }
                                                 }else{
                                                     trovato=false;
+                                                    Log.v("elserisposta","elserisposta");
                                                 }
                                         }else{
                                                 trovato=false;
+                                                Log.v("elsesbagliate","elsesbagliate");
                                             }
                                         break;
                                     case 1:
                                         String opt2= String.valueOf(btnB.getText());
+                                        Log.v("opt",opt2);
                                         if(!sbagliate.contains(opt2)) {
+                                            Log.v("sbagliate","sbagliate");
                                             if (!opt2.equals(domande.get(i - 1).getAnswer())) {
-                                                Log.v("domande1", domande.get(i - 1).getOption2());
-                                                Log.v("domande2", domande.get(i - 1).getAnswer());
-                                                Log.v("elimina2", String.valueOf(elimina));
+                                                Log.v("risposta","risposta");
                                                 DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
                                                 game.child(String.valueOf(elimina)).setValue(false);
                                                 for (int c = 0; c < textViewList.size(); c++) {
                                                     if (textViewList.get(c).getText().equals(username)) {
+                                                        Log.v("ifuser","ifuser");
                                                         helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                         help3.setClickable(false);
                                                         help3.setEnabled(false);
@@ -275,22 +277,26 @@ public class PartitaThread extends Thread{
                                                 }
                                             }else{
                                                 trovato=false;
+                                                Log.v("elserisposta","elserisposta");
                                             }
                                         }else {
                                             trovato = false;
+                                            Log.v("elsesbagliate","elsesbagliate");
                                         }
                                         break;
                                     case 2:
                                         String opt3= String.valueOf(btnC.getText());
+                                        Log.v("opt",opt3);
                                             if (!sbagliate.contains(opt3)) {
+                                                Log.v("sbagliate","sbagliate");
                                                 if (!domande.get(i - 1).getOption3().equals(domande.get(i - 1).getAnswer())) {
-                                                    Log.v("domande1", domande.get(i - 1).getOption3());
-                                                    Log.v("domande2", domande.get(i - 1).getAnswer());
-                                                    Log.v("elimina3", String.valueOf(elimina));
+                                                    Log.v("risposta","risposta");
+
                                                     DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
                                                     game.child(String.valueOf(elimina)).setValue(false);
                                                     for (int c = 0; c < textViewList.size(); c++) {
                                                         if (textViewList.get(c).getText().equals(username)) {
+                                                            Log.v("ifuser","ifuser");
                                                             helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                             help3.setClickable(false);
                                                             help3.setEnabled(false);
@@ -303,22 +309,25 @@ public class PartitaThread extends Thread{
                                                     }
                                                 }else{
                                                     trovato=false;
+                                                    Log.v("elserisposta","elserisposta");
                                                 }
                                             }else{
                                                 trovato=false;
+                                                Log.v("elsesbagliate","elsesbagliate");
                                             }
                                         break;
                                     case 3:
                                         String opt4= String.valueOf(btnD.getText());
+                                        Log.v("opt4",opt4);
                                             if(!sbagliate.contains(opt4)) {
+                                                Log.v("sbagliate","sbagliate");
                                                 if (!opt4.equals(domande.get(i - 1).getAnswer())) {
-                                                    Log.v("domande1", domande.get(i - 1).getOption4());
-                                                    Log.v("domande2", domande.get(i - 1).getAnswer());
-                                                    Log.v("elimina4", String.valueOf(elimina));
+                                                    Log.v("risposta","risposta");
                                                     DatabaseReference game = ref.child("GameStadium").child(indexLobby).child("game");
                                                     game.child(String.valueOf(elimina)).setValue(false);
                                                     for (int c = 0; c < textViewList.size(); c++) {
                                                         if (textViewList.get(c).getText().equals(username)) {
+                                                            Log.v("ifuser","ifuser");
                                                             helpRef.child(String.valueOf(c)).child(("aiuto3")).setValue(true);
                                                             help3.setClickable(false);
                                                             help3.setEnabled(false);
@@ -331,9 +340,11 @@ public class PartitaThread extends Thread{
                                                     }
                                                 }else{
                                                     trovato=false;
+                                                    Log.v("elserisposta","elserisposta");
                                                 }
                                             }else {
                                                 trovato = false;
+                                                Log.v("elsesbagliate","elsesbagliate");
                                             }
                                         break;
                                 }
@@ -499,7 +510,6 @@ public class PartitaThread extends Thread{
         return true;
     }
     public void checkColor() {
-        sbagliate.clear();
         DatabaseReference bottoneRef = ref.child("GameStadium").child(indexLobby).child("game");
         bottoneRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -532,22 +542,28 @@ public class PartitaThread extends Thread{
                             switch (valore) {
                                 case 0:
                                     btnA.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnA.getText()));
+                                    if(!sbagliate.contains(String.valueOf(btnA.getText()))){
+                                        sbagliate.add(String.valueOf(btnA.getText()));
+                                    }
                                     break;
                                 case 1:
                                     btnB.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnB.getText()));
-
+                                    if(!sbagliate.contains(String.valueOf(btnB.getText()))){
+                                        sbagliate.add(String.valueOf(btnB.getText()));
+                                    }
                                     break;
                                 case 2:
                                     btnC.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnC.getText()));
+                                    if(!sbagliate.contains(String.valueOf(btnC.getText()))){
+                                        sbagliate.add(String.valueOf(btnC.getText()));
+                                    }
 
                                     break;
                                 case 3:
                                     btnD.setBackgroundColor(Color.RED);
-                                    sbagliate.add(String.valueOf(btnD.getText()));
-
+                                    if(!sbagliate.contains(String.valueOf(btnD.getText()))){
+                                        sbagliate.add(String.valueOf(btnD.getText()));
+                                    }
                                     break;
                             }
                         }
@@ -621,6 +637,7 @@ public class PartitaThread extends Thread{
     }
     public void newGame(){
         indovinato=false;
+        sbagliate.clear();
         settaBottoni();
         setGame();
     }
@@ -788,6 +805,8 @@ public class PartitaThread extends Thread{
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (snapshot.getChildrenCount() > 0) {
                                         int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                        Log.v("puntVecchio", String.valueOf(puntVecchio));
+                                        Log.v("puntClassifica", String.valueOf(puntClassifica));
                                         if (puntVecchio < puntClassifica) {
                                             classificaRef.setValue(puntClassifica);
                                         }

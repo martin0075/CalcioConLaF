@@ -100,7 +100,7 @@ public class SettingFragment extends Fragment {
                 settingFragment.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent logout=new Intent(settingFragment.getActivity(), LoginActivity.class);
+                        Intent logout=new Intent(settingFragment.getActivity(), MainActivity.class);
                         settingFragment.getActivity().startActivity(logout);
                     }
                 });

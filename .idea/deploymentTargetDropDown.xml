@@ -12,14 +12,15 @@
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-09-05T14:51:05.951826700Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-09-06T09:45:28.868392900Z" />
+    <multipleDevicesSelectedInDropDown value="true" />
     <runningDeviceTargetsSelectedWithDialog>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\dadeu\.android\avd\Tel1_1.avd" />
+            <value value="C:\Users\dadeu\.android\avd\Tel2_1.avd" />
           </Key>
         </deviceKey>
       </Target>
@@ -28,7 +29,7 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\dadeu\.android\avd\Tel2_1.avd" />
+            <value value="C:\Users\dadeu\.android\avd\Tel1_1.avd" />
           </Key>
         </deviceKey>
       </Target>
@@ -39,7 +40,7 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\dadeu\.android\avd\Tel1_1.avd" />
+            <value value="C:\Users\dadeu\.android\avd\Tel2_1.avd" />
           </Key>
         </deviceKey>
       </Target>
@@ -48,7 +49,7 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\dadeu\.android\avd\Tel2_1.avd" />
+            <value value="C:\Users\dadeu\.android\avd\Tel1_1.avd" />
           </Key>
         </deviceKey>
       </Target>
