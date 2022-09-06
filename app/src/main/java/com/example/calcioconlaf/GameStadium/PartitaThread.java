@@ -36,7 +36,6 @@ public class PartitaThread extends Thread{
     ArrayList<PlayerGame> utenti=new ArrayList<>();
     int indice=0;
     int a;
-    int contaPari;
     String username;
     Button btnA;
     Button btnB;
@@ -77,7 +76,7 @@ public class PartitaThread extends Thread{
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                checkColor();
+                //checkColor();
                 checkPunteggio();
                 checkUtenteAttivo();
                 checkHelp();
@@ -87,9 +86,10 @@ public class PartitaThread extends Thread{
         timer2.schedule(new TimerTask() {
             @Override
             public void run() {
+                checkColor();
                 checkNewGame();
             }
-        },0,3000);
+        },0,2000);
     }
     public void setGame(){
         if(i>9){
@@ -552,19 +552,20 @@ public class PartitaThread extends Thread{
                                     if(!sbagliate.contains(String.valueOf(btnB.getText()))){
                                         sbagliate.add(String.valueOf(btnB.getText()));
                                     }
+
                                     break;
                                 case 2:
                                     btnC.setBackgroundColor(Color.RED);
                                     if(!sbagliate.contains(String.valueOf(btnC.getText()))){
                                         sbagliate.add(String.valueOf(btnC.getText()));
                                     }
-
                                     break;
                                 case 3:
                                     btnD.setBackgroundColor(Color.RED);
                                     if(!sbagliate.contains(String.valueOf(btnD.getText()))){
                                         sbagliate.add(String.valueOf(btnD.getText()));
                                     }
+
                                     break;
                             }
                         }
@@ -637,13 +638,13 @@ public class PartitaThread extends Thread{
         bottoneRef.child("3").setValue("null");
     }
     public void newGame(){
-        indovinato=false;
         sbagliate.clear();
         settaBottoni();
         setGame();
     }
     public void checkNewGame(){
         if(indovinato){
+            indovinato=false;
             newGame();
         }
     }
@@ -749,7 +750,7 @@ public class PartitaThread extends Thread{
                 }
                 if(punteggi.size()==numeroGiocatori){
                     Boolean pareggio=false;
-                    contaPari=0;
+                    int contaPari=0;
                     for(int f=0;f<punteggi.size();f++){
                         if(punteggi.get(f)!=contaPari){
                             contaPari=punteggi.get(f);
@@ -765,7 +766,7 @@ public class PartitaThread extends Thread{
                         }
                         AlertDialog alertDialog;
                         alertDialog=new AlertDialog.Builder(quizStadium).setTitle("Result")
-                                .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+puntClassifica).show();
+                                .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+contaPari).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -778,14 +779,15 @@ public class PartitaThread extends Thread{
                         classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.getChildrenCount() > 0) {
+                                if(snapshot.exists()){
                                     int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
                                     Log.v("puntVecchio", String.valueOf(puntVecchio));
-                                    Log.v("puntClassifica", String.valueOf(puntClassifica));
                                     if (puntVecchio < puntClassifica) {
                                         classificaRef.setValue(puntClassifica);
+                                    }else{
+                                        classificaRef.setValue(puntVecchio);
                                     }
-                                } else {
+                                }else{
                                     classificaRef.setValue(puntClassifica);
                                 }
                             }
@@ -827,17 +829,19 @@ public class PartitaThread extends Thread{
                                 }
                             }
                             DatabaseReference classificaRef = ref.child("LeaderBoardStadium").child(username);
+                            Log.v("puntVecchio", String.valueOf(classificaRef));
                             classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.getChildrenCount() > 0) {
+                                    if(snapshot.exists()){
                                         int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
                                         Log.v("puntVecchio", String.valueOf(puntVecchio));
-                                        Log.v("puntClassifica", String.valueOf(puntClassifica));
                                         if (puntVecchio < puntClassifica) {
                                             classificaRef.setValue(puntClassifica);
+                                        }else{
+                                            classificaRef.setValue(puntVecchio);
                                         }
-                                    } else {
+                                    }else{
                                         classificaRef.setValue(puntClassifica);
                                     }
                                 }

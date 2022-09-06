@@ -76,7 +76,6 @@ public class PartitaThreadTransfer extends Thread{
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                checkColor();
                 checkPunteggio();
                 checkUtenteAttivo();
                 checkHelp();
@@ -86,9 +85,10 @@ public class PartitaThreadTransfer extends Thread{
         timer2.schedule(new TimerTask() {
             @Override
             public void run() {
+                checkColor();
                 checkNewGame();
             }
-        },0,4000);
+        },0,2000);
     }
     public void setGame(){
         if(i>9){
@@ -613,13 +613,13 @@ public class PartitaThreadTransfer extends Thread{
         bottoneRef.child("3").setValue("null");
     }
     public void newGame(){
-        indovinato=false;
         sbagliate.clear();
         settaBottoni();
         setGame();
     }
     public void checkNewGame(){
         if(indovinato){
+            indovinato=false;
             newGame();
         }
     }
@@ -715,18 +715,19 @@ public class PartitaThreadTransfer extends Thread{
                                 ref.child("GameTransfer").child(indexLobby).setValue(null);
                             }
                         },2000);
-                        DatabaseReference classificaRef = ref.child("LeaderboardTransfer").child(username);
+                        DatabaseReference classificaRef = ref.child("LeaderBoardTransfer").child(username);
                         classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.getChildrenCount() > 0) {
+                                if(snapshot.exists()){
                                     int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
                                     Log.v("puntVecchio", String.valueOf(puntVecchio));
-                                    Log.v("puntClassifica", String.valueOf(puntClassifica));
                                     if (puntVecchio < puntClassifica) {
                                         classificaRef.setValue(puntClassifica);
+                                    }else{
+                                        classificaRef.setValue(puntVecchio);
                                     }
-                                } else {
+                                }else{
                                     classificaRef.setValue(puntClassifica);
                                 }
                             }
@@ -770,10 +771,13 @@ public class PartitaThreadTransfer extends Thread{
                             classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if(snapshot.getChildrenCount()>0){
-                                        int puntVecchio=Integer.parseInt(String.valueOf(snapshot.getValue()));
-                                        if(puntVecchio<puntClassifica){
+                                    if(snapshot.exists()){
+                                        int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                        Log.v("puntVecchio", String.valueOf(puntVecchio));
+                                        if (puntVecchio < puntClassifica) {
                                             classificaRef.setValue(puntClassifica);
+                                        }else{
+                                            classificaRef.setValue(puntVecchio);
                                         }
                                     }else{
                                         classificaRef.setValue(puntClassifica);
