@@ -36,6 +36,7 @@ public class PartitaThread extends Thread{
     ArrayList<PlayerGame> utenti=new ArrayList<>();
     int indice=0;
     int a;
+    int contaPari;
     String username;
     Button btnA;
     Button btnB;
@@ -748,7 +749,7 @@ public class PartitaThread extends Thread{
                 }
                 if(punteggi.size()==numeroGiocatori){
                     Boolean pareggio=false;
-                    int contaPari=0;
+                    contaPari=0;
                     for(int f=0;f<punteggi.size();f++){
                         if(punteggi.get(f)!=contaPari){
                             contaPari=punteggi.get(f);
@@ -757,9 +758,14 @@ public class PartitaThread extends Thread{
                         }
                     }
                     if(pareggio){
+                        for (a = 0; a < punteggi.size(); a++) {
+                            if (nomiUtente.get(a).equals(username)) {
+                                puntClassifica = punteggi.get(a);
+                            }
+                        }
                         AlertDialog alertDialog;
                         alertDialog=new AlertDialog.Builder(quizStadium).setTitle("Result")
-                                .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+contaPari).show();
+                                .setMessage("La partita e' finita in pareggio, il tuo punteggio e' di: "+puntClassifica).show();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -768,6 +774,27 @@ public class PartitaThread extends Thread{
                                 ref.child("GameStadium").child(indexLobby).setValue(null);
                             }
                         },2000);
+                        DatabaseReference classificaRef = ref.child("LeaderBoardStadium").child(username);
+                        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.getChildrenCount() > 0) {
+                                    int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                    Log.v("puntVecchio", String.valueOf(puntVecchio));
+                                    Log.v("puntClassifica", String.valueOf(puntClassifica));
+                                    if (puntVecchio < puntClassifica) {
+                                        classificaRef.setValue(puntClassifica);
+                                    }
+                                } else {
+                                    classificaRef.setValue(puntClassifica);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                     else {
                         for (a = 0; a < punteggi.size(); a++) {
