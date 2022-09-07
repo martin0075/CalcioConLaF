@@ -112,7 +112,7 @@ public class LobbyTransferThread extends Thread{
                                                             String idTeam= (String) ds.child("idTeam").getValue();
                                                             domande.add(new QuizTransfer(url,option1,option2,option3,option4,answer,domanda,id,city,country,idTeam));
                                                         }
-                                                        if(domande.size()==10){
+                                                        if(domande.size()==15){
                                                             Log.v("logaaa",domande.get(0).getAnswer());
                                                             intent4.putExtra("DomandeElse",domande);
                                                             lobbyActivity.startActivity(intent4);

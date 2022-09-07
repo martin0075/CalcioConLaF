@@ -662,12 +662,7 @@ public class PartitaThread extends Thread{
                             help1.setClickable(false);
                             help1.setEnabled(false);
                             help1.setBackgroundColor(Color.RED);
-                        }/*else {
-                            help1.setClickable(false);
-                            help1.setEnabled(false);
-                            help1.setBackgroundColor(Color.GREEN);
-
-                        }*/
+                        }
                         if(aiuto2) {
                             help2.setClickable(false);
                             help2.setEnabled(false);
@@ -679,36 +674,6 @@ public class PartitaThread extends Thread{
                             help3.setBackgroundColor(Color.RED);
                         }
                     }
-                    /*if(aiuto1){
-                        for(int a=0;a<textViewList.size();a++) {
-                            if (textViewList.get(a).getText().equals(username)) {
-                                help1.setClickable(false);
-                                help1.setEnabled(false);
-                                help1.setBackgroundColor(Color.RED);
-                            }
-                        }*/
-                    /*}else{
-                        for(int b=0;b<textViewList.size();b++){
-                            if(textViewList.get(b).getText().equals(username)){
-                                help1.setBackgroundColor(Color.TRANSPARENT);
-                            }
-                        }
-                    }
-                    if(aiuto2){
-                        for(int c=0;c<textViewList.size();c++) {
-                            if (textViewList.get(c).getText().equals(username)) {
-                                help2.setClickable(false);
-                                help2.setEnabled(false);
-                                help2.setBackgroundColor(Color.RED);
-                            }
-                        }
-                    }else{
-                        for(int d=0;d<textViewList.size();d++) {
-                            if (textViewList.get(d).getText().equals(username)) {
-                                help2.setBackgroundColor(Color.TRANSPARENT);
-                            }
-                        }
-                    }*/
                 }
             }
 
@@ -719,6 +684,7 @@ public class PartitaThread extends Thread{
         });
     }
     public void finishGame(){
+        i=0;
         timer.cancel();
         btnA.setEnabled(false);
         btnB.setEnabled(false);
@@ -785,11 +751,6 @@ public class PartitaThread extends Thread{
                                     puntVecchio=puntVecchio+puntClassifica;
                                     classificaRef.setValue(puntVecchio);
                                     Log.v("puntVecchio", String.valueOf(puntVecchio));
-                                    /*if (puntVecchio < puntClassifica) {
-                                        classificaRef.setValue(puntClassifica);
-                                    }else{
-                                        classificaRef.setValue(puntVecchio);
-                                    }*/
                                 }else{
                                     classificaRef.setValue(puntClassifica);
                                 }
@@ -813,6 +774,7 @@ public class PartitaThread extends Thread{
                                         @Override
                                         public void run() {
                                             Intent intent = new Intent(quizStadium, GameActivity.class);
+                                            intent.putExtra("Username", username);
                                             quizStadium.startActivity(intent);
                                             ref.child("GameStadium").child(indexLobby).setValue(null);
                                         }
@@ -842,11 +804,6 @@ public class PartitaThread extends Thread{
                                     puntVecchio=puntVecchio+puntClassifica;
                                     classificaRef.setValue(puntVecchio);
                                     Log.v("puntVecchio", String.valueOf(puntVecchio));
-                                        /*if (puntVecchio < puntClassifica) {
-                                            classificaRef.setValue(puntClassifica);
-                                        }else{
-                                            classificaRef.setValue(puntVecchio);
-                                        }*/
                                 }else{
                                     classificaRef.setValue(puntClassifica);
                                 }

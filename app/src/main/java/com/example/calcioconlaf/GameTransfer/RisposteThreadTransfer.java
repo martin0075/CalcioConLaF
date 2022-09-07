@@ -26,7 +26,8 @@ public class RisposteThreadTransfer extends Thread{
     String indexLobby;
     ArrayList<QuizTransfer> domande;
     LobbyActivityTransfer lobbyActivity;
-    int [] endPointVuoto={6,26,16,429,767,768,769,770,771,772,773,774,775,776,777,778,802,954,1006};
+    int [] endPointVuoto={0,1,2,3,4,5,6,7,8,9,10,11,12,13,16,17,19,20,21,22,18,24,23,25,26,27,28,29,30,31,32,
+            26,16,429,767,768,769,770,771,772,773,774,775,776,777,778,802,954,1006};
     int c;
     int x;
     JSONObject result;
@@ -89,7 +90,7 @@ public class RisposteThreadTransfer extends Thread{
                                 //Log.v("jobfgh", String.valueOf(jObj));
                                 String nomeSq = jObj.getString("name");
                                 opzioni.add(nomeSq);
-                                if(opzioni.size()==30){
+                                if(opzioni.size()==45){
                                     for(int f=0;f<opzioni.size();f++){
                                         Log.v("opzioni",opzioni.get(f));
                                     }
@@ -134,7 +135,7 @@ public class RisposteThreadTransfer extends Thread{
     }
     public void controlla(){
         requestQueue= Volley.newRequestQueue(lobbyActivity);
-        for(y=1;y<150;y++){
+        for(y=879;y<1079;y++){
             String URL = "https://api-football-v1.p.rapidapi.com/v3/teams?id="+y;
             StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
                 @Override

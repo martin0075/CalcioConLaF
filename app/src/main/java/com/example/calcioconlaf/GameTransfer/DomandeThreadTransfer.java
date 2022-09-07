@@ -62,7 +62,7 @@ public class DomandeThreadTransfer extends Thread{
                     try {
                         result = new JSONObject(response);
                         String newId= result.getJSONObject("parameters").getString("player");
-                        for(int z=0;z<10;z++){
+                        for(int z=0;z<15;z++){
                             if(newId.equals(domande.get(z).getId())){
                                 Log.v("result2", String.valueOf(result));
                                 JSONObject result1 = (JSONObject) result.getJSONArray("response").get(0);
@@ -96,7 +96,7 @@ public class DomandeThreadTransfer extends Thread{
                                         domande.get(z).setDomanda(domanda);
                                     }
                                 }
-                                z=10;
+                                z=15;
                             }
                         }
                     } catch (JSONException | ParseException e) {
@@ -121,7 +121,7 @@ public class DomandeThreadTransfer extends Thread{
             requestQueue.add(stringRequest);
             cont++;
         }
-        if(domande.size()==10){
+        if(domande.size()==15){
             Log.v("sizeeee", String.valueOf(ids.size()));
             RisposteThreadTransfer risposteThreadTransfer=new RisposteThreadTransfer(username,indexLobby,domande,lobbyActivity);
             lobbyActivity.runOnUiThread(new Runnable() {

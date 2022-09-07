@@ -67,7 +67,7 @@ public class SetIndiziThread extends Thread{
                         //JSONArray arr = new JSONArray(result2.getString("response"));
                         JSONObject jObj=result2.getJSONObject("team");
                         String newId = result2.getJSONObject("team").getString("id");
-                        for (int z = 0; z < 10; z++) {
+                        for (int z = 0; z < 15; z++) {
                             if (newId.equals(domande.get(z).getIdTeam())) {
                                 contatore++;
                                 String citta = result2.getJSONObject("venue").getString("city");
@@ -76,10 +76,10 @@ public class SetIndiziThread extends Thread{
                                 domande.get(z).setCountry(nazione);
                                 //Log.v("domande",domande.get(z).getCity());
                                 //Log.v("domande",domande.get(z).getCountry());
-                                z=10;
+                                z=15;
                             }
                         }
-                        if(contatore==10){
+                        if(contatore==15){
                             write();
                         }
                             } catch(JSONException e){

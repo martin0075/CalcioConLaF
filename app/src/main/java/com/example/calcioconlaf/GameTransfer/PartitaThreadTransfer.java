@@ -91,7 +91,7 @@ public class PartitaThreadTransfer extends Thread{
         },0,2000);
     }
     public void setGame(){
-        if(i>9){
+        if(i>14){
             quizTransferActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
