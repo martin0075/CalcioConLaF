@@ -26,7 +26,7 @@ public class RisposteThreadTransfer extends Thread{
     String indexLobby;
     ArrayList<QuizTransfer> domande;
     LobbyActivityTransfer lobbyActivity;
-    int [] endPointVuoto={429,767,768,769,770,771,772,773,774,775,776,777,778,802,954,1006};
+    int [] endPointVuoto={6,26,16,429,767,768,769,770,771,772,773,774,775,776,777,778,802,954,1006};
     int c;
     int x;
     JSONObject result;

@@ -783,6 +783,7 @@ public class PartitaThread extends Thread{
                                 if(snapshot.exists()){
                                     int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
                                     puntVecchio=puntVecchio+puntClassifica;
+                                    classificaRef.setValue(puntVecchio);
                                     Log.v("puntVecchio", String.valueOf(puntVecchio));
                                     /*if (puntVecchio < puntClassifica) {
                                         classificaRef.setValue(puntClassifica);
@@ -831,31 +832,32 @@ public class PartitaThread extends Thread{
                                     }, 2000);
                                 }
                             }
-                            DatabaseReference classificaRef = ref.child("LeaderBoardStadium").child(username);
-                            Log.v("puntVecchio", String.valueOf(classificaRef));
-                            classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if(snapshot.exists()){
-                                        int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
-                                        puntVecchio=puntVecchio+puntClassifica;
-                                        Log.v("puntVecchio", String.valueOf(puntVecchio));
+                        }
+                        DatabaseReference classificaRef = ref.child("LeaderBoardStadium").child(username);
+                        Log.v("puntVecchio", String.valueOf(classificaRef));
+                        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                    puntVecchio=puntVecchio+puntClassifica;
+                                    classificaRef.setValue(puntVecchio);
+                                    Log.v("puntVecchio", String.valueOf(puntVecchio));
                                         /*if (puntVecchio < puntClassifica) {
                                             classificaRef.setValue(puntClassifica);
                                         }else{
                                             classificaRef.setValue(puntVecchio);
                                         }*/
-                                    }else{
-                                        classificaRef.setValue(puntClassifica);
-                                    }
+                                }else{
+                                    classificaRef.setValue(puntClassifica);
                                 }
+                            }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
-                        }
+                            }
+                        });
                     }
                 }
             }
