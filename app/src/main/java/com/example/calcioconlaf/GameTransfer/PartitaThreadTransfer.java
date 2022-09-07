@@ -774,31 +774,33 @@ public class PartitaThreadTransfer extends Thread{
                                     },2000);
                                 }
                             }
-                        }
-                        DatabaseReference classificaRef=ref.child("LeaderBoardTransfer").child(username);
-                        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Log.v("datachange","dataChange");
-                                if(snapshot.exists()){
-                                    int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
-                                    puntVecchio=puntVecchio+puntClassifica;
-                                    classificaRef.setValue(puntVecchio);
-                                    Log.v("puntVecchio", String.valueOf(puntVecchio));
+                            if(a==punteggi.size()-1){
+                                DatabaseReference classificaRef=ref.child("LeaderBoardTransfer").child(username);
+                                classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Log.v("datachange","dataChange");
+                                        if(snapshot.exists()){
+                                            int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                            puntVecchio=puntVecchio+puntClassifica;
+                                            classificaRef.setValue(puntVecchio);
+                                            Log.v("puntVecchio", String.valueOf(puntVecchio));
                                         /*if (puntVecchio < puntClassifica) {
                                             classificaRef.setValue(puntClassifica);
                                         }else{
                                             classificaRef.setValue(puntVecchio);
                                         }*/
-                                }else{
-                                    classificaRef.setValue(puntClassifica);
-                                }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                                        }else{
+                                            classificaRef.setValue(puntClassifica);
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
+                                    }
+                                });
                             }
-                        });
+                        }
                     }
                 }
             }
