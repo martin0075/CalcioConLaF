@@ -782,12 +782,13 @@ public class PartitaThread extends Thread{
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if(snapshot.exists()){
                                     int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                    puntVecchio=puntVecchio+puntClassifica;
                                     Log.v("puntVecchio", String.valueOf(puntVecchio));
-                                    if (puntVecchio < puntClassifica) {
+                                    /*if (puntVecchio < puntClassifica) {
                                         classificaRef.setValue(puntClassifica);
                                     }else{
                                         classificaRef.setValue(puntVecchio);
-                                    }
+                                    }*/
                                 }else{
                                     classificaRef.setValue(puntClassifica);
                                 }
@@ -837,12 +838,13 @@ public class PartitaThread extends Thread{
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if(snapshot.exists()){
                                         int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                        puntVecchio=puntVecchio+puntClassifica;
                                         Log.v("puntVecchio", String.valueOf(puntVecchio));
-                                        if (puntVecchio < puntClassifica) {
+                                        /*if (puntVecchio < puntClassifica) {
                                             classificaRef.setValue(puntClassifica);
                                         }else{
                                             classificaRef.setValue(puntVecchio);
-                                        }
+                                        }*/
                                     }else{
                                         classificaRef.setValue(puntClassifica);
                                     }
