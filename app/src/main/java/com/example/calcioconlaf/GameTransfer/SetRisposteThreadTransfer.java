@@ -3,6 +3,7 @@ package com.example.calcioconlaf.GameTransfer;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -37,6 +38,7 @@ public class SetRisposteThreadTransfer extends Thread{
         addOption();
     }
     public void addOption(){
+        Log.v("risposteThread","risposteThread");
         int cont=0;
         for (int i = 0; i < domande.size(); i++) {
             ArrayList<String> opzioniShuffle=new ArrayList<>();

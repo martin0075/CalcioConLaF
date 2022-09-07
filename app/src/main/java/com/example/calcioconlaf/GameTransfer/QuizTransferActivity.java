@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
+import android.util.Log;
 
 import com.example.calcioconlaf.R;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,6 +31,7 @@ public class QuizTransferActivity extends AppCompatActivity{
         }else{
             domande=(ArrayList<QuizTransfer>) getIntent().getSerializableExtra("Domande");
         }
+        Log.v("activity","activity");
         ReadPlayerGameThreadTransfer readPlayerGameThread=new ReadPlayerGameThreadTransfer(indexLobby,quizTransferActivity,domande,username);
         readPlayerGameThread.start();
     }

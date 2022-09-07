@@ -330,6 +330,7 @@ public class PartitaThreadTransfer extends Thread{
                         }
                     });
                     i++;
+                    Log.v("i", String.valueOf(i));
                 }
             });
         }
@@ -660,6 +661,7 @@ public class PartitaThreadTransfer extends Thread{
     }
     public void finishGame(){
         timer.cancel();
+        timer2.cancel();
         btnA.setEnabled(false);
         btnB.setEnabled(false);
         btnC.setEnabled(false);
@@ -747,6 +749,7 @@ public class PartitaThreadTransfer extends Thread{
                             if(nomiUtente.get(a).equals(username)){
                                 puntClassifica=punteggi.get(a);
                                 if(usernameVincitore.equals(username)){
+                                    Log.v("vincitore","vincitore");
                                     AlertDialog alertDialog;
                                     alertDialog=new AlertDialog.Builder(quizTransferActivity).setTitle("Result")
                                             .setMessage(username+" sei il vincitore, il tuo punteggio e' di: "+puntClassifica).show();
@@ -774,33 +777,31 @@ public class PartitaThreadTransfer extends Thread{
                                     },2000);
                                 }
                             }
-                            if(a==punteggi.size()-1){
-                                DatabaseReference classificaRef=ref.child("LeaderBoardTransfer").child(username);
-                                classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        Log.v("datachange","dataChange");
-                                        if(snapshot.exists()){
-                                            int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
-                                            puntVecchio=puntVecchio+puntClassifica;
-                                            classificaRef.setValue(puntVecchio);
-                                            Log.v("puntVecchio", String.valueOf(puntVecchio));
+                        }
+                        DatabaseReference classificaRef=ref.child("LeaderBoardTransfer").child(username);
+                        classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Log.v("datachange","dataChange");
+                                if(snapshot.exists()){
+                                    int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
+                                    puntVecchio=puntVecchio+puntClassifica;
+                                    classificaRef.setValue(puntVecchio);
+                                    Log.v("puntVecchio", String.valueOf(puntVecchio));
                                         /*if (puntVecchio < puntClassifica) {
                                             classificaRef.setValue(puntClassifica);
                                         }else{
                                             classificaRef.setValue(puntVecchio);
                                         }*/
-                                        }else{
-                                            classificaRef.setValue(puntClassifica);
-                                        }
-                                    }
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
+                                }else{
+                                    classificaRef.setValue(puntClassifica);
+                                }
                             }
-                        }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
             }

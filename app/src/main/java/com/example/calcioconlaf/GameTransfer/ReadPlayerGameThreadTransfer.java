@@ -38,6 +38,7 @@ public class ReadPlayerGameThreadTransfer extends Thread{
         leggiUtenti();
     }
     public void leggiUtenti(){
+        Log.v("leggiUtenti","leggiUtenti");
         DatabaseReference utenti=gameTransferRef.child(indexLobby).child("utenti");
         utenti.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

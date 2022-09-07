@@ -91,6 +91,7 @@ public class LobbyTransferThread extends Thread{
                                             @Override
                                             public void run() {
                                                 Intent intent4=new Intent(lobbyActivity, QuizTransferActivity.class);
+                                                Log.v("provaintent","provaintent");
                                                 intent4.putExtra("Username", username);
                                                 intent4.putExtra("IndexLobby", indexLobby);
                                                 DatabaseReference game=ref.child("GameTransfer").child(indexLobby).child("domande");

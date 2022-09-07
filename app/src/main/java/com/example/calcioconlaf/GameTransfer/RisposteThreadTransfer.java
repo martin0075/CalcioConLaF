@@ -51,6 +51,7 @@ public class RisposteThreadTransfer extends Thread{
     @Override
     public void run() {
         super.run();
+        Log.v("fotoThread","fotoThread");
         setOption(domande);
         //controlla();
     }

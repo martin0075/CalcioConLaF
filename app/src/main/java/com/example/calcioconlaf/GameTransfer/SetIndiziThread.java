@@ -53,6 +53,7 @@ public class SetIndiziThread extends Thread{
         setIndizio(domande);
     }
     public void setIndizio(ArrayList<QuizTransfer> domande) {
+        Log.v("indizioThread","indizioThread");
         requestQueue= Volley.newRequestQueue(lobbyActivity);
         for (i = 0; i < domande.size(); i++) {
             String id = domande.get(i).getIdTeam();
@@ -76,8 +77,10 @@ public class SetIndiziThread extends Thread{
                                 //Log.v("domande",domande.get(z).getCity());
                                 //Log.v("domande",domande.get(z).getCountry());
                                 z=10;
-                                write();
                             }
+                        }
+                        if(contatore==10){
+                            write();
                         }
                             } catch(JSONException e){
                         e.printStackTrace();
@@ -112,6 +115,7 @@ public class SetIndiziThread extends Thread{
                         lobbyActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Log.v("run1","run1");
                                 Intent intent4=new Intent(lobbyActivity, QuizTransferActivity.class);
                                 intent4.putExtra("Username", username);
                                 intent4.putExtra("IndexLobby", indexLobby);
