@@ -699,6 +699,7 @@ public class PartitaThreadTransfer extends Thread{
                         }
                     }
                     if(pareggio){
+                        Log.v("pareggio","pareggio");
                         for (a = 0; a < punteggi.size(); a++) {
                             if (nomiUtente.get(a).equals(username)) {
                                 puntClassifica = punteggi.get(a);
@@ -741,6 +742,7 @@ public class PartitaThreadTransfer extends Thread{
                             }
                         });
                     }else{
+                        Log.v("else","else");
                         for(a=0;a<punteggi.size();a++){
                             if(nomiUtente.get(a).equals(username)){
                                 puntClassifica=punteggi.get(a);
@@ -777,6 +779,7 @@ public class PartitaThreadTransfer extends Thread{
                         classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Log.v("datachange","dataChange");
                                 if(snapshot.exists()){
                                     int puntVecchio = Integer.parseInt(String.valueOf(snapshot.getValue()));
                                     puntVecchio=puntVecchio+puntClassifica;

@@ -834,7 +834,6 @@ public class PartitaThread extends Thread{
                             }
                         }
                         DatabaseReference classificaRef = ref.child("LeaderBoardStadium").child(username);
-                        Log.v("puntVecchio", String.valueOf(classificaRef));
                         classificaRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
