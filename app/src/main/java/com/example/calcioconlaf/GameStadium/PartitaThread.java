@@ -771,6 +771,7 @@ public class PartitaThread extends Thread{
                             @Override
                             public void run() {
                                 Intent intent=new Intent(quizStadium, GameActivity.class);
+                                intent.putExtra("Username", username);
                                 quizStadium.startActivity(intent);
                                 ref.child("GameStadium").child(indexLobby).setValue(null);
                             }
@@ -822,6 +823,7 @@ public class PartitaThread extends Thread{
                                         @Override
                                         public void run() {
                                             Intent intent = new Intent(quizStadium, GameActivity.class);
+                                            intent.putExtra("Username", username);
                                             quizStadium.startActivity(intent);
                                             ref.child("GameStadium").child(indexLobby).setValue(null);
                                         }

@@ -711,6 +711,7 @@ public class PartitaThreadTransfer extends Thread{
                             @Override
                             public void run() {
                                 Intent intent=new Intent(quizTransferActivity, GameActivity.class);
+                                intent.putExtra("Username", username);
                                 quizTransferActivity.startActivity(intent);
                                 ref.child("GameTransfer").child(indexLobby).setValue(null);
                             }
@@ -749,6 +750,7 @@ public class PartitaThreadTransfer extends Thread{
                                         @Override
                                         public void run() {
                                             Intent intent=new Intent(quizTransferActivity, GameActivity.class);
+                                            intent.putExtra("Username", username);
                                             quizTransferActivity.startActivity(intent);
                                             ref.child("GameTransfer").child(indexLobby).setValue(null);
                                         }
@@ -761,6 +763,7 @@ public class PartitaThreadTransfer extends Thread{
                                         @Override
                                         public void run() {
                                             Intent intent=new Intent(quizTransferActivity,GameActivity.class);
+                                            intent.putExtra("Username", username);
                                             quizTransferActivity.startActivity(intent);
                                             ref.child("GameTransfer").child(indexLobby).setValue(null);
                                         }
