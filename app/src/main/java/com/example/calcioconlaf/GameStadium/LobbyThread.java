@@ -109,7 +109,7 @@ public class LobbyThread extends Thread{
                                                             String urlImage= (String) ds.child("urlImage").getValue();
                                                             domande.add(new Quiz(urlImage,option1,option2,option3,option4,answer,country,city));
                                                         }
-                                                        if(domande.size()==10){
+                                                        if(domande.size()==15){
                                                             Log.v("logaaa",domande.get(0).getAnswer());
                                                             intent4.putExtra("DomandeElse",domande);
                                                             lobbyActivity.startActivity(intent4);

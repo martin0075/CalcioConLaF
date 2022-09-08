@@ -684,8 +684,9 @@ public class PartitaThread extends Thread{
         });
     }
     public void finishGame(){
-        i=0;
+        //i=0;
         timer.cancel();
+        timer2.cancel();
         btnA.setEnabled(false);
         btnB.setEnabled(false);
         btnC.setEnabled(false);

@@ -57,7 +57,7 @@ public class DomandeThread extends Thread{
         requestQueue=Volley.newRequestQueue(lobbyActivity);
         boolean vuoto=false;
         ArrayList<Integer> presi=new ArrayList<>();
-        while(cont<10) {
+        while(cont<15) {
             n = r.nextInt(1010);
             for (int d = 0; d < endpointVuoto.length; d++) {
                 if (n == endpointVuoto[d]) {

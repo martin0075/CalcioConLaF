@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +25,8 @@ import java.util.Map;
 public class NewsThread extends Thread{
     NewsActivity newsActivity;
     AdapterForNews mAdapter;
+    public static int TIMEOUT_MS=20000;
+
     public NewsThread(NewsActivity newsActivity,AdapterForNews mAdapter){
         this.newsActivity=newsActivity;
         this.mAdapter=mAdapter;
@@ -65,6 +68,10 @@ public class NewsThread extends Thread{
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //aggiungo la richiesta alla coda
         requestQueue.add(stringRequest);
 
