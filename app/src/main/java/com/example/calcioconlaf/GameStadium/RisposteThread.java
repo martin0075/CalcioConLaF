@@ -79,7 +79,7 @@ public class RisposteThread extends Thread{
                                 JSONObject result3=(JSONObject) result2.getJSONArray("response").get(0);
                                 Log.v("provola", String.valueOf(result3));
                                 opzioni.add(result3.getString("name"));
-                                if(opzioni.size()==30){
+                                if(opzioni.size()==45){
                                     SetRisposteThread setRisposte=new SetRisposteThread(domande, opzioni,lobbyActivity,username,indexLobby);
                                     lobbyActivity.runOnUiThread(new Runnable() {
                                         @Override

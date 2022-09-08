@@ -38,6 +38,8 @@ public class RisposteThreadTransfer extends Thread{
     Random r=new Random();
     RequestQueue requestQueue;
     RequestQueue requestQueue1;
+    Boolean vuoto=true;
+    ArrayList<Integer> inseriti=new ArrayList<>();
     ArrayList<String> opzioni=new ArrayList<>();
     public FirebaseDatabase database=FirebaseDatabase.getInstance("https://calcioconlaf-37122-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference ref = database.getReference();
@@ -59,21 +61,23 @@ public class RisposteThreadTransfer extends Thread{
     public void setOption(ArrayList<QuizTransfer> domande) {
         requestQueue1 = Volley.newRequestQueue(lobbyActivity);
         while (c < domande.size()) {
-
-
             for (a = 0; a < 3; a++) {
                 int num = r.nextInt(1010);
-                boolean vuoto = false;
-                for (int d = 0; d < endPointVuoto.length; d++) {
-                    if (num == endPointVuoto[d]) {
-                        vuoto = true;
-                        a--;
-                        d = endPointVuoto.length;
-                    } else {
-                        vuoto = false;
+                if(inseriti.contains(num)){
+                    c--;
+                }else{
+                    inseriti.add(num);
+                    vuoto = false;
+                    for (int d = 0; d < endPointVuoto.length; d++) {
+                        if (num == endPointVuoto[d]) {
+                            vuoto = true;
+                            a--;
+                            d = endPointVuoto.length;
+                        } else {
+                            vuoto = false;
+                        }
                     }
                 }
-
                 if (!vuoto) {
                     String URL1 = "https://api-football-v1.p.rapidapi.com/v3/teams?id=" + num;
                     //https://api-football-v1.p.rapidapi.com/v3/teams?id=33

@@ -179,15 +179,19 @@ public class PartitaThreadTransfer extends Thread{
                         @Override
                         public void onClick(View view) {
                             String citta = domande.get(i-1).getCity();
-                            Toast.makeText(quizTransferActivity, "Città: " + citta, Toast.LENGTH_LONG).show();
-                            DatabaseReference helpRef = ref.child("GameTransfer").child(indexLobby).child("utenti");
-                            for (int a = 0; a < textViewList.size(); a++) {
-                                if (textViewList.get(a).getText().equals(username)) {
-                                    helpRef.child(String.valueOf(a)).child(("aiuto1")).setValue(true);
-                                    help1.setClickable(false);
-                                    help1.setEnabled(false);
-                                    help1.setBackgroundColor(Color.RED);
+                            if(!citta.equals(null)){
+                                Toast.makeText(quizTransferActivity, "Città: " + citta, Toast.LENGTH_LONG).show();
+                                DatabaseReference helpRef = ref.child("GameTransfer").child(indexLobby).child("utenti");
+                                for (int a = 0; a < textViewList.size(); a++) {
+                                    if (textViewList.get(a).getText().equals(username)) {
+                                        helpRef.child(String.valueOf(a)).child(("aiuto1")).setValue(true);
+                                        help1.setClickable(false);
+                                        help1.setEnabled(false);
+                                        help1.setBackgroundColor(Color.RED);
+                                    }
                                 }
+                            }else{
+                                Toast.makeText(quizTransferActivity, "Citta' non disponibile, usa un altro indizio", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -195,17 +199,20 @@ public class PartitaThreadTransfer extends Thread{
                         @Override
                         public void onClick(View view) {
                             String nazione = domande.get(i-1).getCountry();
-                            Toast.makeText(quizTransferActivity, "Nazione: " + nazione, Toast.LENGTH_LONG).show();
-                            DatabaseReference helpRef = ref.child("GameTransfer").child(indexLobby).child("utenti");
-                            for (int b = 0; b < textViewList.size(); b++) {
-                                if (textViewList.get(b).getText().equals(username)) {
-                                    helpRef.child(String.valueOf(b)).child(("aiuto2")).setValue(true);
-                                    help2.setClickable(false);
-                                    help2.setEnabled(false);
-                                    view.setBackgroundColor(Color.RED);
+                            if(!nazione.equals(null)){
+                                Toast.makeText(quizTransferActivity, "Nazione: " + nazione, Toast.LENGTH_LONG).show();
+                                DatabaseReference helpRef = ref.child("GameTransfer").child(indexLobby).child("utenti");
+                                for (int b = 0; b < textViewList.size(); b++) {
+                                    if (textViewList.get(b).getText().equals(username)) {
+                                        helpRef.child(String.valueOf(b)).child(("aiuto2")).setValue(true);
+                                        help2.setClickable(false);
+                                        help2.setEnabled(false);
+                                        view.setBackgroundColor(Color.RED);
+                                    }
                                 }
+                            }else{
+                                Toast.makeText(quizTransferActivity, "Nazione non disponibile, usa un altro indizio", Toast.LENGTH_LONG).show();
                             }
-
                         }
                     });
                     ArrayList<String> opt = new ArrayList<>();

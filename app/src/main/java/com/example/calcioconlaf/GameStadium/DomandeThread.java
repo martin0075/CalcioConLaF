@@ -99,7 +99,7 @@ public class DomandeThread extends Thread{
 
                                 domande.add(quiz);
 
-                                if (domande.size() == 10) {
+                                if (domande.size() == 15) {
                                     RisposteThread risposte = new RisposteThread(username, indexLobby, domande, lobbyActivity, endpointVuoto);
                                     lobbyActivity.runOnUiThread(new Runnable() {
                                         @Override

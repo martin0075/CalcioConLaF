@@ -92,7 +92,7 @@ public class PartitaThread extends Thread{
         },0,2000);
     }
     public void setGame(){
-        if(i>9){
+        if(i>14){
             quizStadium.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
