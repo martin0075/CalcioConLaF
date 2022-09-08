@@ -55,7 +55,7 @@ public class LobbyActivity extends AppCompatActivity {
         new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                timer.setText("secondi rimanenti: " + millisUntilFinished / 1000);
                 // logic to set the EditText could go here
             }
 

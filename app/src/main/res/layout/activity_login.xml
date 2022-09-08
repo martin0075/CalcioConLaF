@@ -72,7 +72,7 @@
         android:layout_width="175dp"
         android:layout_height="57dp"
         android:backgroundTint="@color/yellow"
-        android:text="SETTINGS"
+        android:text="EDIT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
