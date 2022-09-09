@@ -52,7 +52,8 @@ public class ReadPlayerGameThreadTransfer extends Thread{
                     boolean aiuto3= (boolean) ds.child("aiuto3").getValue();
                     String username= (String) ds.child("username").getValue();
                     String rispostaSel= (String) ds.child("rispostaSel").getValue();
-                    utentiList.add(new PlayerGameTransfer(username,aiuto1,aiuto2,aiuto3,aiuto4,score,activePlayer,rispostaSel));
+                    String stoppato=(String) ds.child("stoppato").getValue();
+                    utentiList.add(new PlayerGameTransfer(username,aiuto1,aiuto2,aiuto3,aiuto4,score,activePlayer,rispostaSel,stoppato));
                 }
                 numeroGiocatori=utentiList.size();
                 if(utentiList.size()== snapshot.getChildrenCount()){

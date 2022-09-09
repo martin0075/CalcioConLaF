@@ -124,7 +124,7 @@ public class LobbyThread extends Thread{
                                             }
                                         });
                                     }
-                                },20000);
+                                },25000);
                             }
                         }
 

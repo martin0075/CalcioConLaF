@@ -70,14 +70,8 @@ public class LobbyActivity extends AppCompatActivity {
             }
         }.start();
     }
+    @Override
+    public void onBackPressed() {
 
-
-
-
-
-
-
-
-
-
+    }
 }

@@ -124,7 +124,7 @@ public class SetIndiziThread extends Thread{
                             }
                         });
                     }
-                },5000);
+                },8000);
             }
 
             @Override

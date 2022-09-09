@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.calcioconlaf.GameActivity;
+import com.example.calcioconlaf.Login.LoginActivity;
 import com.example.calcioconlaf.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,6 +57,7 @@ public class PartitaThread extends Thread{
     ArrayList<String> sbagliate=new ArrayList<>();
     int i=0;
     String opzione="";
+    String indiceCrash;
     int numeroGiocatori;
     Timer timer=new Timer();
     Timer timer2=new Timer();
@@ -80,7 +82,7 @@ public class PartitaThread extends Thread{
                 checkPunteggio();
                 checkUtenteAttivo();
                 checkHelp();
-
+                checkCrashGame();
             }
         },0,100);
         timer2.schedule(new TimerTask() {
@@ -90,6 +92,7 @@ public class PartitaThread extends Thread{
                 checkNewGame();
             }
         },0,2000);
+
     }
     public void setGame(){
         if(i>14){
@@ -386,7 +389,8 @@ public class PartitaThread extends Thread{
                     boolean aiuto3= (boolean) ds.child("aiuto3").getValue();
                     String usernameDb= (String) ds.child("username").getValue();
                     String rispostaSel= (String) ds.child("rispostaSel").getValue();
-                    utenti.add(new PlayerGame(username,aiuto1,aiuto2,aiuto3,aiuto4,0,attivo,rispostaSel));
+                    String stoppato=(String) ds.child("stoppato").getValue();
+                    utenti.add(new PlayerGame(username,aiuto1,aiuto2,aiuto3,aiuto4,0,attivo,rispostaSel,stoppato));
                     Boolean giocatoreAttivo = (Boolean) ds.child("activePlayer").getValue();
                     if(giocatoreAttivo) {
                         indice=contatore;
@@ -819,6 +823,45 @@ public class PartitaThread extends Thread{
                 }
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void checkCrashGame(){
+        DatabaseReference utentiRef = ref.child("GameStadium").child(indexLobby).child("utenti");
+        utentiRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    if(ds.child("username").getValue().equals(username)){
+                        if(ds.child("stoppato").getValue().equals("false")){
+                            timer.cancel();
+                            timer2.cancel();
+                            quizStadium.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(quizStadium, "Uno degli utenti si e' disconnesso", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(quizStadium, GameActivity.class);
+                                    intent.putExtra("Username", username);
+                                    intent.putExtra("UsernameLobby", username);
+                                    DatabaseReference gameRef = ref.child("GameStadium").child(indexLobby);
+                                    gameRef.setValue(null);
+                                    quizStadium.startActivity(intent);
+                                }
+                            });
+                        }
+                        if(ds.child("stoppato").getValue().equals("true")){
+                            Toast.makeText(quizStadium, "Uno degli utenti si e' disconnesso", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(quizStadium, GameActivity.class);
+                            intent.putExtra("Username", username);
+                            intent.putExtra("UsernameLobby", username);
+                            quizStadium.startActivity(intent);
+                        }
+                    }
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

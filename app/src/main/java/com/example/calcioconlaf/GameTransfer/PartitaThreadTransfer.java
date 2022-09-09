@@ -79,6 +79,7 @@ public class PartitaThreadTransfer extends Thread{
                 checkPunteggio();
                 checkUtenteAttivo();
                 checkHelp();
+                checkCrashGame();
 
             }
         },0,100);
@@ -371,7 +372,8 @@ public class PartitaThreadTransfer extends Thread{
                     boolean aiuto3= (boolean) ds.child("aiuto3").getValue();
                     String usernameDb= (String) ds.child("username").getValue();
                     String rispostaSel= (String) ds.child("rispostaSel").getValue();
-                    utenti.add(new PlayerGameTransfer(username,aiuto1,aiuto2,aiuto3,aiuto4,0,attivo,rispostaSel));
+                    String stoppato=(String) ds.child("stoppato").getValue();
+                    utenti.add(new PlayerGameTransfer(username,aiuto1,aiuto2,aiuto3,aiuto4,0,attivo,rispostaSel,stoppato));
                     Boolean giocatoreAttivo = (Boolean) ds.child("activePlayer").getValue();
                     if(giocatoreAttivo) {
                         indice=contatore;
@@ -813,6 +815,44 @@ public class PartitaThreadTransfer extends Thread{
                 }
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void checkCrashGame(){
+        DatabaseReference utentiRef = ref.child("GameTransfer").child(indexLobby).child("utenti");
+        utentiRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    if(ds.child("username").getValue().equals(username)){
+                        if(ds.child("stoppato").getValue().equals("false")){
+                            timer.cancel();
+                            timer2.cancel();
+                            quizTransferActivity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(quizTransferActivity, "Uno degli utenti si e' disconnesso", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(quizTransferActivity, GameActivity.class);
+                                    intent.putExtra("Username", username);
+                                    intent.putExtra("UsernameLobby", username);
+                                    DatabaseReference gameRef = ref.child("GameTransfer").child(indexLobby);
+                                    gameRef.setValue(null);
+                                    quizTransferActivity.startActivity(intent);
+                                }
+                            });
+                        }
+                        if(ds.child("stoppato").getValue().equals("true")){
+                            Intent intent = new Intent(quizTransferActivity, GameActivity.class);
+                            intent.putExtra("Username", username);
+                            intent.putExtra("UsernameLobby", username);
+                            quizTransferActivity.startActivity(intent);
+                        }
+                    }
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

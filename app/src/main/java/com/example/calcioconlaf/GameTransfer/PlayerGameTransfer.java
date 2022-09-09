@@ -10,8 +10,9 @@ public class PlayerGameTransfer {
     private int score;
     private boolean activePlayer;
     private String rispostaSel;
+    private String  stoppato;
 
-    public PlayerGameTransfer(String username, boolean aiuto1, boolean aiuto2, boolean aiuto3, boolean aiuto4, int score, boolean activePlayer,String rispostaSel) {
+    public PlayerGameTransfer(String username, boolean aiuto1, boolean aiuto2, boolean aiuto3, boolean aiuto4, int score, boolean activePlayer,String rispostaSel,String stoppato) {
         this.username = username;
         this.aiuto1 = aiuto1;
         this.aiuto2 = aiuto2;
@@ -20,6 +21,15 @@ public class PlayerGameTransfer {
         this.score = score;
         this.activePlayer=activePlayer;
         this.rispostaSel=rispostaSel;
+        this.stoppato=stoppato;
+    }
+
+    public String getStoppato() {
+        return stoppato;
+    }
+
+    public void setStoppato(String stoppato) {
+        this.stoppato = stoppato;
     }
 
     public String getUsername() {

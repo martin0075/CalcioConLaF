@@ -24,6 +24,7 @@ public class EditUsernameThread extends Thread{
     DatabaseReference usersRef = ref.child("Users");
     DatabaseReference leaderbordStadiumRef=ref.child("LeaderBoardStadium");
     DatabaseReference leaderboardTransferRef=ref.child("LeaderBoardTransfer");
+    DatabaseReference recensioniRef=ref.child("Recensioni");
     String username;
     String newUsername;
     EditActivity editActivity;
@@ -93,6 +94,27 @@ public class EditUsernameThread extends Thread{
                                                 String val=ds.getValue().toString();
                                                 leaderboardTransferRef.child(ds.getKey()).removeValue();
                                                 leaderboardTransferRef.child(newUsername).setValue(val);
+
+                                            }
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                                recensioniRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot ds : snapshot.getChildren()) {
+                                            if(ds.getKey().equals(username)){
+                                                float punteggio= Float.parseFloat(String.valueOf(ds.child("punteggio").getValue()));
+                                                String recensione=ds.child("recensione").getValue().toString();
+                                                recensioniRef.child(ds.getKey()).removeValue();
+                                                recensioniRef.child(newUsername).child("punteggio").setValue(punteggio);
+                                                recensioniRef.child(newUsername).child("recensione").setValue(recensione);
 
                                             }
 

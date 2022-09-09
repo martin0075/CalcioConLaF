@@ -64,14 +64,8 @@ public class LobbyActivityTransfer extends AppCompatActivity {
             }
         }.start();
     }
+    @Override
+    public void onBackPressed() {
 
-
-
-
-
-
-
-
-
-
+    }
 }

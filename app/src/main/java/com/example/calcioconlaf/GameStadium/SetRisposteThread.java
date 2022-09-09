@@ -169,7 +169,7 @@ public class SetRisposteThread extends Thread{
                             }
                         });
                     }
-                }, 5000);
+                }, 8000);
             }
 
             @Override
