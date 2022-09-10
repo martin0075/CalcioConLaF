@@ -26,7 +26,7 @@ public class RisposteThreadTransfer extends Thread{
     String indexLobby;
     ArrayList<QuizTransfer> domande;
     LobbyActivityTransfer lobbyActivity;
-    int [] endPointVuoto={0,1,2,3,4,5,6,7,8,9,10,11,12,13,16,17,19,20,21,22,18,24,23,25,26,27,28,29,30,31,32,
+    int [] endPointVuoto={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,19,20,21,22,18,24,23,25,26,27,28,29,30,31,32,
             26,16,429,767,768,769,770,771,772,773,774,775,776,777,778,802,954,1006};
     int c;
     int x;
