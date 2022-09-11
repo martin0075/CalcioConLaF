@@ -45,8 +45,8 @@ public class QuizTransferActivity extends AppCompatActivity{
         ReadPlayerGameThreadTransfer readPlayerGameThread=new ReadPlayerGameThreadTransfer(indexLobby,quizTransferActivity,domande,username);
         readPlayerGameThread.start();
     }
-
-    @Override
+    
+    /*@Override
     protected void onStop() {
         Log.v("STOP","STOP");
         super.onStop();
@@ -113,7 +113,7 @@ public class QuizTransferActivity extends AppCompatActivity{
             }
         });
 
-    }
+    }*/
     @Override
     public void onBackPressed() {
 

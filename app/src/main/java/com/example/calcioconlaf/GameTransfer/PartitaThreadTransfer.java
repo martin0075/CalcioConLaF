@@ -79,7 +79,7 @@ public class PartitaThreadTransfer extends Thread{
                 checkPunteggio();
                 checkUtenteAttivo();
                 checkHelp();
-                checkCrashGame();
+                //CrashcheckCrashGame();
 
             }
         },0,100);
@@ -821,7 +821,7 @@ public class PartitaThreadTransfer extends Thread{
             }
         });
     }
-    public void checkCrashGame(){
+    /*public void checkCrashGame(){
         DatabaseReference utentiRef = ref.child("GameTransfer").child(indexLobby).child("utenti");
         utentiRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -858,5 +858,5 @@ public class PartitaThreadTransfer extends Thread{
 
             }
         });
-    }
+    }*/
 }

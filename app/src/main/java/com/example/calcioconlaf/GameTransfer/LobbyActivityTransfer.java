@@ -72,7 +72,7 @@ public class LobbyActivityTransfer extends AppCompatActivity {
             }
         }.start();
     }
-    @Override
+    /*@Override
     protected void onStop() {
         Log.v("STOP","STOP");
         super.onStop();
@@ -139,7 +139,8 @@ public class LobbyActivityTransfer extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
+
     @Override
     public void onBackPressed() {
 
